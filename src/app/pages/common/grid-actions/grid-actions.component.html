@@ -1,0 +1,14 @@
+<div *ngIf="params.colDef.cellRendererParams.button&&data" class="buttons grid-button">
+    <ng-container *ngFor="let btn of params.colDef.cellRendererParams.button">
+        <button type="button" nbButton size="tiny"
+            [disabled]="showBtnObj!=null&&(btn=='delete'||btn=='enable')&&(!showBtnObj?.isDelete)" class="ml-1"
+            (click)="onClick($event,{buttonName:btn,col:params.colDef})"
+            [status]="iconObj[btn]?(btn=='enable'?(this.enableBtn?iconObj.enable.sts:iconObj.disable.sts):iconObj[btn].sts):iconObj.default.sts"
+            title="{{btn=='enable'?toolTip:btn}}">
+            <nb-icon
+                [ngClass]="iconObj[btn]? (btn=='enable'?(this.enableBtn?iconObj.enable.cls:iconObj.disable.cls):iconObj[btn].cls):iconObj.default.cls"
+                style="line-height: 15px;"></nb-icon>
+            <!-- <ng-container *ngIf="(!iconObj[btn])&&(btn!='OPEN')">{{btn}}</ng-container> -->
+        </button>
+    </ng-container>
+</div>

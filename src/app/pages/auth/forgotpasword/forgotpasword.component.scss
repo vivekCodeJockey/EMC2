@@ -1,0 +1,55 @@
+a:link {
+  text-decoration: none;
+  font-weight: 600;
+  color: #0f5c9c !important;
+  cursor: pointer;
+  &:hover {
+    color: white !important;
+  }
+}
+
+a:visited {
+  text-decoration: none;
+  font-weight: 600;
+  color: #0f5c9c !important;
+  cursor: pointer;
+  &:hover {
+    color: white !important;
+  }
+}
+
+.bg {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(73, 131, 228, 1) 50%,
+    rgba(8, 7, 104, 1) 100%
+  );
+}
+
+.auth-btn {
+  border: 1px solid #ffffff;
+  background-color: transparent;
+  color: #ffffff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: large;
+  cursor: pointer;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.auth-btn:hover {
+  border: 1px solid #015ebc;
+  background-color: #fff;
+  color: #015ebc;
+  padding: 5px 10px;
+}
+
+.auth-btn:disabled,
+.auth-btn[disabled] {
+  border: 1px solid #999999 !important;
+  background-color: transparent !important;
+  color: #adadad !important;
+}

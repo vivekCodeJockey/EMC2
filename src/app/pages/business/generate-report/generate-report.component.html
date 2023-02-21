@@ -1,0 +1,33 @@
+<nb-card class="col-md-12 px-0"  nbSpinnerStatus="success" [nbSpinner]="loading" nbSpinnerSize="giant"
+nbSpinnerMessage="Loading... it will take more to time render">
+    <nb-card-header class="d-flex justify-content-between align-items center mx-3">
+        <span class="col-lg-2"> Report Generation</span>
+        <div class="form-row col-lg-4">
+            <span class="col-lg-12  label">JRF No : {{jrfRefNumber}}</span>
+            <span class="col-lg-12  label">Ref Date : {{jrfRefDate | date:'shortDate' }}</span>
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <ag-grid-angular #agGrid style="width: 100%;" id="myGrid" class="{{reportDefaultColDef.theme}} mt-1"
+            [columnDefs]="reportColumnDefs" [defaultColDef]="reportDefaultColDef" [gridOptions]="gridOptions"
+            (gridReady)="onReportGridReady($event)">
+        </ag-grid-angular>
+        <div class="col-5 row px-3">
+            <label for="pfile" class="label col-form-label  col-12 px-0">Report</label>
+            <input type="file" nbInput [fieldSize]="fieldSize" name="fileInput" accept=".pdf" [(ngModel)]="fileInput"
+                (change)="handleFileInput($event.target.files)" class="px-3 mb-2 mr-2">
+            <button nbButton status="primary" class="mb-2" (click)="uploadDocument($event)" [size]="fieldSize" outline>
+                <i class="ion-android-upload mr-2"></i> UPLOAD
+            </button>
+        </div>
+    </nb-card-body>
+    <nb-card-footer>
+        <button type="button" (click)="generateReport($event)" nbButton class="btn btn-primary px-4 py-2 p-2">
+            <nb-icon icon="pie-chart-2"></nb-icon>Generate Report
+        </button>
+    </nb-card-footer>
+</nb-card>
+<ng-template #contentTemplate let-data>
+    <iframe [src]="'data:'+extensionType+';base64,'+base64 | safe:'resourceUrl'"
+    [height]="clientHeight+'px'" width="830px"></iframe>
+</ng-template>

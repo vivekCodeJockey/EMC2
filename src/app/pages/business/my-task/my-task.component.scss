@@ -1,0 +1,14 @@
+// btn css
+button {
+  background-color: var(--button-filled-basic-background-color);
+  // border-color: var(--button-filled-basic-border-color);
+  border-color: var(--ag-header-background-color);
+  color: var(--button-filled-basic-text-color);
+}
+
+:host ::ng-deep nb-tabset .tab .tab-link {
+  padding: 10px;
+  font-size: small;
+  background: var(--button-filled-basic-background-color);
+  margin-right: 3px;
+}

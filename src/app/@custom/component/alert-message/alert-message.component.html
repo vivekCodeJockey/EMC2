@@ -1,0 +1,22 @@
+<div class="card-row wrapper">
+    <div class="card-col d-flex justify-content-center">
+        <nb-card status="{{status}}" size="{{size}}" class="error-card border-{{status}}">
+            <nb-card-header>{{title}}</nb-card-header>
+            <nb-card-body>
+              <div *ngIf="message">
+                {{message}}
+              </div>
+              <div *ngIf="messageList">
+                <ol>
+                    <li *ngFor="let msg of messageList">
+                        {{msg}}
+                    </li>
+                </ol>
+            </div>
+            </nb-card-body>
+            <nb-card-footer>
+                <button nbButton status="primary" (click)="dismiss()" class="stp-btn">Ok</button>
+            </nb-card-footer>
+        </nb-card>
+    </div>
+</div>

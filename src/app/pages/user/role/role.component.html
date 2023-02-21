@@ -1,0 +1,99 @@
+<!-- role management container -->
+<nb-card class="col-md-12 col-lg-10 min-width">
+
+  <!-- role management header section starts -->
+  <nb-card-header>Role Management</nb-card-header>
+  <!-- role management header ends starts -->
+
+  <!-- role management content section starts -->
+  <nb-card-body class="pb-0">
+
+    <!-- section 1 -->
+    <div *ngIf="!newRole" class="col-12 mb-3 mx-0 px-0 row d-flex align-items-center justify-content-between">
+      <div class="col-7 px-0">
+        <!-- search role section starts -->
+        <div class="row d-flex justify-content-between">
+          <!-- label -->
+          <label class="align-self-center label form-label col-12">Select Role to update permission</label>
+
+          <!-- dropdown -->
+          <nb-select class="col-12" size="{{fieldSize}}" [(selected)]="roleId"
+            (selectedChange)="getRolePermissions($event)" name="role-id" autofocus>
+            <nb-option value={{role.id}} *ngFor="let role of roles">{{role.name}}</nb-option>
+          </nb-select>
+        </div>
+      </div>
+      <!-- add role button -->
+      <div class="col-3 px-0 d-flex justify-content-end align-items-center">
+        <!-- add icon -->
+        <button type="button" nbButton class="btn btn-primary px-2 py-1" (click)="newRole=true"><i
+            class="ion-android-add ion-android-add-type-bold mr-2" style="font-size: larger;"></i>ADD ROLE</button>
+      </div>
+    </div>
+    <!-- section 2 -->
+    <div *ngIf="(!newRole)&&(roleId>0)&&(rolePermissions&&rolePermissions.length>0)" class="container">
+      <div *ngIf="!newRole" class="row hdrCls">
+        <div class="col-sm schCol">Screen Name</div>
+        <div class="col-sm schCol">View</div>
+        <div class="col-sm schCol">Create</div>
+        <div class="col-sm schCol">Edit</div>
+        <div class="col-sm schCol">Delete</div>
+      </div>
+    </div>
+    <!-- new role -->
+    <div *ngIf="newRole" class="col-5 mb-3 px-0">
+      <!-- role form start -->
+      <form [formGroup]="roleForm" class="">
+        <label for="nRoleTxt" class="label col-form-label">Role Name</label>
+        <input type="text" formControlName="roleName" maxlength="100"  nbInput fullWidth
+          [fieldSize]="fieldSize" class="form-control p-2" placeholder="Enter New Role Here" autofocus>
+      </form>
+      <!-- role form ends -->
+    </div>
+
+  </nb-card-body>
+  <!-- label -->
+  <nb-card *ngIf="(!newRole)&&(roleId>0)" class="list-card border-0">
+    <nb-card-body class="pt-0">
+      <!-- table-bordered -->
+      <div class="container table table-hover">
+        <div *ngFor="let rolePermission of rolePermissions" class="row">
+          <div class="col-sm scCol text-left label">
+            {{rolePermission.pageName}}
+          </div>
+          <div class="col-sm scCol">
+            <nb-checkbox name="view" id="view" [value]="rolePermission.view" [checked]="rolePermission.view"
+              (checkedChange)="rolePermission.view = !rolePermission.view"></nb-checkbox>
+          </div>
+          <div class="col-sm scCol">
+            <nb-checkbox name="create" id="create" [checked]="rolePermission.create"
+              (checkedChange)="rolePermission.create = !rolePermission.create"></nb-checkbox>
+          </div>
+          <div class="col-sm scCol">
+            <nb-checkbox name="edit" id="edit" [checked]="rolePermission.edit"
+              (checkedChange)="rolePermission.edit = !rolePermission.edit"></nb-checkbox>
+          </div>
+          <div class="col-sm scCol">
+            <nb-checkbox name="delete" id="delete" [checked]="rolePermission.delete"
+              (checkedChange)="rolePermission.delete = !rolePermission.delete"></nb-checkbox>
+          </div>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+  <!-- role management content section ends -->
+
+  <!-- role management footer section starts -->
+  <nb-card-footer>
+    <!-- adding new role section -->
+    <div *ngIf="newRole" class="mb-3">
+      <button type="button" nbButton (click)="saveRole()" class="btn btn-primary px-4 py-2 p-2"
+        [disabled]="buttonDisabled">Add new role</button>
+      <button type="button" nbButton class="btn btn-primary px-4 py-2 p-2" (click)="cancel()">Cancel</button>
+    </div>
+    <!-- role asignment section -->
+    <button *ngIf="!newRole" nbButton type="button" (click)="saveRolePermission()" class="btn btn-primary px-4 py-2 p-2"
+      [disabled]="(!roleId)||buttonDisabled">Update Permission </button>
+  </nb-card-footer>
+  <!-- role management footer section ends -->
+</nb-card>

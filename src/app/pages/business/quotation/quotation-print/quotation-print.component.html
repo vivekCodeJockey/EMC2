@@ -1,0 +1,473 @@
+<table class="page-header" border="1" cellpadding="0" cellspacing="0" style="border-collapse:
+        collapse;font-size: small;">
+    <tr>
+        <td colspan="2" rowspan="2" style="height:80px">
+            <!-- <img style="width:80%;margin-left: 10px;height:50px" src="assets/images/printLogo1.png"> -->
+            <img style="width:80%;margin-left: 10px;height:50px" src="assets/images/log2.png">
+        </td>
+        <td colspan="10">
+            <!-- <img style="width: 96%;margin-left: 10px;height: 30px;"
+                src="assets/images/printLogo2.png">  -->
+                <img style="width: 96%;margin-left: 10px;height: 30px;"
+                src="assets/images/log1.png"> </td>
+    </tr>
+    <tr>
+        <td *ngIf="!jrfDtl.quoRefNumber" colspan="6" style="padding-left: 4px;">Doc.No:TASL/17025/EMC/FRM/QTN</td>
+        <td *ngIf="jrfDtl.quoRefNumber" colspan="6" style="padding-left: 4px;">Doc.No:{{jrfDtl.quoRefNumber}}</td>
+        <td colspan="2" style="padding-left: 4px;">Approved
+            and Issued By- QM</td>
+        <td colspan="2" style="padding-left: 4px;"> <span id="pageFooter"> Page No  1 of 2 </span></td>
+    </tr>
+    <tr>
+        <td colspan="2" width="109" style="border-right:.5pt solid black;
+                width:81pt"><span>&nbsp;</span>Quotation</td>
+        <td colspan="5" width="255" style="width:191pt"><span>&nbsp;</span>Issue No: A
+            &amp;<span>&nbsp; </span>Date of Issue:01-03-2021</td>
+        <td colspan="4" width="408"><span>&nbsp;</span>Rev No:
+            02<span>&nbsp; </span>&amp; Date of Revision: 27-10-2021</td>
+    </tr>
+</table>
+<div class="page-footer">
+</div>
+<table class="page" style="font-size: small;page-break-before: always;">
+    <thead>
+        <tr>
+            <td>
+                <!--place holder for the fixed-position header-->
+                <div class="page-header-space"></div>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <table border="1" cellpadding="0" cellspacing="0" style="border-top:0px;border-collapse:
+    collapse;width:100%">
+                    <tr style="border:0px;height:28px;">
+                        <td colspan="3" style="text-align:right;border:0px;width: 58%;">Ref
+                            No&nbsp;:&nbsp;</td>
+                        <td style="border:0px;border-right:1px solid">
+                            &nbsp;{{jrfDtl.quoRefNumber?jrfDtl.quoRefNumber:'TASL/17025/EMC/FRM/QTN/2223/'}}&nbsp;</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid black;">
+                        <td colspan="3" style="text-align:right;border:0px;width: 58%">Date of Quotation&nbsp;:&nbsp;</td>
+                        <td *ngIf="!jrfDtl.jrfRefDate" style="border:0px;border-right:1px solid">&nbsp;{{today| date:
+                            'd/M/yyyy' }}&nbsp;</td>
+                        <td *ngIf="jrfDtl.jrfRefDate" style="border:0px;border-right:1px solid">&nbsp;
+                            {{ jrfDtl.jrfRefDate}}&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <table border="0" cellpadding="0" cellspacing="0" style="border-collapse:
+                                    collapse;">
+                                <tbody>
+                                    <tr style="border:0px;border-bottom:1px solid;padding-left: 4px;" height="100px">
+                                        <td style="padding-left: 4px;font-weight: bold;width: 15%;vertical-align: text-top;padding-top: 14px;">To</td>
+                                        <td colspan="8">{{formData.value.companyName}}<br>{{formData.value.companyAddress}}</td>
+                                    </tr>
+                                    <tr style="border-bottom:1px solid;" rowspan="6">
+                                        <td style="padding-left: 4px;font-weight: bold;">Kind Attn:
+                                        </td>
+                                        <td colspan="8"> {{formData.value.userName}}</td>
+                                    </tr>
+                                    <tr height="100px">
+                                        <td colspan="10" style=" padding-top: 4px;text-indent: 10px;
+                                                padding-left: 4px;text-align: justify;padding-right: 4px;">With
+                                            reference to your Enquiry: Email, Dated:{{jrfDtl.jrfRefDate?jrfDtl.jrfRefDate:today | date:'d/M/yyyy'}} and
+                                            the
+                                            filled in JRF No. TASL/17025/EMC/FRM/JRF/2223/106, Dated:{{today | date:'d/M/yyyy'}}
+                                            hereby
+                                            we
+                                            submit our quotation along with the Terms and Conditions for the
+                                            following
+                                            services, as per your request. Request you to review and confirm your
+                                            acceptance by sending the PO, along
+                                            with advance payment through NEFT / Cheque/ DD drawn in favor of <span
+                                                style="font-weight: bold;">TATA
+
+                                                ADVANCED SYSTEMS
+                                                LIMITED Payable at Bangalore,42-43
+                                                Electronics City Phase-1, Hosur Road, Bangalore, 560100 Karnataka,
+                                                India.
+                                                GST
+                                                No:GSTIN 29AACCT5245K1ZZ and
+                                                PAN No: AACCT5245K .
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table border="0" cellpadding="0" cellspacing="0" style="border-collapse:
+                                    collapse;width:100%">
+                                <tbody>
+                                    <tr>
+                                        <td style="border:1px solid;font-weight: bold;;text-align: center;">Sl. No.
+                                        </td>
+                                        <td colspan="3" style="border:1px solid;font-weight: bold;;text-align: center;">
+                                            Details
+                                            of Test</td>
+                                        <td style="border:1px solid;font-weight: bold;;text-align: center;">Qty
+                                            (No’s)</td>
+                                        <td colspan="2" style="border:1px solid;font-weight: bold;;text-align: center;">
+                                            Unit
+                                            Price INR.</td>
+                                        <td colspan="2" style="border:1px solid;font-weight: bold;;text-align: center;">
+                                            Total
+                                            Price INR.</td>
+                                    </tr>
+                                    <tr *ngFor="let row of rowData;let i = index;">
+                                        <td style="border-right:1px solid;text-align: center;">{{i + 1}}</td>
+                                        <td colspan="3" style="border-right:1px solid;text-indent: 5px;">
+                                            {{row.testDescription}}</td>
+                                        <td style="border-right:1px solid;text-align: center;">{{row.qty}}</td>
+                                        <td colspan="2"
+                                            style="border-right:1px solid;text-align: right;text-indent: 5px;">
+                                            {{row.unitPrice}}&nbsp;&nbsp;</td>
+                                        <td style="border-right:1px solid;text-align: right;text-indent: 5px;">
+                                            {{row.totalPrice}}&nbsp;&nbsp;</td>
+                                            <p *ngIf="i==29" style="page-break-after: always; counter-increment: page;"></p>
+                                    </tr>
+                                    <tr style="border-top:1px solid">
+                                        <td colspan="4">&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <div *ngIf="rowData.length < 14">
+                                        <tr *ngFor="let in of [].constructor(15 - rowData.length);let j=index;">
+                                            <td colspan="4">&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                    </div>
+                                </tbody>
+                            </table>
+                            <p *ngIf="rowData.length > 18" style="page-break-after: always; counter-increment: page;"></p>
+                            <table border="0" cellpadding="0" cellspacing="0" style="border-collapse:
+                                    collapse;width:100%;text-align: right;padding-right: 10px;">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="7" style="font-weight: bold;">Note :</td>
+                                        <td style="padding-right: 10px;">#N/A</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="7">Total</td>
+                                        <td style="padding-right: 10px;">{{formData.value.totalAmount}}</td>
+                                    </tr>
+                                    <tr *ngIf="formData.value.taxType=='CGST,SGST'">
+                                        <td colspan="7">CGST @ 9%</td>
+                                        <td style="padding-right: 10px;">{{formData.value.taxAmount/2}}</td>
+                                    </tr>
+                                    <tr *ngIf="formData.value.taxType=='CGST,SGST'">
+                                        <td colspan="7">SGST @ 9%</td>
+                                        <td style="padding-right: 10px;">{{formData.value.taxAmount/2}}</td>
+                                    </tr>
+                                    <tr *ngIf="formData.value.taxType=='IGST'">
+                                        <td colspan="7">IGST @ 18%</td>
+                                        <td style="padding-right: 10px;">{{formData.value.taxAmount}}</td>
+                                    </tr>
+                                    <tr *ngIf="formData.value.taxType=='UGST'">
+                                        <td colspan="7">UGST @ 18%</td>
+                                        <td style="padding-right: 10px;">{{formData.value.taxAmount}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="7" style="font-weight: bold;">GRAND TOTAL</td>
+                                        <td style="padding-right: 10px;">{{formData.value.grandTotalAmount}}</td>
+                                    </tr>
+                                    <tr style="border:1px solid">
+                                        <td colspan="7" style="font-weight: bold;">ROUNDED OFF</td>
+                                        <td style="padding-right: 10px;">{{formData.value.roundedOff}}</td>
+                                    </tr>
+                                    <tr>
+                                </tbody>
+                            </table>
+                            <table border="0" cellpadding="0" cellspacing="0" style="border-collapse:
+                                    collapse;width:100%;border-bottom: 1px solid black;">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="3" style="width: 25%;padding-left: 4px;font-weight: bold;">Total Value in
+                                            words</td>
+                                        <td colspan="7" style="padding-right: 10px;text-align: end;text-transform: capitalize;">
+                                            {{tWord}} only</td>
+                                    </tr>
+                                    <tr style="border-top:1px solid;text-align: right;">
+                                        <td colspan="10" style="padding-right: 4px;">For TATA
+                                            ADVANCED SYSTEMS
+                                            LIMITED</td>
+                                    </tr>
+                                    <tr style="height: 85px;">
+                                        <td colspan="7" style="padding-left: 4px;">Company
+                                            Name Tata Advanced Systems
+                                            Limited<br>
+                                            Account No 004005019837<br>
+                                            IFSC Code ICIC0000040</td>
+                                        <td><span>SD</span><span style="font-weight: bold">Customer Care -in
+                                                Charge</span>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <p style="page-break-after: always; counter-increment: page;"></p>
+                            <table style="font-size: 11.78px; margin-left: 15px; margin-right: 15px;text-align: justify;">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="10" style="text-align:center;font-weight:bold;font-size: large;">
+                                            Terms and
+                                            Conditions</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="8"><span>&nbsp;
+                                            </span>1.<span>&nbsp;
+                                            </span>One consolidated test report shall be issued per product.</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="8"><span>&nbsp;
+                                            </span>2.<span>&nbsp;
+                                            </span>Normal Hours for EMC test facilities are 9AM - 5PM on week days.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="8"><span>&nbsp;
+                                            </span>3.<span>&nbsp;
+                                            </span>Extended
+                                            Hours for EMC test
+                                            facilities 5
+                                            PM - 10PM on week days, all hours of Saturday, Sunday and
+                                            TATA
+                                            ADVANCED SYSTEMS LIMITED
+                                            Holidays.</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td colspan="8"><span>&nbsp;
+                                            </span>4.<span>&nbsp;</span>All the accessories
+                                            for operation/Monitoring of the
+                                            test units,
+                                            including Power supply, loads,batteries,cables,tools, wires etc.,
+                                            shall be brought by the customer.</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td colspan="8"><span>&nbsp;
+                                            </span>5.<span>&nbsp;</span>The technical
+                                            representative of the
+                                            customer, having know how knowledge about the equipment to be tested,
+                                            is
+                                            preferable to be present at the test venue during the testing. A witness
+                                            representative accompanying the customer
+                                            shall abide by the laws/regulations as prevailing in Any charges related
+                                            to travel/accommodation and
+                                            other
+                                            hospitality requirements of the Customers and their accompanying reps
+                                            are
+                                            not
+                                            covered in this quotation.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="8"><span>&nbsp;</span>6.<span>&nbsp;</span>Transporting the
+                                            test
+                                            samples / units to
+                                            and fro TATA ADVANCED SYSTEMS LIMITED, Bangalore,loading
+                                            /unloading, packing / unpacking, internal movement, making the test
+                                            sample
+                                            unit during
+                                            testing etc. is the
+                                            responsibility of the customer only.</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="8"><span>&nbsp;</span>7.<span>&nbsp;</span>Test samples and
+                                            all
+                                            accessories shall be
+                                            removed from LAB by the customer immediatelyafter
+                                            the
+                                            testing is completed. Maximum Storage time for Customer material is 30
+                                            days
+                                            from the
+                                            date
+                                            of completion of test.Beyondwhich the material cannot be stored and TATA
+                                            ADVANCED SYSTEMS
+                                            LIMITED will not be responsible</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="8"><span>&nbsp;</span>8.<span>&nbsp;</span> No claim shall be
+                                            made by
+                                            the customer for
+                                            any unforeseen damage caused to the test samples,which may occur out
+                                            of control of TATA ADVANCED SYSTEMS LIMITED personnel, during the
+                                            process of
+                                            the testing.</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td colspan="8"><span>&nbsp;
+                                            </span>9.<span>&nbsp;</span>Any damage to
+                                            infrastructure or to any
+                                            equipment of TATA ADVANCED SYSTEMS LIMITED caused by customer/
+                                            customer’s equipment will be at the cost of the customer and
+                                            repair/restoration of the services are
+                                            accepted at the discretion of
+                                            TATA ADVANCED SYSTEMS LIMITED. </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="8"><span>&nbsp;</span>10.<span>&nbsp;</span>No claim shall be
+                                            made by the customer
+                                            in case the service /contract is
+                                            not
+                                            carried out on confirmed
+                                            dates by TATA ADVANCED SYSTEMS LIMITED due to circumstances beyond its
+                                            control.
+                                    </tr>
+                                    <tr>
+                                        <td colspan="8"><span>&nbsp;</span>11.<span>&nbsp;
+                                            </span>The test reports produced by EMC centre
+                                            TATA ADVANCED SYSTEMS LIMITED shall apply only to the sample
+                                            that has been tested under the specific conditions and modes of testing
+                                            as
+                                            described in the test plan
+                                            or
+                                            test report. The Observations made in the Test Report are
+                                            based on the performance monitored during the
+                                            conduction of the test only and not under any operating conditions
+                                            beyond
+                                            the
+                                            scope tested/ demonstrated
+                                            during the testing.</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="8"><span>&nbsp;</span>12.<span>&nbsp;
+                                            </span>Customer is not authorized for operating
+                                            the TATA ADVANCED SYSTEMS LIMITED<span>&nbsp;
+                                            </span>Equipment.</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td colspan="8"><span>&nbsp;</span>13.<span>&nbsp;
+                                            </span>Unless otherwise approved by the TATA
+                                            ADVANCED SYSTEMS LIMITED ,the report shall not be reproduced
+                                            in part<span>&nbsp; </span>or in full<span>&nbsp;
+                                            </span>for<span>&nbsp;
+                                            </span>whatsoever the need be.<span>&nbsp;
+                                            </span>Any<span>&nbsp; </span>such action will not
+                                            hold
+                                            the authenticity of
+                                            the test
+                                            results provided by
+                                            TATA ADVANCED SYSTEMS LIMITED.</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td colspan="8"><span>&nbsp;</span>14.<span>&nbsp;
+                                            </span>Any test samples accessories, support for
+                                            ancillary equipment / materials brought in by the customer
+                                            for testing shall not violate the ISO 14001:2004, BS OHSAS 18001:2007
+                                            norms
+                                            and requirements
+                                            of TATA ADVANCED
+                                            SYSTEMS LIMITED as prevailing time to time.</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4"><span>&nbsp;</span>15.<span>&nbsp;
+                                            </span>This quote is valid for 90 days.</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td colspan="9"><span>&nbsp;</span>16.<span>&nbsp;
+                                            </span>Slot will be booked after receiving the confirmed PO
+                                            and 100% Payment.</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td colspan="9"><span>&nbsp;</span>17.<span>&nbsp;
+                                            </span>The Payment has to be done in the form of NEFT /DD / Cheque,
+                                            drawn in
+                                            favor of TATA
+                                            ADVANCED
+                                            SYSTEMS LIMITED
+                                            Payable at Bangalore</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td colspan="8"><span>&nbsp;</span>18.<span>&nbsp;
+                                            </span>Extended hours of the facility shall be charged at 25% extra.
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+
+                                        <td colspan="8"><span>&nbsp;</span>19.<span>&nbsp;
+                                            </span>Delivery of Test Reports will be done
+                                            within 10 working days from the date of completion of the test.</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td><span>&nbsp;</span>20<span>&nbsp; </span>The
+                                            customer is notified in case any confidential information is released
+                                            due to
+                                            the requirements of law / authorities (e.g.
+                                            NABL,BIS,
+                                            TEC etc.) by contractual
+                                            agreements.</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4"><span>&nbsp; </span>21.<span>&nbsp;
+                                            </span>Cancellation charges :</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="9">
+                                            <span>&nbsp;&nbsp;
+                                            </span>i)<span>&nbsp; </span>20% of quoted value if
+                                            slot is canceled 2
+                                            days before the test.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="9">
+                                            <span>&nbsp;
+                                            </span>ii)<span>&nbsp;</span>50% of quote value if
+                                            slot is canceled on
+                                            the day of the test.<span>&nbsp;</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="8"><span>&nbsp;
+                                            </span>22.<span>&nbsp;
+                                            </span>MSME SC/ST registered customers can avail
+                                            reimbursement of testing charges only related to Raw
+                                            materials, semi finished and finished products limited to
+                                            50% or Rs 1.00 Lakh, Whichever is less,per SC/ST
+                                            MSEs per financial year (excluding GST and all other applicable
+                                            taxes),through attesting the >NABL/BIS
+                                            testing report within 45 days along with duly filled application form
+                                            and
+                                            supporting documents to the
+                                            nearest NNSH office, introduced
+                                            by MSME Govt of
+                                            India.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span style="font-weight: bold;">Note</span>No rework on the Unit under
+                                            test /accessories/Test Jigs items
+                                            is allowed inside the
+                                            Anechoic lab)
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>

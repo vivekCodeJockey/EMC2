@@ -1,0 +1,176 @@
+// css for anchor tags
+a:link {
+  text-decoration: inherit;
+  color: white !important;
+  cursor: auto;
+  cursor: pointer;
+}
+
+a:visited {
+  text-decoration: inherit;
+  color: white !important;
+  cursor: pointer;
+}
+
+// nb-card-body {
+//   --layout-background-color: transparent;
+// }
+
+.background-img {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  // z-index: -1;
+
+  img {
+    width: 100%;
+    height: 100%;
+    
+    // object-fit: cover;
+    object-fit: fill;
+  }
+}
+
+// background theme
+// .bg {
+  // background: rgb(2, 0, 36);
+  // background: linear-gradient(
+  //   90deg,
+  //   rgba(2, 0, 36, 1) 0%,
+  //   rgba(73, 131, 228, 1) 50%,
+  //   rgba(8, 7, 104, 1) 100%
+  // );
+
+  // linear-gradient( 90deg, rgb(29 45 77) 0%, rgb(72 106 174) 50%, rgb(24 40 72) 100% );
+  // background: url("../../../../assets/images/Background.jpg");
+
+  // background-repeat: no-repeat;
+  // background-size: cover;
+  // width: 100%;
+  // height: 100%;
+// }
+
+.login-form-bg {
+  background-color: rgba(128, 128, 128, 0.987);
+  background-color: #9bc2e654;
+  background: linear-gradient(#005194, #9bc2e6d9);
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  // margin-right: 50px;
+}
+
+// password input styling
+input[type="email"] {
+  font-family: inherit;
+  letter-spacing: inherit;
+  font-size: 0.9rem;
+  text-indent: 8px;
+}
+
+input[type="text"] {
+  font-family: inherit;
+  letter-spacing: inherit;
+  font-size: 0.9rem;
+  text-indent: 8px;
+}
+
+input[type="password"] {
+  font-family: inherit;
+  letter-spacing: inherit;
+  font-size: 0.9rem;
+  text-indent: 8px;
+}
+
+// login btn
+// .login-btn {
+//   background: transparent;
+//   border: 1px solid white !important;
+//   color: white !important;
+//   border-radius: 5px;
+//   font-weight: 500 !important;
+//   transition: 0.1s;
+//   &:hover:disabled {
+//     background-color:white;
+//     border: none;
+//     color: black !important;
+//     font-weight: 500 !important;
+//   }
+// }
+
+
+.auth-btn:not([disabled]){
+  border: 1px solid #ffffff;
+  // background-color: transparent;
+  background-color: #3e7fb6;
+  color: #ffffff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: large;
+  cursor: pointer;
+  // box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+  //   rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  box-shadow:rgb(153 183 212 / 49%) -8px 0px 5px 5px, rgb(63 79 96 / 38%) 17px 17px 15px 0px
+}
+
+.auth-btn:hover {
+  border: 1px solid #015ebc;
+  background-color: #fff;
+  color: #015ebc;
+  padding: 5px 10px;
+}
+// #7a92a5
+.auth-btn:disabled,
+.auth-btn[disabled] {
+  border: 1px solid #7a92a5;
+  // border: 1px solid #999999;
+  background-color: transparent;
+  // color: #adadad;
+  color: #7a92a5;
+}
+
+// link fond
+.span_bold {
+  font-weight: 600;
+  color: #0f5c9c !important;
+  cursor: pointer;
+  &:hover {
+    color: white !important;
+  }
+}
+
+// copyright footer banner
+.copyRight {
+  position: absolute;
+  bottom: 0;
+  background-color: #526599 !important;
+}
+
+// loading section
+.loading {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #015ebc;
+  animation: spin 1s ease-in-out infinite;
+  -webkit-animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+nb-layout-column {
+  padding: 0 !important;
+}
+// loading section ends

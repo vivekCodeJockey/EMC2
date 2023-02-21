@@ -1,0 +1,80 @@
+<!-- User Role container starts -->
+<nb-card class="col-md-12 px-0" nbSpinnerStatus="success" nbSpinnerSize="giant" nbSpinnerMessage="Loading...">
+    <!-- header section starts-->
+    <nb-card-header class="d-flex justify-content-between align-items center mx-3">
+        <span class="col-lg-2 px-0">Role Assignment</span>
+    </nb-card-header>
+    <!-- header section ends -->
+    <!-- body section starts -->
+    <nb-card-body>
+        <!-- search section starts-->
+        <div class="col-12 d-flex justify-content-end align-items-center px-0">
+            <label class="search-label label mr-2 mb-0" for="search">Search:</label>
+            <nb-form-field>
+                <input nbInput id="search" [(ngModel)]="searchText" [fieldSize]="fieldSize" class="search-input"
+                    (keyup.enter)="searchUser()" (ngModelChange)="updateSearchText()">
+                <button nbSuffix type="button" nbButton size="tiny" class="searchBtn border-0" (click)="searchUser()"
+                    [status]="'default'" title="search">
+                    <nb-icon icon="search"></nb-icon>
+                </button>
+            </nb-form-field>
+        </div>
+        <!-- search section ends-->
+        <ag-grid-angular #userGrid style="width: 100%;" id="catmyGrid" class="{{userDefaultColDef.theme}} mt-2"
+            [columnDefs]="userColumnDefs" [defaultColDef]="userDefaultColDef" [gridOptions]="userGridOptions"
+            (gridReady)="onUserGridReady($event)">
+        </ag-grid-angular>
+        <!-- user table section ends -->
+        <div class="col-lg-12">
+            <!-- form starts -->
+            <form class="text-white row mt-3" [formGroup]="userForm">
+                <div class="col-md-4">
+                    <!-- label -->
+                    <label class="label">Login ID</label>
+                    <!-- username -->
+                    <input type="text" class="form-control" nvValidate="alphaNumericWithDot" nbInput
+                        formControlName="username" fullWidth maxlength="250" [fieldSize]="fieldSize"
+                        [readonly]="userName">
+                </div>
+                <!-- label -->
+                <div class="col-md-4">
+                    <label class="label">Email</label>
+                    <!-- email -->
+                    <input type="email" class="form-control" nbInput autofocus formControlName="email" fullWidth
+                        nbTooltip="User ID should be valid email Id" maxlength="100" nbTooltipStatus="warning"
+                        [fieldSize]="fieldSize" [readonly]="userEmail"
+                        [ngClass]="{'input-error': userForm.controls.email.touched && userForm.controls.email.errors}">
+                    <div *ngIf="userForm.controls.email.touched
+                         && userForm.controls.email.errors" class="error-message kl">
+                        <div *ngIf="userForm.controls.email.errors.required">Email is required</div>
+                        <div *ngIf="userForm.controls.email.errors.email">Email must be a valid </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <!-- label -->
+                    <label class="align-self-center label form-label col-12">Select Role</label>
+                    <!-- dropdown -->
+                    <nb-select fullWidth size="{{fieldSize}}" formControlName="roleId"
+                        [selected]="userForm.controls['roleId'].value" [compareWith]="compareById" name="role-id"
+                        autofocus>
+                        <nb-option value={{role.id}} *ngFor="let role of roles">{{role.name}}</nb-option>
+                    </nb-select>
+                </div>
+            </form>
+            <!-- form ends -->
+        </div>
+    </nb-card-body>
+    <!-- body ends -->
+    <!-- footer starts -->
+    <nb-card-footer>
+        <button type="button" nbButton class="btn btn-primary" (click)="saveUser()"
+            *ngIf="btnPermission?.isCreate || btnPermission?.ediisEdit" [disabled]="userButtonDisabled">
+            <nb-icon icon="save"></nb-icon>{{userButtonName}}
+        </button>
+        <button type="button" nbButton class="btn btn-primary" (click)="cancelUser()"
+            *ngIf="btnPermission?.isCreate || btnPermission?.ediisEdit" [disabled]="userButtonDisabled">
+            <nb-icon icon="backspace"></nb-icon>Cancel
+        </button>
+    </nb-card-footer>
+    <!-- footer ends -->
+</nb-card>

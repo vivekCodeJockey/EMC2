@@ -1,0 +1,8 @@
+<div *ngIf="params.colDef.cellRendererParams.checkbox&&data" class="buttons grid-button">
+    <ng-container *ngFor="let cbx of params.colDef.cellRendererParams.checkbox">
+        <!-- (change)="changeSelection($event, index)"  -->
+        <input class="mt-1" type="checkbox" id="{{cbx.name}}cbx" name="{{cbx.name}}" [ngModel]="cbx.val === data[params.colDef.field]"
+            (click)="onClick($event,{checkName:cbx,col:params.colDef})" />
+        <span class="label ml-1 mr-1" for="{{cbx.name}}cbx">{{cbx.name}}</span>
+    </ng-container>
+</div>

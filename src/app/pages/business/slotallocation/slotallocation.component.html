@@ -1,0 +1,101 @@
+<!-- slot allocations master container starts -->
+<nb-card class="col-12 row" [nbSpinner]="loading" nbSpinnerStatus="success" nbSpinnerSize="large"
+nbSpinnerMessage="Loading...">
+    <!-- header section starts -->
+    <nb-card-header class="">
+        <span class="col-lg-2">Slot Allocation</span>
+    </nb-card-header>
+    <!-- header section ends -->
+    <!-- body section starts -->
+    <nb-card-body>
+        <div class="col-12 mb-sm-2 m-0 d-flex justify-content-end">
+            <div class="row col-md-6 col-lg-4">
+                <span class="col-lg-12  label">Ref No: {{jrfRefNumber}}</span>
+                <span class="col-lg-12  label">Date : {{jrfDate}}</span>
+            </div>
+        </div>
+        <div class="col-12">
+            <form [formGroup]="slotAllocationForm" class="mt-2">
+                <div class="row">
+                    <!-- name of EUT -->
+                    <div class="col-md-6 col-lg-4">
+                        <!-- label -->
+                        <label for="nEutTxt" class="label col-form-label">Name of EUT <span style="font-size: 9px;">
+                            </span></label>
+                        <!-- input -->
+                        <!-- [fieldSize]="fieldSize" -->
+                        <input type="text" class="form-control" formControlName="eutName" readonly nbInput fullWidth [fieldSize]="fieldSize"
+                            id="nEutTxt" name="nameEut">
+                    </div>
+                    <!-- weight -->
+                    <div class=" col-md-6 col-lg-2 mb-3">
+                        <!-- label -->
+                        <label for="wEutTxt" class="label col-form-label">Weight</label>
+                        <!-- input -->
+                        <div class="form-row mx-0">
+                            <!-- [fieldSize]="fieldSize" -->
+                            <input type="text" class="form-control col-sm-10 col-9" formControlName="weight" readonly [fieldSize]="fieldSize" 
+                                nbInput fullWidth id="wEutTxt" name="weight">
+                            <label for="wEut" class="label col-form-label col-2 text-center">kg</label>
+                        </div>
+                    </div>
+                    <!-- Quantity of EUT -->
+                    <div class="col-md-6 col-lg-2 mb-3">
+                        <!-- label -->
+                        <label for="qEutTxt" class="label col-form-label">Quantity</label>
+                        <!-- input -->
+                        <!-- [fieldSize]="fieldSize" -->
+                        <input type="text" class="form-control" formControlName="quantity" nbInput fullWidth readonly [fieldSize]="fieldSize"
+                            id="qEutTxt" name="quantity">
+                    </div>
+                    <!-- Dimensions(LxWxH) -->
+                    <div class="col-md-6 col-lg-4 mb-3">
+                        <!-- label -->
+                        <label for="" class="label col-form-label">Dimensions(LxWxH)</label>
+                        <div class="row m-0 d-flex justify-content-between">
+                            <!-- length input -->
+                            <!-- [fieldSize]="fieldSize" -->
+                            <input type="text" class="form-control col-md-3 col-lg-3" formControlName="length" readonly [fieldSize]="fieldSize"
+                                nbInput fullWidth id="lEutTxt" name="length">
+                            <span for="wdEutTxt" class="label col-form-label text-center">X</span>
+                            <!-- width input -->
+                            <!-- [fieldSize]="fieldSize" -->
+                            <input type="text" class="form-control col-md-3 col-lg-3" formControlName="width" readonly [fieldSize]="fieldSize"
+                                nbInput fullWidth id="wdEutTxt" name="width">
+                            <span for="hEutTxt" class="label col-form-label text-center">X</span>
+                            <!-- height input -->
+                            <!-- [fieldSize]="fieldSize" -->
+                            <input type="text" class="form-control col-md-3 col-lg-3" formControlName="height" readonly [fieldSize]="fieldSize"
+                                nbInput fullWidth id="hEutTxt" name="height">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-12 col-lg-12 mb-3">
+            <!-- add button -->
+            <div class="col-12 d-flex justify-content-end align-items-center px-0" *ngIf="btnPermission?.isCreate || btnPermission?.isEdit">
+                <button type="button" (click)="getSlotAllocation(null, 'addRow')" nbButton
+                    class="btn btn-primary px-2 py-1"><i class="ion-android-add ion-android-add-type-bold mr-2"
+                        style="font-size: larger;"></i>ADD</button>
+            </div>
+            <ag-grid-angular #agGrid style="width: 100%;" id="myGrid" class="{{slotDefaultColDef.theme}} mt-3"
+                [columnDefs]="slotColumnDefs" [defaultColDef]="slotDefaultColDef" [gridOptions]="gridOptions"
+                (gridReady)="onSlotAllocationGridReady($event)">
+            </ag-grid-angular>
+        </div>
+    </nb-card-body>
+    <!-- body section ends -->
+    <!-- footer starts -->
+    <nb-card-footer *ngIf="btnPermission?.isCreate || btnPermission?.isEdit">
+        <div class="px-3">
+            <button type="submit" nbButton class="btn btn-primary px-4 py-2 p-2"
+                [disabled]="slotAllocationButtonDisabled"
+                (click)="saveSlotAllocation()"><nb-icon icon="save"></nb-icon>{{slotAllocationButtonName}}</button>
+            <button type="button" nbButton class="btn btn-primary px-4 py-2 p-2"
+                [disabled]="slotAllocationButtonDisabled" (click)="cancelSlotAllocation()"><nb-icon icon="backspace"></nb-icon>Cancel</button>
+        </div>
+    </nb-card-footer>
+    <!-- footer ends -->
+</nb-card>
+<!-- slot allocations master container ends -->

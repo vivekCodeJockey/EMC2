@@ -1,0 +1,51 @@
+<!-- visitor pass container starts -->
+<nb-card class="col-12 row mx-0" style="margin: 0px">
+    <!-- body section starts -->
+    <nb-card-body>
+        <div class="col-12 d-flex justify-content-end align-items-center mb-2 px-0" *ngIf="btnPermission?.isCreate || btnPermission?.isEdit">
+            <button type="button" (click)="getVisitorPass(null, 'addRow')" nbButton class="btn btn-primary px-2 py-1"><i
+                    class="ion-android-add ion-android-add-type-bold mr-2" style="font-size: larger;"></i>ADD</button>
+        </div>
+        <ag-grid-angular #agGrid style="width: 100%;" id="myGrid" class="{{passDefaultColDef.theme}} mb-3"
+            [columnDefs]="passColumnDefs" [defaultColDef]="passDefaultColDef" [gridOptions]="gridOptions"
+            (gridReady)="onVisitorPassGridReady($event)">
+        </ag-grid-angular>
+        <div class="label">
+            <div class="mb-1">Note: Two-dose vaccination is mandatory</div>
+            <div class="mb-1">
+                Instructions for Material Gate pass/Delivery Challan as given below, request you to please ensure
+                the same before dispatching from your end. Please note these are mandatory requirements as per
+                compliance requirements of GST rules.
+            </div>
+            <ol class="mb-1">
+                <li class="label">The Gate pass should be in the name of Tata Advanced Systems Limited, E city.</li>
+                <li class="label">HSN code of all the line items.</li>
+                <li class="label">GST Number of Both the parties on the gate pass. (TASL GST No: 29AACCT5245K1ZZ)</li>
+                <li class="label">Value of the goods to be mentioned.</li>
+                <li class="label">Signature with the seal of the Organisation</li>
+                <li class="label">If the value of the shipment is more than Rs. 50,000/- An e-way bill is mandatory.
+                </li>
+                <li class="label">Two copies of the Gate pass have to be brought along with the consignment.</li>
+                <li class="label">Manual correction /overwriting of the gate pass fields is not allowed on our premises.
+                </li>
+                <li class="label">Who so ever concern letters are not considered as gate pass or Delivery challan.</li>
+            </ol>
+            <div class="label">Please note if these points are not covered in the gate pass our security will not
+                accept the
+                goods. Hence request you to follow the above instructions for hassle-free Testing. After reaching
+                our premises kindly call Ragavendra (9900971823) for further assistance.</div>
+        </div>
+    </nb-card-body>
+    <!-- body section end -->
+    <!-- footer section starts -->
+    <nb-card-footer *ngIf="btnPermission?.isCreate || btnPermission?.isEdit">
+        <div>
+            <button type="submit" nbButton class="btn btn-primary px-4 py-2 p-2" (click)="saveVisitorPass()"
+                [disabled]="visitorPassButtonDisabled"><nb-icon icon="save"></nb-icon>{{visitorPassButtonName}}</button>
+            <button type="button" nbButton class="btn btn-primary px-4 py-2 p-2"
+            [disabled]="visitorPassButtonDisabled" (click)="cancelVisitorPass()"><nb-icon icon="backspace"></nb-icon>Cancel</button>
+        </div>
+    </nb-card-footer>
+    <!-- footer section end -->
+</nb-card>
+<!-- visitor pass container end -->

@@ -1,0 +1,167 @@
+<!-- Quotation container starts-->
+<nb-card class="col-md-12 px-0" [nbSpinner]="loading" nbSpinnerStatus="success" nbSpinnerSize="giant"
+    nbSpinnerMessage="Loading...">
+    <!-- Quotation header section starts -->
+    <nb-card-header class="d-flex justify-content-between align-items center mx-3">
+        <span class="col-lg-2"> Quotation</span>
+        <div class="form-row  col-lg-3">
+            <span class="col-lg-12  label">Seq No : {{jrfSeqNumber}}</span>
+            <span class="col-lg-12  label">Seq Date : {{jrfDate}}</span>
+            <!-- <span class="col-lg-4  label">Ref No: {{jrfRefNumber}}</span>
+        <span class="col-lg-4  label">Ref Date : {{jrfDate}}</span> -->
+        </div>
+        <div *ngIf="quoRefNumber" class="form-row col-lg-4">
+            <!-- <span class="col-lg-4  label">Seq No: {{jrfSeqNumber}}</span>
+        <span class="col-lg-4  label">Seq Date : {{jrfDate}}</span> -->
+            <span class="col-lg-12  label">Ref No : {{quoRefNumber}}</span>
+            <span class="col-lg-12  label">Ref Date : {{jrfRefDate}}</span>
+        </div>
+        <!-- add icon -->
+        <!-- (click)="newRole=true" -->
+        <button type="button" nbButton class=" btn btn-primary px-4 py-0 p-2" [hidden]="!editFlag" (click)="addNewRow()"><i
+                class="ion-android-add ion-android-add-type-bold mr-2" outline></i>ADD TEST</button>
+
+    </nb-card-header>
+    <!-- Quotation header section ends -->
+
+    <!-- Quotation body starts -->
+    <nb-card-body class="qutBody pt-1">
+        <!-- data section starts -->
+        <div class="quotCls">
+            <ag-grid-angular #agGrid style="width: 100%;max-height:300px; padding: 0 15px;" id="myGrid" domLayout='autoHeight'
+                class="{{quoteDefaultColDef.theme}}" [rowData]="quoteRowData" [columnDefs]="quoteColumnDefs"
+                (cellValueChanged)="onCellValueChanged($event)" (gridReady)="onGridReady($event)" [aggFuncs]="colTotal"
+                [defaultColDef]="quoteDefaultColDef"></ag-grid-angular>
+        </div>
+        <!-- data section ends -->
+
+        <!-- form section starts -->
+        <form class="text-white row m-0 form_input" [formGroup]="quoteForm" style="padding: 0 15px;">
+
+            <!-- discount -->
+            <div class="col-12 d-flex justify-content-end align-items-center">
+                <label for="qDiscountTxt" class="col-3 label col-form-label text-right">DISCOUNT <span
+                        class='fas fa-rupee-sign'></span></label>
+                <!-- <span class='fas fa-rupee-sign'></span> -->
+                <input type="text" class="py-0 col-2 form-control d-inline" nbInput fullWidth id="qDiscountTxt"
+                    nvValidate="amount" [readonly]="!editFlag" [fieldSize]="fieldSize" formControlName="discount"
+                    (change)="updateTotalAndTax()" name="discount">
+            </div>
+
+            <!-- total -->
+            <div class="col-12 d-flex justify-content-end align-items-center">
+                <input type="hidden" formControlName="id" />
+                <input type="hidden" formControlName="jrfId" />
+                <input type="hidden" formControlName="referenceNo" />
+                <input type="hidden" formControlName="referenceId" />
+                <input type="hidden" formControlName="quotationComments" />
+                <label for="qtotalTxt" class="col-3 label col-form-label text-right">TOTAL <span
+                        class='fas fa-rupee-sign'></span></label>
+                <!-- <span class='fas fa-rupee-sign'></span> -->
+                <input type="text" class="py-0 col-2 form-control d-inline" nbInput fullWidth id="qtotalTxt"
+                    [fieldSize]="fieldSize" name="totalAmount" formControlName="totalAmount" readonly>
+            </div>
+
+            <!-- tax -->
+            <!-- <div class="col-12 row d-flex justify-content-end px-0">
+                <div class="row">
+                    <nb-radio size="fieldSize" class="col-4 bg-primary"><label class="label col-form-label">IGST</label>
+                    </nb-radio>
+                    <input type="text" value=18 class="col-6 mr-3" [fieldSize]="fieldSize" style="width: 2%;" nbInput id="qIgstPerTxt"
+                        name="qIgstPer" formControlName="qIgstPer">
+                </div> 
+                <div>
+                    <nb-radio class="col-md-1"><label class="col-md-4 label col-form-label">UGST</label></nb-radio>
+                    <input type="text" value=18 class=" mr-3" [fieldSize]="fieldSize" nbInput id="qUgstTxt"
+                        name="qUgstPer" formControlName="qUgstPer">
+                </div>
+
+                 <div>
+                    <nb-radio class="col-md-2"><label class="col-md-4 label col-form-label">CGST/SGST</label>
+                    </nb-radio>
+                    <input type="text" value=9 class="col-md-1 mr-3" [fieldSize]="fieldSize" nbInput id="qCgstPerTxt"
+                        name="qCgstPer" formControlName="qCgstPer">
+                </div>
+                 <div class="mb-2 col-12 d-flex justify-content-end">
+                    <label for="taxAmtNum" class="col-md-8 label col-form-label">TAX AMOUNT</label>
+                    <input type="text" class="col-3 form-control d-inline" nbInput fullWidth id="taxAmtTxt"
+                        [fieldSize]="fieldSize" name="taxAmt" id="taxAmtNum" formControlName="taxAmt" disabled>
+                </div>
+
+            </div> -->
+            <div class="col-12 d-flex justify-content-end align-items-center">
+
+                <nb-radio-group id="taxTypeId" name="taxType" formControlName="taxType" layout="row" class="d-flex">
+                    <nb-radio [disabled]="!editFlag" value="CGST,SGST">CGST,SGST</nb-radio>
+                    <nb-radio [disabled]="!editFlag" value="IGST">IGST</nb-radio>
+                    <nb-radio [disabled]="!editFlag" value="UGST">UGST</nb-radio>
+                </nb-radio-group>
+
+                <label for="taxAmtNum" class="col-sm-4 col-md-3 label col-form-label text-right">TAX AMOUNT(18%) <span
+                        class='fas fa-rupee-sign'></span></label>
+                <!-- <span class='fas fa-rupee-sign'></span> -->
+                <input type="text" class=" py-0 col-2 form-control d-block" nbInput fullWidth id="taxAmtTxt"
+                    [fieldSize]="fieldSize" name="taxAmount" id="taxAmtNum" formControlName="taxAmount" readonly>
+
+            </div>
+
+
+
+            <!-- rounded off -->
+            <div class="col-12 d-flex justify-content-end align-items-center">
+                <label for="qRoundFTxt" class="col-3 label col-form-label text-right">ROUNDED OFF <span
+                        class='fas fa-rupee-sign'></span></label>
+                <!-- <span class='fas fa-rupee-sign'></span> -->
+                <input type="text" class="py-0 col-2 form-control d-inline" nbInput fullWidth id="qRoundFTxt"
+                    [fieldSize]="fieldSize" name="roundedOff" formControlName="roundedOff" readonly>
+            </div>
+            <!-- grand total -->
+            <div class="col-12 d-flex justify-content-end align-items-center">
+                <label for="qGTotalTxt" class="col-3 label col-form-label text-right">GRAND TOTAL <span
+                        class='fas fa-rupee-sign'></span></label>
+                <!-- <span class='fas fa-rupee-sign'></span> -->
+                <input type="text" class="py-0 col-2 form-control d-inline" nbInput fullWidth id="qGTotalTxt"
+                    [fieldSize]="fieldSize" name="grandTotalAmount" formControlName="grandTotalAmount" readonly>
+            </div>
+        </form>
+        <!-- form section ends -->
+    </nb-card-body>
+    <!-- Quotation body ends -->
+
+    <!-- Quotation footer starts -->
+    <nb-card-footer *ngIf="btnPermission?.isCreate || btnPermission?.isEdit">
+        <button type="button" nbButton class="btn btn-primary px-4 py-2 p-2" [hidden]="editFlag"
+            (click)="editFlag=true"><nb-icon icon="edit"></nb-icon>Edit</button>
+        <button type="button" nbButton class="btn btn-primary px-4 py-2 p-2" (click)="openPrintPreview($event)"><nb-icon icon="printer"></nb-icon>Print
+            Preview</button>
+        <button type="button" nbButton class="btn btn-primary px-4 py-2 p-2" [hidden]="!editFlag"
+            (click)="saveQuotation(false)"><nb-icon icon="save"></nb-icon>Save</button>
+        <button type="button" nbButton class="btn btn-primary px-4 py-2 p-2" [hidden]="!editFlag"
+            (click)="saveQuotation(true)"><nb-icon icon="email"></nb-icon>Save&Send</button>
+        <button type="button" nbButton class="btn btn-primary px-4 py-2 p-2" [hidden]="editFlag"
+            (click)="saveQuotation(true)"><nb-icon icon="email"></nb-icon>Send</button>
+        <button type="button" nbButton class="btn btn-primary px-4 py-2 p-2" [hidden]="!editFlag"
+            (click)="editFlag=false"><nb-icon icon="backspace"></nb-icon>Cancel</button>
+    </nb-card-footer>
+    <!-- Quotation footer ends -->
+</nb-card>
+<!-- Quotation container ends -->
+
+
+<ngx-quotation-print hidden id="quotationPrint" [rowData]="quoteGridRowData" [formData]="quoteForm" [tWord]="tWord" [jrfDtl]="{'quoRefNumber':quoRefNumber,'jrfRefDate':jrfRefDate}">
+</ngx-quotation-print>
+
+
+<ng-template #contentTemplate let-data let-ref="dialogRef" let-windowRef="windowRef">
+    <nb-card class="mb-0" style="border:none; width: 30vw;">
+        <nb-card-body class="px-2 py-1 ">
+            <div class="label mb-2">Please Enter the remarks for Quotation changes</div>
+            <textarea style="resize: none; line-height: 1.25em; " rows="5" [(ngModel)]="data.obj.remarks" nbInput
+                fullWidth></textarea>
+        </nb-card-body>
+        <nb-card-footer class="py-1 px-0">
+                <button type="button" nbButton class="btn btn-primary px-4 py-2 p-2" (click)="windowRef.close()"><nb-icon icon="clipboard"></nb-icon>Submit</button>
+                <button type="button" nbButton class="btn btn-primary px-4 py-2 p-2" (click)="data.obj.remarks='';windowRef.close()"><nb-icon icon="backspace"></nb-icon>Cancel</button>
+        </nb-card-footer>
+    </nb-card>
+</ng-template>

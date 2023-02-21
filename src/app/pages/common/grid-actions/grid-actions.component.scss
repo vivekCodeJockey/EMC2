@@ -1,0 +1,14 @@
+// button.status-default {
+//     padding: 2px 5px !important;
+// //     // border-radius: 0px;
+// }
+
+button.status-default{
+    background-color: var(--button-filled-basic-background-color);
+    border-color: var(--ag-header-background-color);
+    color: var(--button-filled-basic-text-color);
+}
+//     background-color: var(--button-filled-basic-background-color);
+//     border-color: var(--button-filled-basic-border-color);
+//     color: var(--button-filled-basic-text-color);
+// }

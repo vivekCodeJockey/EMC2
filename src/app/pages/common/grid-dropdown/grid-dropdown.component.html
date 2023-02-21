@@ -1,0 +1,5 @@
+<select class="select-cls" [(ngModel)] ="selectedItem" (ngModelChange)="onChange(selectedItem)" size="{{fieldSize}}" fullWidth>
+    <option *ngFor="let obj of data" [ngValue]="obj">
+           {{obj[labelKey]}}
+    </option>
+</select>

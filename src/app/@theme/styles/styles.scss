@@ -1,0 +1,156 @@
+@use "themes" as *;
+
+// themes - our custom or/and out of the box themes
+// @import "themes";
+
+// framework component styles
+@use "@nebular/theme/styles/globals" as *;
+// framework component themes (styles tied to theme variables)
+// @import "~@nebular/theme/styles/globals";
+@use "@nebular/auth/styles/globals" as *;
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/grid";
+
+// loading progress bar theme
+@import "./pace.theme";
+
+@import "./layout";
+@import "./overrides";
+@import url("../font/openSans");
+
+// install the framework and custom global styles
+@include nb-install() {
+  // framework global styles
+  @include nb-theme-global();
+  @include nb-auth-global();
+
+  @include ngx-layout();
+  // loading progress bar
+  @include ngx-pace-theme();
+
+  @include nb-overrides();
+}
+
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+@import "~ag-grid-community/dist/styles/ag-grid.min.css";
+@import "~ag-grid-community/dist/styles/ag-theme-balham.min.css";
+@import "~ag-grid-community/dist/styles/ag-theme-balham-dark.min.css";
+@import "~ag-grid-community/dist/styles/ag-theme-blue.min.css";
+@import "~ag-grid-community/dist/styles/ag-theme-dark.min.css";
+@import "~ag-grid-community/dist/styles/ag-theme-fresh.min.css";
+
+nb-card {
+  --ag-header-foreground-color: whitesmoke;
+  --ag-header-background-color: #486aae;
+
+  /* background color for grid row*/
+  // --ag-background-color: #f1f7fd;
+  // --ag-odd-row-background-color: #f1f7fd;
+
+  // --menu-item-hover-background-color:
+  // --menu-item-hover-text-color:
+  // --menu-item-active-background-color:
+  // --menu-item-active-text-color:
+
+  /* border color for grid row*/
+  // --ag-row-border-color:#486AAE;
+}
+
+.ag-cell {
+  display: flex;
+  align-items: center;
+
+  &:not(:focus-within) {
+    border-right: 1px solid var(--ag-row-border-color, #d9dcde) !important;
+  }
+}
+
+// .ag-cell-focus:not(.ag-cell-range-selected):focus-within {
+//   border: none;
+// }
+
+.cell-span {
+  background: white;
+  // border-bottom: 1px solid var(--ag-row-border-color, #d9dcde) !important;
+}
+
+.ag-cell-inline-editing {
+  height: 100%;
+  width: 100%;
+}
+
+.ag-overlay-no-rows-wrapper {
+  background-clip: content-box;
+  background-color: var(--card-background-color);
+  pointer-events: none;
+}
+
+ngx-grid-dropdown,
+ngx-grid-datepicker {
+  height: 99%;
+  width: 99%;
+}
+
+/* pagination button css */
+// .ag-paging-button {
+//   background: #588de9;
+// }
+
+// .ag-paging-button.ag-disabled
+// {
+//   display: none;
+// }
+
+.loading {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: 3px solid rgba(103, 47, 47, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+  -webkit-animation: spin 1s ease-in-out infinite;
+}
+
+// --------------------- css created by naveen starts----------------------------
+
+nb-card-footer {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  align-items: center;
+  // border-top: none;
+
+  button {
+    margin-left: 10px;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+
+    // border-color: var(--ag-header-background-color) !important;
+    border-color: #b5bdc9 !important;
+
+    &:hover {
+      border-color: var(--ag-header-background-color) !important;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+        rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    }
+  }
+}
+
+.custom-checkbox {
+  width: 1rem;
+  height: 1rem;
+}
+
+button.searchBtn {
+  background-color: var(--button-filled-basic-background-color);
+  // border-color: var(--button-filled-basic-border-color);
+  border-color: var(--ag-header-background-color);
+  color: var(--button-filled-basic-text-color);
+}
+
+// --------------------- css created by naveen starts----------------------------

@@ -1,0 +1,648 @@
+<nb-badge text="New" *ngIf="(!loading)&&!jrfSeqNumber" status="success" position="top left"></nb-badge>
+<div class="row">
+   <div class="col-md-12">
+      <nb-card [formGroup]="jrfForm" [nbSpinner]="loading" nbSpinnerStatus="success" nbSpinnerSize="large"
+         nbSpinnerMessage="Loading..." style="margin: 0px;border: 0px;">
+         <nb-card-header *ngIf="jrfSeqNumber" class="pb-1">
+            <!-- <nb-form-field></nb-form-field> -->
+            <div class="row col-12 mb-sm-2 m-0 d-flex justify-content-end">
+               <!-- sequential number -->
+               <div class="row col-md-6 col-lg-3">
+                  <span class="col-lg-12  label">Seq No: {{jrfSeqNumber}}</span>
+                  <span class="col-lg-12 label">Date : {{jrfDate}}</span>
+               </div>
+               <!-- reference number -->
+               <div *ngIf="jrfRefNumber!=''" class="row col-md-6 col-lg-4">
+                  <span class="col-lg-12  label">JRF No: {{jrfRefNumber}}</span>
+                  <span class="col-lg-12  label">Date : {{jrfDate}}</span>
+               </div>
+            </div>
+         </nb-card-header>
+         <!-- jrf header section ends -->
+
+         <!-- jrf body starts -->
+         <nb-card-body>
+            <input type="hidden" formControlName="id" />
+            <input type="hidden" formControlName="jrfSeqNo" />
+            <input type="hidden" formControlName="jrfRefNo" />
+            <input type="hidden" formControlName="eutShortDocId" />
+            <input type="hidden" formControlName="eutDescDocId" />
+            <input type="hidden" formControlName="eutDescDocName" />
+            <input type="hidden" formControlName="eutShortDocName" />
+            <nb-stepper (stepChange)="stopGridsEditing()" #stepper *ngIf="newJrfForm" orientation="vertical">
+               <!-- steppr 1 starts -->
+               <nb-step [stepControl]="" label="Details of EUT">
+
+                  <div class="col-lg-12 form-row">
+                     <!-- name of Eut -->
+                     <div class="col-lg-4">
+                        <!-- label -->
+
+                        <label for="nEutTxt" class="label col-form-label">Name of EUT</label>
+                        <!-- input -->
+                        <input type="text" maxlength="200" class="form-control" formControlName="eutName" nbInput
+                           required="required" autofocus autofocus fullWidth id="nEutTxt" name="nameEut"
+                           [fieldSize]="fieldSize">
+                     </div>
+
+                     <!-- manufacturer/ make -->
+                     <div class="col-lg-4 mb-3">
+                        <!-- label -->
+                        <label for="mEutTxt" class="label col-form-label">Manufacturer / Make</label>
+                        <!-- input -->
+                        <input type="text" maxlength="270" class="form-control" formControlName="manufacturer" nbInput
+                           fullWidth id="mEutTxt" name="makeEut" [fieldSize]="fieldSize">
+                     </div>
+
+                     <!-- model number -->
+                     <div class="col-lg-4 mb-3">
+                        <!-- label -->
+                        <label for="mEutNoTxt" class="label col-form-label">Model Number</label>
+                        <!-- input -->
+                        <input type="text" maxlength="200" class="form-control" nbInput formControlName="modelNo"
+                           fullWidth id="mEutNoTxt" name="modelNo" [fieldSize]="fieldSize">
+                     </div>
+
+                     <!-- name of the software -->
+                     <div class="col-lg-4 mb-3">
+                        <!-- label -->
+                        <label for="sNameTxt" class="label col-form-label">Name of the Software</label>
+                        <!-- input -->
+                        <input type="text" maxlength="200" class="form-control" formControlName="nameOfSoftware" nbInput
+                           fullWidth id="sNameTxt" name="softwareName" [fieldSize]="fieldSize">
+                     </div>
+
+                     <!-- software version number -->
+                     <div class="col-lg-4 mb-3">
+                        <!-- label -->
+                        <label for="sVersionTxt" class="label col-form-label">Software Version no.</label>
+                        <!-- input -->
+                        <input type="text" maxlength="200" class="form-control" formControlName="softwareVerNo" nbInput
+                           fullWidth id="sVersionTxt" name="softwareVersion" [fieldSize]="fieldSize">
+                     </div>
+
+                     <!-- type of EUT mount -->
+                     <div class="col-lg-4 mb-3">
+                        <!-- label -->
+                        <label for="" class="label col-form-label">Type of EUT Mount</label>
+                        <!-- dropdown -->
+                        <nb-select class="d-block" formControlName="typeEutMount" size="{{fieldSize}}" selected="1"
+                           fullWidth>
+                           <nb-option value="floorStand">Floor Stand</nb-option>
+                           <nb-option value="tableTop">Table Top</nb-option>
+                           <nb-option value="rackMount">Rack Mount</nb-option>
+                           <nb-option value="Vehicle">Vehicle</nb-option>
+                        </nb-select>
+                     </div>
+
+                     <!-- weight -->
+                     <div class=" col-md-6 col-lg-2 mb-3">
+                        <!-- label -->
+                        <label for="wEutTxt" class="label col-form-label">Weight</label>
+                        <!-- input -->
+                        <div class="form-row mx-0">
+                           <input type="text" maxlength="6" nvValidate="decimal" class="form-control col-sm-10 col-9"
+                              formControlName="weight" nbInput fullWidth id="wEutTxt" name="weight"
+                              [fieldSize]="fieldSize">
+                           <label for="wEut" class="label col-form-label col-2 text-center">kg</label>
+                        </div>
+                     </div>
+
+                     <!-- Quantity of EUT -->
+                     <div class="col-md-6 col-lg-2 mb-3">
+                        <!-- label -->
+                        <label for="qEutTxt" class="label col-form-label">Quantity</label>
+                        <!-- input -->
+                        <input type="text" nvValidate="number" maxlength="3" (change)="eutQtyChange($event)"
+                           class="form-control" formControlName="eutQty" nbInput fullWidth id="qEutTxt" name="quantity"
+                           [fieldSize]="fieldSize">
+                     </div>
+
+                     <!-- Dimensions(LxWxH) -->
+                     <div class="col-md-5 col-lg-4 mb-3">
+                        <!-- label -->
+                        <label for="" class="label col-form-label">Dimensions(LxWxH)</label>
+
+                        <div class="row m-0 d-flex justify-content-between">
+                           <!-- length input -->
+                           <input type="text" nvValidate="decimal" maxlength="6" class="form-control col-md-2 col-lg-3"
+                              formControlName="length" nbInput fullWidth id="lEutTxt" name="length"
+                              [fieldSize]="fieldSize">
+
+                           <span for="wdEutTxt" class="label col-form-label text-center">X</span>
+                           <!-- width input -->
+                           <input type="text" nvValidate="decimal" maxlength="6" class="form-control col-md-2 col-lg-3"
+                              formControlName="width" nbInput fullWidth id="wdEutTxt" name="width"
+                              [fieldSize]="fieldSize">
+
+                           <span for="hEutTxt" class="label col-form-label text-center">X</span>
+                           <!-- height input -->
+                           <input type="text" nvValidate="decimal" maxlength="6" class="form-control col-md-2 col-lg-3"
+                              formControlName="height" nbInput fullWidth id="hEutTxt" name="height"
+                              [fieldSize]="fieldSize">
+                        </div>
+                     </div>
+
+                     <!-- pre compliance and final testing -->
+                     <div class="testReqType col-md-6 col-lg-4">
+                        <nb-radio-group id="pcomplianceCbx" name="preCompliance" formControlName="typeOfTest"
+                           class="row m-0 ml-md-4 ml-lg-3">
+                           <!-- radio section -->
+                           <nb-radio value="Pre-Compliance" class="col-md-12 col-lg-12 font-sm">Pre-Compliance
+                           </nb-radio>
+                           <nb-radio value="Final Testing" class="col-md-12 col-lg-12">Final Testing</nb-radio>
+                        </nb-radio-group>
+                     </div>
+
+                     <!-- Accessories details -->
+                     <div class="col-lg-6 mb-3">
+                        <!-- label -->
+                        <label for="aDetailTxa" class="label col-form-label">Accessories details</label>
+                        <!-- textarea -->
+                        <textarea rows="9" maxlength="255" type="text" nbInput formControlName="accDtl" fullWidth
+                           id="aDetailTxa" name="accessoriesDetails" [fieldSize]="fieldSize" class="form-control "
+                           style="resize: none; line-height: 1.25em;"></textarea>
+                     </div>
+
+                     <!-- Application -->
+                     <div class="col-lg-6 mb-3">
+                        <!-- label -->
+                        <label for="" class="label col-form-label">Application</label>
+
+                        <div class="row">
+                           <!-- dropdown -->
+                           <nb-select formControlName="standardType" selected="mil" size="{{fieldSize}}"
+                              class="col-sm-6 col-md-6 col-lg-4 mb-3" fullWidth>
+                              <nb-option value="mil">MIL</nb-option>
+                              <nb-option value="Telcom">Telcom</nb-option>
+                              <nb-option value="Automotive">Automotive</nb-option>
+                              <nb-option value="Railway">Railway</nb-option>
+                           </nb-select>
+
+                           <nb-select *ngIf="jrfForm.get('standardType').value == 'mil'" selected="ground"
+                              formControlName="mlStdType" size="{{fieldSize}}"
+                              class="col-sm-6 col-md-6 col-lg-7  mb-sm-4  mt-lg-0 mb-md-4 mb-lg-3" fullWidth>
+                              <nb-option value="ground">Ground</nb-option>
+                              <nb-option value="navySubmarine">Navy - Submarine</nb-option>
+                              <nb-option value="navySurfaceShips">Navy - Surface Ships</nb-option>
+                              <nb-option value="AirForce">Air Force / Space System</nb-option>
+                           </nb-select>
+                        </div>
+
+                        <div class="stardarditems d-flex justify-content-between align-items-center">
+                           <nb-radio-group
+                              *ngIf="jrfForm.get('standardType').value == 'mil'&&jrfForm.get('mlStdType').value"
+                              formControlName="mlStdSubType" size="{{fieldSize}}" multiple fullWidth>
+                              <nb-radio *ngIf="jrfForm.get('mlStdType').value==='ground'" value="Fixed & Airforce"> Navy
+                                 Fixed & Airforce</nb-radio>
+                              <nb-radio *ngIf="jrfForm.get('mlStdType').value==='ground'" value="Navy mobile & Army">
+                                 Navy mobile & Army</nb-radio>
+                              <nb-radio *ngIf="jrfForm.get('mlStdType').value==='navySubmarine'"
+                                 value="Internal Pressure Hul">Internal Pressure Hull</nb-radio>
+                              <nb-radio *ngIf="jrfForm.get('mlStdType').value==='navySubmarine'"
+                                 value="External Pressure Hull">External Pressure Hull</nb-radio>
+                              <nb-radio *ngIf="jrfForm.get('mlStdType').value==='navySurfaceShips'"
+                                 value="Below Deck - Metallic">Below Deck - Metallic</nb-radio>
+                              <nb-radio *ngIf="jrfForm.get('mlStdType').value==='navySurfaceShips'"
+                                 value="Below Deck - Non Metallic">Below Deck - Non Metallic</nb-radio>
+                              <nb-radio *ngIf="jrfForm.get('mlStdType').value==='navySurfaceShips'" value="Above Deck">
+                                 Above Deck</nb-radio>
+                              <nb-radio *ngIf="jrfForm.get('mlStdType').value==='AirForce'" value="Army">Army</nb-radio>
+                              <nb-radio *ngIf="jrfForm.get('mlStdType').value==='AirForce'" value="Navy">Navy</nb-radio>
+                              <nb-radio *ngIf="jrfForm.get('mlStdType').value==='AirForce'" value="Air force">Air force
+                              </nb-radio>
+                           </nb-radio-group>
+                        </div>
+                     </div>
+
+                     <div *ngIf="internalJrf" class="row col-lg-4 mb-3 mr-auto">
+                        <label for="" class="col-md-5 col-lg-12 label col-form-label py-0">Testing Requested</label>
+
+                        <!-- <nb-checkbox class="col-lg-3 px-0 " formControlName="testingRequested">System
+                           </nb-checkbox>
+                           <nb-checkbox class="col-lg-3 px-0" formControlName="testingRequested">Rack
+                           </nb-checkbox>
+                           <nb-checkbox class="col-lg-3 px-0" formControlName="testingRequested">LRU
+                           </nb-checkbox> -->
+                        <nb-radio-group formControlName="testingRequested" name="testingRequestedcbx"
+                           class="col-12 row d-flex align-items-center justify-content-between ml-1">
+                           <nb-radio class="col-3 p-0" value="System">System</nb-radio>
+                           <nb-radio class="col-3 p-0" value="Rack">Rack
+                           </nb-radio>
+                           <nb-radio class="col-3 p-0" value="LRU">LRU
+                           </nb-radio>
+                        </nb-radio-group>
+
+                        <!-- </div> -->
+                     </div>
+                     <!-- name of Eut -->
+                     <div *ngIf="internalJrf" class="col-lg-4 mb-3">
+                        <!-- label -->
+                        <label for="projectcodeTxt" class="label col-form-label">Project Code</label>
+                        <!-- input -->
+                        <input type="text" maxlength="200" class="form-control" formControlName="projectCode" nbInput
+                           required="required" fullWidth id="projectcodeTxt" name="projectcode" [fieldSize]="fieldSize">
+                     </div>
+                     <div *ngIf="internalJrf" class="col-lg-4 mb-3">
+                        <!-- label -->
+                        <label for="intertaskTxt" class="label col-form-label">Task</label>
+                        <!-- input -->
+                        <input type="text" maxlength="200" class="form-control" formControlName="task" nbInput
+                           required="required" fullWidth id="intertaskTxt" name="intertask" [fieldSize]="fieldSize">
+                     </div>
+
+                     <div *ngIf="internalJrf" class="col-lg-4 mb-3">
+
+                        <!-- label -->
+                        <label for="qapRefNoTxt" class="label col-form-label">QAP DOC Ref No.:</label>
+                        <!-- input -->
+                        <input type="text" maxlength="200" class="form-control" formControlName="qapDocRefNo" nbInput
+                           required="required" fullWidth id="qapRefNoTxt" name="qapRefNo" [fieldSize]="fieldSize">
+                     </div>
+
+                     <div *ngIf="internalJrf" class="col-lg-4 mb-3">
+
+                        <!-- label -->
+                        <label for="atpDofNoTxt" class="label col-form-label">ATP DOC Ref No.:</label>
+                        <!-- input -->
+                        <input type="text" maxlength="200" class="form-control" formControlName="atpDocRefNo" nbInput
+                           required="required" fullWidth id="atpDofNoTxt" name="atpDofNo" [fieldSize]="fieldSize">
+                     </div>
+
+                     <div *ngIf="internalJrf" class="col-lg-4 mb-3">
+
+                        <!-- label -->
+                        <label for="noOfLruTxt" class="label col-form-label">No. of LRUs integrated</label>
+                        <!-- input -->
+                        <input type="text" maxlength="200" class="form-control" formControlName="noOfLRUsIntegrated" nbInput
+                           required="required"  fullWidth id="noOfLruTxt" name="noOfLru"
+                           [fieldSize]="fieldSize">
+                           <input type="text" class="form-control"  hidden formControlName="jrfType"  name="jrfType" >
+                     </div>
+
+                     <div *ngIf="internalJrf" class="d-md-flex align-items-center" style="padding: 0 5px;">
+                        <label class="col-sm-12 col-md-7 label col-form-label p-sm-0">Are the LRUs qualified
+                           individually for EMI/EMC
+                        </label>
+                        <nb-radio-group formControlName="emiOrEmc" name="qualifiedEmi"
+                           class="col-sm-12 col-md-5 row flex-column d-md-flex align-items-center justify-content-between ml-2">
+                           <nb-radio class="col-5 p-0" value="yes">Yes</nb-radio>
+                           <nb-radio class="col-5 p-0" value="no">No
+                           </nb-radio>
+                        </nb-radio-group>
+                     </div>
+
+                     <div *ngIf="internalJrf" class="d-md-flex align-items-center" style="padding: 0 5px;">
+                        <label class="col-sm-12 col-md-7 label col-form-label p-sm-0">Interconnecting harnesses are
+                           shielded
+                        </label>
+                        <nb-radio-group formControlName="shielded" name="statementConform"
+                           class="col-sm-12 col-md-5 row d-md-flex flex-column align-items-center justify-content-between ml-2">
+                           <nb-radio class="col-5 p-0" value="yes">Yes</nb-radio>
+                           <nb-radio class="col-5 p-0" value="no">No
+                           </nb-radio>
+                        </nb-radio-group>
+                     </div>
+                  </div>
+               </nb-step>
+               <!-- steppr 1 ends -->
+
+               <!-- stepper 2 starts -->
+               <nb-step [stepControl]="" label="Parameters" class="col-12" fullWidth>
+                  <div style="min-height: 370px;" class="paraCls">
+                     <ag-grid-angular #agGrid
+                        style="width: 100%;max-height: 370px !important;"
+                        id="myGrid" class="{{paramDefaultColDef.theme}} col-12" [rowData]="paramrowData"
+                        (gridReady)="onParametersGridReady($event)" [columnDefs]="paramColumnDefs"
+                        domLayout='autoHeight' [defaultColDef]="paramDefaultColDef"
+                        (cellValueChanged)="onCellValueChangedParameter($event)"
+                        (rowClicked)="onParametersGridRowClicked($event)"></ag-grid-angular>
+                  </div>
+               </nb-step>
+               <!-- stepper 2 ends -->
+
+
+               <!-- stepper 3 starts -->
+               <nb-step [stepControl]="" label="Details of Test" class="col-12" fullWidth>
+
+                  <div style="min-height: 370px;" class="testGCls">
+
+                     <div class="col-12 d-flex justify-content-end align-items-center mb-2">
+                        <!-- add icon -->
+                        <button type="button" (click)="addTestRow()" nbButton class="btn btn-primary px-2 py-1"><i
+                              class="ion-android-add ion-android-add-type-bold mr-2"></i>ADD</button>
+                     </div>
+
+                     <ag-grid-angular #agGrid1
+                        style="width: 100%;max-height: 355px !important;"
+                        id="myGrid1" (gridReady)="onTestGridReady($event)" class="{{paramDefaultColDef.theme}} px-3"
+                        [rowData]="testrowData" [columnDefs]="testColumnDefs"
+                        (rowClicked)="onTestGridRowClicked($event)" [defaultColDef]="testDefaultColDef"
+                        domLayout='autoHeight'>
+                     </ag-grid-angular>
+                  </div>
+
+               </nb-step>
+               <!-- stepper 3 ends -->
+
+               <!-- stepper 4 starts -->
+               <nb-step [stepControl]="" label="Short Note" class="">
+                  <!-- <form [formGroup]="thirdForm" (ngSubmit)="onThirdSubmit()" class="step-container"> -->
+                  <div class="row ml-0 col-lg-12">
+                     <!-- short note about EUT with Block -->
+                     <div class="col-lg-12 mb-2 form-row d-flex justify-content-between">
+                        <!-- label -->
+                        <div class="col-8 px-0">
+                           <label for="shortNoteTxa" class="label col-form-label">Short note about EUT with Block
+                              diagram</label>
+                           <!-- text area -->
+                           <textarea rows="9" maxlength="500" nbInput formControlName="eutShortNote" fullWidth
+                              id="shortNoteTxa" name="shortNote" [fieldSize]="fieldSize" class="form-control"
+                              style="resize: none; line-height: 1.25em;"></textarea>
+                        </div>
+
+                        <div class="col-4">
+                           <label for="shortNoteTxa" class="label col-form-label">Attach Document</label>
+                           <input type="file" id="file" nbInput [fieldSize]="fieldSize"
+                              (change)="handleFileInput($event.target.files,'SHORT')" fullWidth>
+                           <div>{{shortDocFileName}}</div>
+                        </div>
+                     </div>
+
+                     <!-- performance monitoring parameters -->
+                     <div class="col-lg-12 mb-3 form-row d-flex justify-content-between" fullWidth>
+                        <div class="col-8 px-0">
+                           <!-- label -->
+                           <label for="pMParamTxa" class="label col-form-label">Performance monitoring parameters during
+                              testing</label>
+                           <!-- text area -->
+                           <textarea rows="9" maxlength="500" formControlName="eutDesc" nbInput fullWidth
+                              id="pMParamTxa" name="performanceParam" [fieldSize]="fieldSize" class="form-control"
+                              style="resize: none; line-height: 1.25em;"></textarea>
+                        </div>
+                        <div class="col-4">
+                           <label for="shortNoteTxa" class="label col-form-label">Attach Document</label>
+                           <input type="file" id="file" [fieldSize]="fieldSize" nbInput
+                              (change)="handleFileInput($event.target.files,'PERFORMA')" fullWidth>
+                           <div>{{descDocFileName}}</div>
+                        </div>
+
+                     </div>
+                  </div>
+
+               </nb-step>
+               <!-- stepper 4 ends -->
+
+               <!-- stepper 5 starts -->
+               <nb-step [stepControl]="" label="Confirmation">
+                  <!-- <form [formGroup]="thirdForm" (ngSubmit)="onThirdSubmit()" class="step-container"> -->
+                  <div class="form-row col-lg-12">
+
+                     <!-- left section starts -->
+                     <div class='row col-lg-4'>
+                        <!--  -->
+                        <div class="row d-sm-flex col-lg-12 mb-1">
+                           <label for="" class="col-md-5 col-lg-12 label col-form-label py-0">Customer Witness</label>
+                           <nb-radio-group formControlName="custWitness" class="col-md-7 col-lg-12 d-flex px-3">
+                              <nb-radio class="col-lg-6 p-0" value="true">Yes</nb-radio>
+                              <nb-radio class="col-lg-6 p-0" value="false">No</nb-radio>
+                           </nb-radio-group>
+                        </div>
+
+                        <div *ngIf="jrfForm.get('typeOfTest').value != 'Pre-Compliance'" class="row col-lg-12 mb-1">
+                           <label for="" class="col-md-5 col-lg-12 label col-form-label py-0">Test reports /
+                              Graphs</label>
+                           <div class="col-md-7 col-lg-12 d-flex align-items-center px-3">
+                              <nb-checkbox class="col-lg-6 px-0" formControlName="hardCopy">Hard Copy
+                              </nb-checkbox>
+                              <nb-checkbox class="col-lg-6 px-0" formControlName="softCopy">Soft Copy
+                              </nb-checkbox>
+                           </div>
+                        </div>
+                        <div *ngIf="jrfForm.get('typeOfTest').value == 'Pre-Compliance'" class="row col-lg-12 mb-1">
+                           <label for="" class="col-md-5 col-lg-12 label col-form-label py-0">Pre-Compliance Test
+                              data</label>
+                           <div class="col-md-7 col-lg-12 d-flex justify-content-start px-3">
+                              <nb-checkbox formControlName="preCompTestData" class="">Only Graphs </nb-checkbox>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- left section ends -->
+                     <!-- right section starts -->
+                     <div class="col-lg-8">
+                        <!-- confirm label -->
+                        <p class="col-12 label col-form-label pl-0">Confirm:</p>
+
+                        <div class="d-md-flex align-items-center">
+                           <!-- label -->
+                           <label class="col-sm-12 col-md-7 label col-form-label p-sm-0">1. Any Deviation method from
+                              the test
+                              Methodology or Standard / any Special
+                              requirement
+                           </label>
+                           <!-- radio -->
+                           <nb-radio-group formControlName="deviationMethod" name="deviationMethod"
+                              class="col-sm-12 col-md-5 row d-md-flex align-items-center justify-content-between ml-2">
+                              <nb-radio class=" col-5 p-0" value="true">Yes</nb-radio>
+                              <nb-radio class=" col-5 p-0" value="false">No</nb-radio>
+                           </nb-radio-group>
+                        </div>
+                        <div *ngIf="jrfForm.get('deviationMethod').value == 'true'" class="d-flex">
+                           <textarea rows="5" maxlength="255" formControlName="deviationMethodDesc" nbInput fullWidth
+                              id="deviationMethodDesc" name="deviationMethodDesc" [fieldSize]="fieldSize"
+                              class="form-control" style="resize: none; line-height: 1.25em;"
+                              placeholder="Deviation Method Description"></textarea>
+                        </div>
+                        <div class="d-md-flex align-items-center">
+                           <label class="col-sm-12 col-md-7 label col-form-label p-sm-0">2. Pre-Defined Criteria /
+                              Acceptance
+                              criteria
+                              (if any)
+                           </label>
+                           <nb-radio-group formControlName="accCriteria" name="accCriteria"
+                              class="col-sm-12 col-md-5 row d-md-flex align-items-center justify-content-between ml-2">
+                              <nb-radio class="col-5 p-0" value="true">Yes</nb-radio>
+                              <nb-radio class="col-5 p-0" value="false">No</nb-radio>
+                           </nb-radio-group>
+                        </div>
+                        <div *ngIf="jrfForm.get('accCriteria').value == 'true'" class="d-flex">
+                           <textarea rows="5" maxlength="255" formControlName="accCriteriaDesc" nbInput fullWidth
+                              id="accCriteriaDesc" name="accCriteriaDesc" [fieldSize]="fieldSize" class="form-control"
+                              style="resize: none; line-height: 1.25em; "
+                              placeholder="Deviation Method Description"></textarea>
+                        </div>
+
+
+                        <div class="d-md-flex align-items-center">
+                           <label class="col-sm-12 col-md-7 label col-form-label p-sm-0">3. Decision rule employed while
+                              making a
+                              statement of
+                              confirmity.(With or Without MU)
+                           </label>
+
+                           <nb-radio-group formControlName="statementConform" name="statementConform"
+                              class="col-sm-12 col-md-5 row d-md-flex align-items-center justify-content-between ml-2">
+                              <nb-radio class="col-5 p-0" value="Pass/Fail">Pass/Fail</nb-radio>
+                              <nb-radio class="col-5 p-0" value="Others(Pls Specify)">Others
+                              </nb-radio>
+                           </nb-radio-group>
+
+
+                        </div>
+
+                        <div *ngIf="jrfForm.get('statementConform').value == 'Others(Pls Specify)'" class="d-flex">
+                           <textarea maxlength="255" rows="5" formControlName="statementConformOthDesc" nbInput
+                              fullWidth id="statementConformOthDesc" name="accCriteriaDesc" [fieldSize]="fieldSize"
+                              class="form-control" style="resize: none; line-height: 1.25em;"
+                              placeholder="Others Description"></textarea>
+                        </div>
+                     </div>
+                     <!-- right section ends -->
+                     <!-- any other requirements sections -->
+                     <div class="col-lg-12 mb-2">
+                        <label for="rotherTxa" class="label col-form-label">Any other requirements,
+                           specify</label>
+                        <textarea rows="5" maxlength="255" formControlName="othReq" class="form-control" nbInput
+                           fullWidth id="rotherTxa" name="otherRequirements" [fieldSize]="fieldSize"
+                           style="resize: none;"></textarea>
+                     </div>
+
+                     <div class="col-lg-12 mb-1">
+                        <span class="label col-form-label">Note: This rule is applicable for monitored parameters
+                           only.</span>
+                     </div>
+                  </div>
+
+
+
+                  <!-- <div class="mx-3">
+                     <button nbButton nbStepperPrevious class="stp-btn">prev</button>
+                     <button type="button" nbButton
+                        class="btn btn-primary px-4 py-2 p-2 float-right ml-3 mr-2">Cancel</button>
+                     <button type="button" nbButton class="btn btn-primary px-4 py-2 p-2 float-right ml-3"
+                        (click)="save(true)">Save &
+                        Send</button>
+                     <button type="button" nbButton class="btn btn-primary px-4 py-2 p-2 float-right"
+                        (click)="save(false)">Save</button>
+                  </div> -->
+
+                  <!-- </form> -->
+               </nb-step>
+               <!-- stepper 5 ends -->
+            </nb-stepper>
+            <!-- stepper ends -->
+         </nb-card-body>
+         <!-- jrf body ends -->
+         <nb-card-footer>
+            <div class="col-12">
+               <button nbButton class="float-left stp-btn"
+                  [hidden]="loading||(!loading)&&myStepper!=undefined&&myStepper.selectedIndex==0" (click)="goBack()">
+                  <nb-icon icon="arrow-circle-left"></nb-icon>prev
+               </button>
+               <button type="button" nbButton
+                  [hidden]="loading||(!loading)&&myStepper!=undefined&&myStepper.selectedIndex!=4"
+                  [disabled]="saveInProgress" class="btn btn-primary px-4 py-2 p-2 float-right ml-3 mr-2"
+                  *ngIf="btnPermission?.isCreate || btnPermission?.isEdit">
+                  <nb-icon icon="backspace"></nb-icon>Cancel
+               </button>
+               <button type="button" nbButton class="btn btn-primary px-4 py-2 p-2 float-right ml-3"
+                  *ngIf="btnPermission?.isCreate || btnPermission?.isEdit"
+                  [hidden]="loading||(!loading)&&myStepper!=undefined&&myStepper.selectedIndex!=4"
+                  [disabled]="saveInProgress" (click)="save(true)">
+                  <nb-icon icon="email"></nb-icon>Save &
+                  Send
+               </button>
+               <button type="button" nbButton class="btn btn-primary px-4 py-2 p-2 float-right"
+                  *ngIf="(btnPermission?.isCreate || btnPermission?.isEdit)&&(!internalJrf)"
+                  [hidden]="(jrfRefNumber)||(!showButton)||loading||(!loading)&&myStepper!=undefined&&myStepper.selectedIndex!=4"
+                  [disabled]="saveInProgress" (click)="save(false)">
+                  <nb-icon icon="save"></nb-icon>Save
+               </button>
+               <button nbButton class="float-right stp-btn mr-4" [disabled]="jrfForm.get('eutQty').value<1"
+                  [hidden]="loading||(!loading)&&myStepper!=undefined&&myStepper.selectedIndex==4"
+                  (click)="goForward()">next<nb-icon icon="arrow-circle-right"></nb-icon></button>
+            </div>
+         </nb-card-footer>
+      </nb-card>
+   </div>
+</div>
+<!-- jrf container ends -->
+<ng-template #contentTemplate let-data let-windowRef="windowRef">
+   <div *ngIf="data.rowData.additionalName === 'freqency/strength'" class="testAdditional">
+      <div class="row">
+         <div class="col-6">
+            <div class="form-group">
+               <label for="fieldStrength" class="label">Field Strength</label>
+               <input type="text" nvValidate="number" [(ngModel)]="data.rowData.fieldStrength" maxlength="4"
+                  [fieldSize]="fieldSize" nbInput fullWidth class="form-control" id="fieldStrength">
+            </div>
+         </div>
+         <div class="col-4">
+            <div class="form-group">
+               <label for="fieldStrengthUnit" class="label">Unit</label>
+               <!-- <select [(ngModel)]="data.rowData.fieldStrengthUnit" hidden size="{{fieldSize}}" class="form-control"
+                  id="fieldStrengthUnit">
+                  <option selected>"V/M"</option>
+               </select>  -->
+               <input nbInput for="fieldStrength" readonly [fieldSize]="fieldSize" class="form-control" value="V/M">
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-6">
+            <div class="form-group">
+               <label for="freqRangeFrom" class="label">From Frequency</label>
+               <input type="text" nvValidate="decimal" maxlength="6" [(ngModel)]="data.rowData.freqRangeFrom"
+                  maxlength="6" [fieldSize]="fieldSize" nbInput fullWidth class="form-control" id="freqRangeFrom">
+            </div>
+         </div>
+         <div class="col-4">
+            <div class="form-group">
+               <label for="freqRangeFromUnit" class="label">Unit</label>
+               <nb-select [(ngModel)]="data.rowData.freqRangeFromUnit" [selected]="data.rowData.freqRangeFromUnit"
+                  size="{{fieldSize}}" class="form-control border-0 p-0" id="freqRangeFromUnit">
+                  <nb-option [value]="unit" *ngFor="let unit of data.units">{{unit}}</nb-option>
+               </nb-select>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-6">
+            <div class="form-group">
+               <label for="freqRangeTo" class="label">To Frequency</label>
+               <input type="text" nvValidate="decimal" maxlength="6" [(ngModel)]="data.rowData.freqRangeTo"
+                  maxlength="6" [fieldSize]="fieldSize" nbInput fullWidth class="form-control" id="freqRangeTo">
+            </div>
+         </div>
+         <div class="col-4">
+            <div class="form-group">
+               <label for="freqRangeToUnit" class="label">Unit</label>
+               <nb-select [(ngModel)]="data.rowData.freqRangeToUnit" size="{{fieldSize}}"
+                  [selected]="data.rowData.freqRangeToUnit" class="form-control border-0 p-0" id="freqRangeToUnit">
+                  <nb-option [value]="unit" *ngFor="let unit of data.units">{{unit}}</nb-option>
+               </nb-select>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div *ngIf="data.rowData.additionalName === 'cable'" class="testAdditional">
+      <div class="row">
+         <div class="col-12">
+            <div class="form-group">
+               <label for="cablesCount" class="label">No of Cables to be tested</label>
+               <input type="text" nvValidate="number" maxlength="6" [(ngModel)]="data.rowData.noOfCables"
+                  [fieldSize]="fieldSize" nbInput fullWidth class="form-control" id="cablesCount">
+            </div>
+         </div>
+      </div>
+   </div>
+   <nb-card-footer class="py-1 px-0">
+      <button type="button" nbButton class="btn btn-primary px-4 py-2 p-2" (click)="windowRef.close()">
+         <nb-icon icon="clipboard"></nb-icon>submit
+      </button>
+      <button type="button" nbButton class="btn btn-primary px-4 py-2 p-2"
+         (click)="((data.rowData.additionalName === 'cable')?(data.rowData.noOfCables=''):[data.rowData.freqRangeTo='',data.rowData.freqRangeFrom='',data.rowData.fieldStrength='']);windowRef.close()">
+         <nb-icon icon="backspace"></nb-icon>Cancel
+      </button>
+   </nb-card-footer>
+</ng-template>

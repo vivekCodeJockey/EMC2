@@ -1,0 +1,83 @@
+<nb-card class="col-md-12 px-0" nbSpinnerStatus="success" [nbSpinner]="loading" nbSpinnerSize="giant"
+    nbSpinnerMessage="Loading... it will take more to time render">
+    <nb-card-header class="d-flex justify-content-between align-items center mx-0">
+        <span class="col-2 px-0">Document Upload</span>
+        <div class="col-10 px-0 d-flex align-items-center justify-content-md-end">
+            <div class="px-0 d-flex flex-column">
+                <span class="col-lg-12  label px-md-2">JRF No :&nbsp;{{exJrfDtl.jrfRefNumber}}</span>
+                <span class="col-lg-12  label px-md-2"> Test Name :&nbsp;{{exJrfDtl.testName}}</span>
+            </div>
+            <div class="px-0 d-flex flex-column">
+                <span class="col-lg-12  label px-md-2">Test Seq No :&nbsp;{{exJrfDtl.testSeqNo}}</span>
+                <span class="col-lg-12  label px-md-2">Test Planned Date :&nbsp;{{exJrfDtl.testPlannedDate}}</span>
+            </div>
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <ag-grid-angular #agGrid style="width: 100%;" id="myGrid" class="{{documentDefaultColDef.theme}} mt-1"
+            [columnDefs]="documentColumnDefs" [defaultColDef]="documentDefaultColDef" [gridOptions]="gridOptions"
+            (gridReady)="onDocumentGridReady($event)">
+        </ag-grid-angular>
+        <div class="col-lg-12 px-0">
+            <form class="text-white mt-3" [formGroup]="documentForm">
+                <div class="row justify-content-between">
+                    <div class="col-md-6 col-lg-3 mb-sm-4  mt-lg-0 mb-md-4 mb-lg-3">
+                        <label for="pfile" class=" col-12 label col-form-label px-0">Document type </label>
+                        <nb-select selected="graph" formControlName="fileType" size="{{fieldSize}}" fullWidth>
+                            <nb-option value="graph">Graph</nb-option>
+                            <nb-option value="image">Image</nb-option>
+                        </nb-select>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mb-4">
+                        <!-- label -->
+                        <label for="fileHeaderTxt" class="label col-form-label">Document Header</label>
+                        <!-- input -->
+                        <input type="text" class=" form-control " formControlName="fileHeader" nbInput fullWidth
+                            id="fileHeaderTxt" name="fileHeader" [fieldSize]="fieldSize">
+                    </div>
+                    <div class="col-md-6 col-lg-3 mb-3">
+                        <label class="label col-form-label">Upload file</label>
+                        <input type="file" multiple nbInput name="fileInput" formControlName="fileInput"
+                            accept="image/*" (change)="handleFileInput($event.target.files)" [fieldSize]="fieldSize"
+                            class="form-control" fullWidth>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mb-3 position-relative">
+                        <label class="label col-form-label text-primary">{{imgFileName}}</label>
+                        <label for="docuploadimg"
+                            style="color: black; border: 1px solid black; border-radius: 7px;position: absolute; top: 30px;"
+                            class="label col-form-label p-2"><i class="ion-android-camera mr-2"></i>Capture Image
+                        </label>
+                        <input type="file" multiple nbInput name="fileInput" formControlName="fileInput"
+                            id="docuploadimg" capture="user" accept="image/*"
+                            (change)="handleFileInput($event.target.files,'image')" [fieldSize]="fieldSize" class="form-control"
+                            fullWidth>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end">
+                    <button nbButton status="primary" [size]="fieldSize" (click)="uploadDocument()"
+                        [disabled]="documentButtonDisabled" outline>
+                        <i class="ion-android-upload mr-2"></i> UPLOAD
+                    </button>
+                    <!-- <button nbButton status="danger" [size]="fieldSize" hidden="true" (click)="getSnapshot()" outline>
+                        <i class="ion-android-capture mr-2"></i> Capture Image
+                    </button> -->
+                </div>
+            </form>
+        </div>
+        <!-- <div class="col-md-12">
+            <webcam [trigger]="invokeObservable" (imageCapture)="captureImg($event)"></webcam>
+        </div>
+        <div *ngIf="webcamImage&&webcamImage.imageAsDataUrl" class="col-12">
+            <img [src]="webcamImage?.imageAsDataUrl" height="400px" />
+        </div> -->
+    </nb-card-body>
+    <!-- <nb-card-footer>
+    </nb-card-footer> -->
+</nb-card>
+<ng-template #contentTemplate let-data>
+    <!-- <img *ngIf="extensionType=='image/jpeg'" [src]="'data:'+extensionType+';base64,'+base64 | safe:'resourceUrl'"
+    [height]="clientHeight+'px'" width="830px" alt=""> -->
+    <iframe [src]="'data:'+extensionType+';base64,'+base64 | safe:'resourceUrl'"
+    [height]="clientHeight+'px'" width="830px"></iframe>
+</ng-template>

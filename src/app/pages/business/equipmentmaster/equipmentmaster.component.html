@@ -1,0 +1,99 @@
+<!-- Equipment master container starts -->
+<nb-card class="col-12 row">
+    <!-- header section starts-->
+    <nb-card-header class="d-flex justify-content-between align-items center px-2">
+        <span class="col-lg-2"> Equipment</span>
+    </nb-card-header>
+    <!-- header section ends -->
+    <nb-card-body>
+        <div class="col-12 d-flex justify-content-end align-items-center px-0">
+            <label class="search-label label mr-2 mb-0" for="search">Search:</label>
+            <nb-form-field>
+                <input nbInput id="search" [(ngModel)]="searchText" [fieldSize]="fieldSize" class="search-input"
+                    (keyup.enter)="searchEquip()" (ngModelChange)="updateSearchText()">
+                <button nbSuffix type="button" nbButton size="tiny" class="searchBtn border-0" (click)="searchEquip()"
+                    [status]="'default'" title="search">
+                    <nb-icon icon="search"></nb-icon>
+                </button>
+            </nb-form-field>
+        </div>
+        <!-- domLayout='autoHeight' -->
+        <ag-grid-angular #agGrid style="width: 100%;" id="myGrid" class="{{equipDefaultColDef.theme}} mt-2"
+            [columnDefs]="equipColumnDefs" domLayout='autoHeight' [defaultColDef]="equipDefaultColDef"
+            [gridOptions]="gridOptions" (gridReady)="onEquipmentGridReady($event)">
+        </ag-grid-angular>
+        <!-- Form Start -->
+        <form [formGroup]="equipmentForm" class="mt-2">
+            <div class="col-md-6 col-lg-4 mt-3 px-0 d-flex align-items-center">
+                <label for="" class="col-md-5 col-lg-5 label col-form-label ">Calibration Applicable</label>
+                <div class="col-md-7 col-lg-12 d-flex justify-content-start px-3">
+                    <nb-checkbox formControlName="calibrationApplicable" (change)="showAndHide($event.target.checked)">
+                    </nb-checkbox>
+                </div>
+            </div>
+            <div class="row col-12 mt-1 mx-0 px-0">
+                <!-- Instrument -->
+                <div class="col-md-6 col-lg-4 mb-3">
+                    <label for="iName" class="label col-form-label">Name of Instrument</label>
+                    <input type="text" class="form-control" maxlength="250" formControlName="instrumentName" nbInput
+                        fullWidth id="iNameTxt" name="iName" [fieldSize]="fieldSize">
+                </div>
+                <!-- Make -->
+                <div class="col-md-6 col-lg-4 mb-3">
+                    <label for="eMake" class="label col-form-label">Make</label>
+                    <input type="text" class="form-control" maxlength="250" formControlName="make" nbInput id="eMakeTxt"
+                        fullWidth name="eMake" [fieldSize]="fieldSize">
+                </div>
+                <!-- Model No -->
+                <div class="col-md-6 col-lg-4 mb-3">
+                    <label for="eModelNoTxt" class="label col-form-label">Model No</label>
+                    <input type="text" class="form-control" maxlength="250" formControlName="modelNo" nbInput fullWidth
+                        id="eModelNoTxt" name="eModelNo" [fieldSize]="fieldSize">
+                </div>
+                <!-- Serial No -->
+                <div class="col-md-6 col-lg-4 mb-3">
+                    <label for="eSerialTxt" class="label col-form-label">Serial No</label>
+                    <input type="text" class="form-control" maxlength="250" formControlName="serialNo" nbInput fullWidth
+                        id="eSerialTxt" name="eSerial" [fieldSize]="fieldSize">
+                </div>
+                <!-- Calibration Date -->
+                <div *ngIf="equipmentForm.get('calibrationApplicable').value == true"
+                    class="col-md-6 col-lg-4 mb-3 mb-3">
+                    <label for="eCalibTxt" class="label col-form-label">Calibration Date</label>
+                    <input type="text" class="form-control" formControlName="calibrationDate"
+                        [value]="equipmentForm.controls['calibrationDate'].value | date: 'dd-MM-yyyy'" nbInput fullWidth
+                        id="eCalibTxt" [nbDatepicker]="picker" name="eCalib" [fieldSize]="fieldSize" readonly>
+                    <nb-datepicker #picker [min]="min"></nb-datepicker>
+                </div>
+                <!-- Due Date -->
+                <div *ngIf="equipmentForm.get('calibrationApplicable').value == true" class="col-md-6 col-lg-4 mb-3">
+                    <label for="eDueTxt" class="label col-form-label">Due Date</label>
+                    <input type="text" class="form-control" formControlName="dueDate"
+                        [value]="equipmentForm.controls['dueDate'].value | date: 'dd-MM-yyyy'" nbInput id="eDueTxt"
+                        fullWidth [nbDatepicker]="picker1" name="eDue" [fieldSize]="fieldSize" readonly>
+                    <nb-datepicker #picker1 [min]="min"></nb-datepicker>
+                </div>
+                <!-- <div class="col-md-6 col-lg-4 mb-3 px-0">
+                    <label for="" class="col-md-5 col-lg-12 label col-form-label ">Calibration Applicable</label>
+                    <div class="col-md-7 col-lg-12 d-flex justify-content-start px-3">
+                        <nb-checkbox formControlName="calibrationApplicable"
+                            (change)="showAndHide($event.target.checked)">
+                        </nb-checkbox>
+                    </div>
+                </div> -->
+            </div>
+        </form>
+    </nb-card-body>
+    <!-- footer -->
+    <nb-card-footer *ngIf="btnPermission?.isCreate || btnPermission?.isEdit">
+        <button type="submit" nbButton class="btn btn-primary px-4 py-2 p-2" [disabled]="equipmentButtonDisabled"
+            (click)="saveEquipment()">
+            <nb-icon icon="save"></nb-icon>{{equipmentButtonName}}
+        </button>
+        <button type="button" nbButton class="btn btn-primary px-4 py-2 p-2" [disabled]="equipmentButtonDisabled"
+            (click)="cancelEquipment()">
+            <nb-icon icon="backspace"></nb-icon>Cancel
+        </button>
+    </nb-card-footer>
+</nb-card>
+<!-- Equipment master container ends -->

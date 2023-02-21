@@ -1,0 +1,44 @@
+.qutBody .col-md-8 {
+  text-align: end;
+}
+
+.form_input {
+  input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid gray;
+    border-radius: 0;
+    text-align: right;
+    &:hover {
+      background-color: transparent;
+      border-bottom: 1px solid gray;
+    }
+    &:disabled {
+      background-color: transparent;
+      border-bottom: 1px solid gray;
+    }
+  }
+}
+
+.fas {
+  font-size: 10px;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 550;
+  padding-left: 5px;
+}
+
+:host ::ng-deep nb-radio .outer-circle,
+nb-radio .inner-circle {
+  width: 1rem;
+  height: 1rem;
+}
+
+:host ::ng-deep nb-radio .inner-circle {
+  transform: translate3d(-2.16px, -10px, 0) scale(0.5) !important;
+}
+
+.quotCls ::ng-deep .ag-body-viewport{
+  overflow: overlay;
+  max-height: 250px;
+}

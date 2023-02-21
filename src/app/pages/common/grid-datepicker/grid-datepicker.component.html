@@ -1,0 +1,10 @@
+<!-- <nb-datepicker  #picker [min]="min" [max]="max"></nb-datepicker>
+<input   *ngIf="fieldType=='date'" nbInput fullWidth fieldSize="small"  (ngModelChange)="onDateChanged($event)" [(ngModel)]="fieldData" placeholder="" [nbDatepicker]="picker">
+<nb-date-timepicker   #dateTimePicker singleColumn [step]="10"></nb-date-timepicker>
+<input  *ngIf="fieldType=='dateTime'" format="PPP p" nbInput fullWidth fieldSize="small"  (ngModelChange)="onDateChanged($event)"  [(ngModel)]="fieldData" placeholder="" [nbDatepicker]="dateTimePicker"> -->
+
+
+<!-- <input   *ngIf="fieldType=='date'" nbInput fullWidth fieldSize="small"  (ngModelChange)="onDateChanged($event)" [(ngModel)]="fieldData" placeholder="" [nbDatepicker]="picker"> -->
+<nb-datepicker  #picker [min]="min" ></nb-datepicker>
+<input   nbInput fullWidth fieldSize="small"  (ngModelChange)="onDateChanged($event)"  [(ngModel)]="fieldData" placeholder="" [nbDatepicker]="fieldType=='dateTime'?dateTimePicker:picker">
+<nb-date-timepicker   #dateTimePicker singleColumn  [min]="min" [step]="10"></nb-date-timepicker>

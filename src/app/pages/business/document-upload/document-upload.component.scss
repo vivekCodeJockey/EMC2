@@ -1,0 +1,30 @@
+::-webkit-file-upload-button {
+  background: transparent;
+  border: none;
+  border-right: 1px solid blue;
+  outline: none;
+  margin-right: 10px;
+  padding-left: 0;
+}
+
+input {
+  background: transparent;
+}
+
+#docuploadimg::-webkit-file-upload-button {
+  background: transparent;
+  border: none;
+  border-right: 1px solid blue;
+  outline: none;
+  margin-right: 10px;
+  padding-left: 0;
+  display: none;
+}
+
+#docuploadimg {
+  display: none;
+}
+
+label {
+  cursor: pointer;
+}

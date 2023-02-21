@@ -1,0 +1,109 @@
+<!-- forgot password section starts -->
+<div *ngIf="customTitle ==='f_password'" class="d-flex flex-column justify-content-center align-items-center">
+
+    <!-- input -->
+    <div class="col-sm-10 col-md-10 col-lg-10 mt-2 mb-3">
+        <label>Enter your registered Mail ID</label>
+        <input type="email" class="validate form-control p-2" autofocus #useremail="ngModel" [(ngModel)]="emailId"
+            nbTooltip="User ID should be valid email Id" maxlength="100" nbTooltipStatus="warning" required
+            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" placeholder="Mail ID" name="emailId">
+    </div>
+    <!-- button -->
+    <button type="submit" class="auth-btn px-3 py-2 mb-2 col-5 col-lg-3" (click)="sendForgotOTP()"
+        [disabled]="(!emailId)||(!useremail.valid)">Send
+        OTP
+        <div [ngClass]="{'loading':loader}"></div>
+    </button>
+    <!-- <button type="submit" class="px-3 py-2 btn col-5 col-lg-3 btn-primary mb-2" [disabled]="(!emailId)||(!useremail.valid)"
+        (click)="sendForgotOTP()">Send
+        OTP</button> -->
+    <!-- navigation link to sign in screen -->
+    <p class="text-center text-white">Back to <span (click)="reloadPage()"><a href="">Sign In</a></span></p>
+
+</div>
+<!-- forgot password section ends -->
+
+<!-- reset password section starts -->
+<div *ngIf="customTitle ==='r_password'" class="resetPass_content d-flex flex-column align-items-center">
+    <!-- OTP input -->
+    <div class="col-sm-10 col-md-10 mb-3">
+        <label for="">OTP</label>
+        <input type="text" name="resetOTP" maxlength="8" autofocus nvValidate="number" class="form-control p-2"
+            [(ngModel)]="resetOTP" placeholder="Enter OTP here...">
+    </div>
+    <!-- Reset Password -->
+    <div class="col-sm-10 col-md-10 mb-3">
+        <label for="">Reset Password</label>
+        <input type="password" name="changepwd" maxlength="25" class="form-control p-2" [(ngModel)]="pwd"
+            placeholder="reset password">
+    </div>
+    <!-- Confirm Password -->
+    <div class="col-sm-10 col-md-10 mb-4">
+        <label for="">Confirm Password</label>
+        <input type="password" name="confirmpwd" maxlength="25" class="form-control p-2" [(ngModel)]="confirmpwd"
+            placeholder="reset confirm password">
+    </div>
+    <!-- button -->
+
+    <div class="col-sm-10 col-md-10 d-flex justify-content-center align-items-center">
+        <button type="submit" class="auth-btn px-3 py-2 mb-2" (click)="resetPassword()"
+            [disabled]="((!resetOTP))||((!pwd))||((!confirmpwd))">Reset Password
+            <div [ngClass]="{'loading':loader}"></div>
+        </button>
+        <!-- <button type="submit" class="px-3 py-2 btn btn-primary mb-2"
+            [disabled]="((!resetOTP))||((!pwd))||((!confirmpwd))" (click)="resetPassword()">Reset Password</button> -->
+    </div>
+
+    <!-- navigation link to sign in screen -->
+    <p class="text-center text-white">Back to <span (click)="reloadPage()"><a href="">Sign In</a></span></p>
+
+</div>
+<!-- reset password section ends -->
+
+<!-- verification email section starts -->
+<div *ngIf="customTitle ==='v_password'"
+    class="w-100 vh-100 resetPass_content d-flex justify-content-center align-items-center text-white">
+
+    <div class="col-10 border-white d-flex flex-column justify-content-center align-items-center">
+        <h4 class="text-center text-white">Thank you for registering with us. Verification OTP has been sent to your
+            email address
+            {{email}}
+        </h4>
+        <div class="col-lg-5 col-12 mb-3 mt-5">
+            <!-- OPT input -->
+            <label for="">OTP</label>
+            <input type="password" class="form-control p-2" autofocus maxlength="8" nvValidate="number" name="emailOTP"
+                [(ngModel)]="emailOTP" placeholder="Enter your OTP here">
+        </div>
+        <!-- button for verify email -->
+        <button class="auth-btn px-3 py-2 mb-3 col-lg-2 col-8" [disabled]="(!emailOTP)" (click)="verifyOTP()">Verify
+            Email
+            <div [ngClass]="{'loading':loader}"></div>
+        </button>
+        <!-- <button class="px-3 py-2 btn col-lg-2 col-8 btn-primary mb-3" [disabled]="(!emailOTP)"
+            (click)="verifyOTP()">Verify
+            Email</button> -->
+
+        <!-- button for resend OTP -->
+        <button class="px-3 py-2 btn col-lg-2 col-8 btn-primary mb-3" (click)="resendSignupOTP()">Resend OTP</button>
+        <!-- navigation link to sign in screen -->
+        <p class="text-center text-white">Back to <span (click)="reloadPage()"><a href="">Sign In</a></span></p>
+    </div>
+</div>
+
+<!-- verification email section ends -->
+
+<!-- verified email section starts -->
+<div *ngIf="customTitle =='verified_password'"
+    class="w-100 vh-100 resetPass_content d-flex justify-content-center align-items-center text-white">
+    <div class="col-10 border-white d-flex flex-column justify-content-center align-items-center">
+        <h4 class="text-center text-white">Thank you for registering with us
+        </h4>
+        <!-- navigation link to sign in screen -->
+        <p class="text-center text-white">Back to <span (click)="reloadPage()"><a href="">Sign In</a></span></p>
+    </div>
+</div>
+<!-- verified email section ends -->
+
+<!-- <p class="text-center font-weight-lighter" *ngIf="customTitle =='verified_password'">Back to <span class="span_bold"><a
+            href="#" class="">Sign In</a></span></p> -->

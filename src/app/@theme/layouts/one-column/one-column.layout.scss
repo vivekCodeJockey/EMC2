@@ -1,0 +1,29 @@
+@import "../../styles/themes";
+@import "~bootstrap/scss/mixins/breakpoints";
+@import "~@nebular/theme/styles/global/breakpoints";
+
+@include nb-install-component() {
+  .menu-sidebar ::ng-deep .scrollable {
+    padding-top: nb-theme(layout-padding-top);
+  }
+
+  nb-sidebar.expanded {
+    width: calc(var(--sidebar-width) - (var(--sidebar-padding) * 3));
+  }
+  nb-sidebar.expanded ::ng-deep .main-container-fixed {
+    width: calc(var(--sidebar-width) - (var(--sidebar-padding) * 3));
+  }
+
+  // ---------------editied by naveen--------------------
+  .bg_header {
+    background: rgb(2, 0, 36);
+    background: linear-gradient(
+      90deg,
+      rgba(2, 0, 36, 1) 20%,
+      rgba(73, 131, 228, 1) 50%,
+      rgba(8, 7, 104, 1) 100%
+    );
+  }
+
+  // ---------------editied by naveen--------------------
+}

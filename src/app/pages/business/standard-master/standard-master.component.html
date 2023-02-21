@@ -1,0 +1,192 @@
+<!-- standard master container starts -->
+<nb-card class="col-12 row">
+   <!-- tabset container starts -->
+   <nb-tabset (changeTab)="getActiveTab($event)">
+      <!-- test tab section starts -->
+      <nb-tab tabTitle="Test">
+
+         <div class="col-12 d-flex justify-content-end align-items-center px-0">
+            <label class="search-label label mr-2 mb-0" for="search">Search:</label>
+            <nb-form-field>
+               <input nbInput id="search" [(ngModel)]="searchtestText" [fieldSize]="fieldSize" class="search-input"
+               (keyup.enter)="searchTest()" (ngModelChange)="updateTestText()">
+               <button nbSuffix type="button" nbButton size="tiny" class="searchBtn border-0"
+                  (click)="searchTest()" [status]="'default'" title="search">
+                  <nb-icon icon="search"></nb-icon>
+               </button>
+            </nb-form-field>
+         </div>
+         <ag-grid-angular #agGrid style="width: 100%;" id="myGrid" [enableCellChangeFlash]="true"
+            class="{{testDefaultColDef.theme}} mt-2" [columnDefs]="testColumnDefs" [defaultColDef]="testDefaultColDef"
+            [gridOptions]="gridOptions" (gridReady)="onTestGridReady($event)">
+         </ag-grid-angular>
+         <!-- test form -->
+         <form [formGroup]="testForm" class="mt-3" (ngSubmit)="saveTest()">
+            <div class="row">
+               <!-- category -->
+               <div class="col-md-6 col-lg-4 mb-3">
+                  <label for="" class="label col-form-label">Category</label>
+                  <nb-select class="d-block" size="{{fieldSize}}" fullWidth
+                     [selected]="testForm.controls['testCategoryId'].value"
+                     (selectedChange)="getSpecificationMaster($event)" formControlName="testCategoryId" autofocus>
+                     <nb-option [value]="category.id" *ngFor="let category of categoryMasterList">{{category.name}}
+                     </nb-option>
+                  </nb-select>
+               </div>
+               <!-- specification -->
+               <div class="col-md-6 col-lg-4 mb-3">
+                  <label for="" class="label col-form-label">Specification</label>
+                  <nb-select class="d-block" size="{{fieldSize}}" formControlName="specificationId" fullWidth
+                     [selected]="testForm.controls['specificationId'].value">
+                     <nb-option [value]="specification.id" *ngFor="let specification of specificationMasterList">
+                        {{specification.name}}</nb-option>
+                  </nb-select>
+               </div>
+               <!-- test name -->
+               <div class="col-md-6 col-lg-4 mb-3">
+                  <label for="tNameTxt" class="label col-form-label">Test Name</label>
+                  <input type="text" class="form-control" maxlength="250" nbInput fullWidth id="tNameTxt"
+                     formControlName="testName" [fieldSize]="fieldSize">
+               </div>
+               <!-- additional -->
+               <div class="col-md-6 col-lg-4 mb-3">
+                  <label for="" class="label col-form-label">Additional</label>
+                  <nb-select class="d-block" size="{{fieldSize}}" formControlName="additionalName" fullWidth
+                     [selected]="testForm.controls['additionalName'].value">
+                     <nb-option value="">&nbsp;</nb-option>
+                     <nb-option value="supplyVoltage">Supply Voltage</nb-option>
+                     <nb-option value="cable">Cable</nb-option>
+                     <nb-option value="freqency/strength">Freqency/Strength</nb-option>
+                  </nb-select>
+               </div>
+               <!-- report header -->
+               <div class="col-md-6 col-lg-4 mb-3">
+                  <label for="reportHeaderTxt" class="label col-form-label">Report Header</label>
+                  <input type="text" class="form-control" maxlength="250" nbInput fullWidth id="reportHeaderTxt"
+                     formControlName="reportHeader" [fieldSize]="fieldSize">
+               </div>
+               <div class="col-md-6 col-lg-4 mb-3">
+                  <label for="" class="label col-form-label">Worksheet Type</label>
+                  <nb-select class="d-block" size="{{fieldSize}}" formControlName="workSheetId" fullWidth
+                     [selected]="testForm.controls['workSheetId'].value">
+                     <nb-option [value]="key" *ngFor="let key of WorksheetSettingsList">
+                        {{WorksheetSettingData[key].worksheetName}}
+                     </nb-option>
+                  </nb-select>
+               </div>
+            </div>
+            <!-- footer -->
+            <nb-card-footer class="px-0 pb-0" *ngIf="btnPermission?.isCreate || btnPermission?.isEdit">
+               <button type="submit" nbButton class="btn btn-primary px-4 py-2 p-2" [disabled]="testButtonDisabled">
+                  <nb-icon icon="save"></nb-icon>{{testButtonName}}
+               </button>
+               <button type="button" nbButton class="btn btn-primary px-4 py-2 p-2" (click)="cancelTest()"
+                  [disabled]="testButtonDisabled">
+                  <nb-icon icon="backspace"></nb-icon>Cancel
+               </button>
+            </nb-card-footer>
+         </form>
+      </nb-tab>
+      <!-- test tab section ends -->
+      <!-- category tab section starts -->
+      <nb-tab tabTitle="Category">
+         <div class="col-12 d-flex justify-content-end align-items-center px-0">
+            <label class="search-label label mr-2 mb-0" for="search">Search:</label>
+            <nb-form-field>
+               <input nbInput id="search" [(ngModel)]="searchCatText" [fieldSize]="fieldSize" class="search-input"
+               (keyup.enter)="searchCat()" (ngModelChange)="updateCatText()">
+               <button nbSuffix type="button" nbButton size="tiny" class="searchBtn border-0"
+                  (click)="searchCat()" [status]="'default'" title="search">
+                  <nb-icon icon="search"></nb-icon>
+               </button>
+            </nb-form-field>
+         </div>
+         <!-- grid -->
+         <ag-grid-angular #catagGrid style="width: 100%;" id="catmyGrid" class="{{categoryDefaultColDef.theme}} mt-2"
+            [columnDefs]="categoryColumnDefs" [defaultColDef]="categoryDefaultColDef" [gridOptions]="catGridOptions"
+            (gridReady)="onCategoryGridReady($event)">
+         </ag-grid-angular>
+         <!-- category form -->
+         <form [formGroup]="categoryForm" class="mt-3" (ngSubmit)="saveCategory()">
+            <div class="d-flex flex-column flex-lg-row px-0">
+               <!-- category -->
+               <div class="col-md-6 col-lg-4 mb-3 pl-0">
+                  <label for="tCategoryText" class="label col-form-label">Category</label>
+                  <input type="text" class="form-control" maxlength="250" nbInput id="tCategoryText" fullWidth
+                     formControlName="categoryName" [fieldSize]="fieldSize" autofocus>
+               </div>
+               <!-- description -->
+               <div class="col-md-6 col-lg-4 mb-3">
+                  <label for="tDescriptionTxt" class="label col-form-label">Description</label>
+                  <input type="text" class="form-control" maxlength="250" nbInput id="tDescriptionTxt" fullWidth
+                     formControlName="categoryDescription" [fieldSize]="fieldSize">
+               </div>
+            </div>
+            <!-- footer -->
+            <nb-card-footer class="px-0 pb-0" *ngIf="btnPermission?.isCreate || btnPermission?.isEdit">
+               <button type="submit" nbButton class="btn btn-primary px-4 py-2 p-2" [disabled]="categoryButtonDisabled">
+                  <nb-icon icon="save"></nb-icon>{{categoryButtonName}}
+               </button>
+               <button type="button" nbButton class="btn btn-primary px-4 py-2 p-2" (click)="cancelCategory()"
+                  [disabled]="categoryButtonDisabled">
+                  <nb-icon icon="backspace"></nb-icon>Cancel
+               </button>
+            </nb-card-footer>
+         </form>
+      </nb-tab>
+      <!-- category tab section ends -->
+      <!-- specification tab section starts -->
+      <nb-tab tabTitle="Specification">
+         <div class="col-12 d-flex justify-content-end align-items-center px-0">
+            <label class="search-label label mr-2 mb-0" for="search">Search:</label>
+            <nb-form-field>
+               <input nbInput id="search" [(ngModel)]="searchSpecText" [fieldSize]="fieldSize" class="search-input"
+               (keyup.enter)="searchSpec()" (ngModelChange)="updateSpecText()">
+               <button nbSuffix type="button" nbButton size="tiny" class="searchBtn border-0"
+                  (click)="searchSpec()" [status]="'default'" title="search">
+                  <nb-icon icon="search"></nb-icon>
+               </button>
+            </nb-form-field>
+         </div>
+         <!-- grid -->
+         <ag-grid-angular #specagGrid style="width: 100%;" id="specmyGrid" class="{{specDefaultColDef.theme}} mt-2"
+            [columnDefs]="specColumnDefs" [defaultColDef]="specDefaultColDef" [gridOptions]="specGridOptions"
+            (gridReady)="onSpecificationGridReady($event)">
+         </ag-grid-angular>
+         <!-- specification form -->
+         <form [formGroup]="specificationForm" class="mt-3" (ngSubmit)="saveSpecification()">
+            <div class="d-flex flex-column flex-lg-row">
+               <!-- category -->
+               <div class=" col-md-6 col-lg-4 mb-3 pl-0">
+                  <label for="" class="label col-form-label">Category</label>
+                  <nb-select class="d-block" size="{{fieldSize}}" formControlName="categoryId" fullWidth
+                     [selected]="specificationForm.controls['categoryId'].value" autofocus>
+                     <nb-option [value]="category.id" *ngFor="let category of categoryMasterList">{{category.name}}
+                     </nb-option>
+                  </nb-select>
+               </div>
+               <!-- specification -->
+               <div class="col-md-6 col-lg-4 mb-3">
+                  <label for="tSpecTxt" class="label col-form-label">Specification</label>
+                  <input type="text" class="form-control" maxlength="250" nbInput id="tSpecTxt" fullWidth
+                     formControlName="specificationName" [fieldSize]="fieldSize">
+               </div>
+            </div>
+            <!-- footer -->
+            <nb-card-footer class="px-0 pb-0" *ngIf="btnPermission?.isCreate || btnPermission?.isEdit">
+               <button type="submit" nbButton class="btn btn-primary px-4 py-2 p-2"
+                  [disabled]="specificationButtonDisabled">
+                  <nb-icon icon="save"></nb-icon>{{specificationButtonName}}
+               </button>
+               <button type="button" nbButton class="btn btn-primary px-4 py-2 p-2" (click)="cancelSpecification()"
+                  [disabled]="specificationButtonDisabled">
+                  <nb-icon icon="backspace"></nb-icon>Cancel
+               </button>
+            </nb-card-footer>
+         </form>
+      </nb-tab>
+      <!-- specification tab section ends -->
+   </nb-tabset>
+   <!-- tabset container ends -->
+</nb-card>
+<!-- standard master container ends -->

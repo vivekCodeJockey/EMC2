@@ -1,0 +1,20 @@
+.fas {
+    font-size: 10px;
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 550;
+    padding-left: 5px;
+}
+
+// :host ::ng-deep nb-tabset .tab .tab-link {
+//     padding: 10px;
+//     font-size: small;
+//     background: #edf1f7;
+//     margin-right: 0px;
+//   }
+
+// overflow: overlay;padding-right: 9px;
+
+.freqCls ::ng-deep .ag-body-viewport{
+    overflow: overlay;
+    max-height: 336px;
+}

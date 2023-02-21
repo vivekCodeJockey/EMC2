@@ -1,0 +1,196 @@
+<nb-card class="col-md-12 px-0" nbSpinnerStatus="success" nbSpinnerSize="giant" [nbSpinner]="loading" nbSpinnerMessage="Loading...">
+    <nb-card-header class="d-flex justify-content-between align-items center mx-2">
+        <span class="col-2 px-0"> Work Sheet</span>
+        <div class="col-10 px-0 d-flex align-items-center justify-content-md-end">
+            <div *ngIf="exJrfDtl.isButtonRequired == 'true'">
+                <label *ngIf="counter" class="label">
+                    <nb-icon class="mr-2" icon="clock-outline"></nb-icon>
+                    {{counter | formatTime}}
+                </label>
+            </div>
+            <div class="px-0 d-flex flex-column">
+                <span class="col-lg-12  label px-md-2 ">JRF No :&nbsp;{{exJrfDtl.jrfRefNumber}}</span>
+                <span class="col-lg-12  label px-md-2 "> Test Name :&nbsp;{{exJrfDtl.testName}}</span>
+            </div>
+            <div class="px-0 d-flex flex-column">
+                <span class="col-lg-12  label px-md-2 ">Test Seq No :&nbsp;{{exJrfDtl.testSeqNo}}</span>
+                <span class="col-lg-12  label px-md-2 ">Test Planned Date
+                    :&nbsp;{{exJrfDtl.testPlannedDate}}</span>
+            </div>
+        </div>
+    </nb-card-header>
+    <nb-card-body class="px-0 py-0">
+        <form [formGroup]="wSheetForm">
+            <div *ngIf="(!tsScreen)&&(!eqScreen)" class="col-lg-12 form-row px-4 mx-0">
+                <!-- name of Eut -->
+                <div class="col-md-6">
+                    <!-- label -->
+                    <label for="nEutTxt" class="label col-form-label">Name of EUT</label>
+                    <!-- input -->
+                    <input type="text" class="form-control" formControlName="eutName" nbInput fullWidth id="nEutTxt"
+                        readonly name="nameEut" [fieldSize]="fieldSize">
+                </div>
+                <div class="col-md-6">
+                    <!-- label -->
+                    <label for="modelTxt" class="label col-form-label">Model Number</label>
+                    <!-- input -->
+                    <input type="text" class="form-control" nbInput formControlName="modelNo" fullWidth id="modelTxt"
+                        readonly name="modelNo" [fieldSize]="fieldSize">
+                </div>
+                <div class="col-md-6">
+                    <!-- label -->
+                    <label for="serialTxt" class="label col-form-label">Serial Number</label>
+                    <!-- input -->
+                    <input type="text" class="form-control" nbInput formControlName="serialNo" fullWidth id="serialTxt"
+                        readonly name="serialNo" [fieldSize]="fieldSize">
+                </div>
+                <div class="col-md-6">
+                    <!-- label -->
+                    <label for="curTxt" class="label col-form-label">EUT Current</label>
+                    <!-- input -->
+                    <input type="text" class="form-control" nbInput formControlName="eutCurrent" fullWidth readonly
+                        id="curTxt" name="eCurrent" [fieldSize]="fieldSize">
+                </div>
+                <div class="col-md-6">
+                    <!-- label -->
+                    <label for="tempTxt" class="label col-form-label">Temp</label>
+                    <!-- input -->
+                    <input type="text" class="form-control" nbInput maxlength="250" nbInput [readonly]="!testStarted"
+                        formControlName="testTemperature" fullWidth id="tempTxt" name="temp" [fieldSize]="fieldSize">
+                </div>
+                <div class="col-md-6">
+                    <!-- label -->
+                    <label for="operationTxt" class="label col-form-label">Operation</label>
+                    <!-- input -->
+                    <input type="text" class="form-control" nbInput formControlName="operation" fullWidth
+                        id="operationTxt" readonly name="operation" [fieldSize]="fieldSize">
+                </div>
+                <div class="col-md-6">
+                    <!-- label -->
+                    <label for="mHumidityTxt" class="label col-form-label">Humidity</label>
+                    <!-- input -->
+                    <input type="text" class="form-control" maxlength="250" nbInput formControlName="testHumidity"
+                        [readonly]="!testStarted" fullWidth id="mHumidityTxt" name="rh" [fieldSize]="fieldSize">
+                </div>
+                <div class="col-md-6">
+                    <!-- label -->
+                    <label for="fileTxt" class="label col-form-label">Limit Line Graph</label>
+                    <span class="label text-primary ml-3">{{fileName}}</span>
+                    <!-- input -->
+                    <input type="file" id="file" formControlName="fileInput" nbInput [fieldSize]="fieldSize"
+                        [readonly]="!testStarted" (change)="handleFileInput($event.target.files)" fullWidth>
+
+                </div>
+                <div class="col-lg-6">
+                    <!-- label -->
+                    <label for="refDocNoTxa" class="label col-form-label">RefDoc Number</label>
+                    <!-- input -->
+                    <textarea rows="5" nbInput formControlName="testRefDocNo" maxlength="250" fullWidth id="refDocNoTxa"
+                        name="refDocNo" [fieldSize]="fieldSize" class="form-control" [readonly]="!testStarted"
+                        style="resize: none; line-height: 1.25em;" placeholder=""></textarea>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-row">
+                        <div class="col-md-6 col-lg-12">
+                            <!-- label -->
+                            <label for="methodTxt" class="label col-form-label">Method</label>
+                            <!-- input -->
+                            <input type="text" class="form-control" maxlength="250" nbInput formControlName="testMethod"
+                                [readonly]="!testStarted" fullWidth id="methodTxt" name="method"
+                                [fieldSize]="fieldSize">
+
+                        </div>
+                        <div class="col-md-6 col-lg-12">
+                            <label for="softwareTxt" class="label col-form-label">Software</label>
+                            <!-- input -->
+                            <input type="text" class="form-control" maxlength="250" nbInput
+                                formControlName="testSoftwareUsed" [readonly]="!testStarted" fullWidth id="softwareTxt"
+                                name="software" [fieldSize]="fieldSize">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <!-- label -->
+                    <label for="eutLimitTxa" class="label col-form-label">Limit Lines</label>
+                    <textarea rows="5" nbInput formControlName="limitLines" maxlength="499" fullWidth id="eutLimitTxa"
+                        name="eutLimitLine" [fieldSize]="fieldSize" class="form-control" [readonly]="!testStarted"
+                        style="resize: none; line-height: 1.25em;" placeholder=""></textarea>
+                </div>
+            </div>
+        </form>
+        <div *ngIf="eqScreen" class="col-lg-12">
+            <div *ngIf="!testStarted" class="eqOverLay"></div>
+            <!--  (cellValueChanged)="onCellValueChanged($event)" -->
+            <ag-grid-angular #agGrid
+                style="width: 100%;max-height: 355px !important;overflow: overlay; padding: 0 15px;" id="myGrid"
+                class="{{eqDefaultColDef.theme}}" [rowData]="equipmentList" [columnDefs]="eqColumnDefs"
+                domLayout="autoHeight" (firstDataRendered)="onFirstDataRendered($event)"
+                (gridReady)="onEquipmentGridReady($event)" [rowSelection]="'multiple'"
+                [defaultColDef]="eqDefaultColDef"></ag-grid-angular>
+        </div>
+        <div *ngIf="tsScreen" class="col-lg-12">
+            <div class="col-12 d-flex justify-content-end align-items-center mt-2 mb-2 px-3">
+                <button type="button" (click)="addNew()" *ngIf="(testStarted)&&addWorkSheetBtn" nbButton
+                    class="btn btn-primary px-2 py-1"><i
+                        class="ion-android-add ion-android-add-type-bold mr-1"></i>ADD</button>
+            </div>
+            <div *ngIf="!testStarted" class="eqOverLay"></div>
+            <!-- (gridReady)="onGridReady($event)"(cellValueChanged)="onCellValueChanged($event)"height:400px;  -->
+            <ag-grid-angular #agGrids style="width: 100%; padding: 0 15px;" id="myGrids"
+                class="{{tSheetDefaultColDef.theme}} worksheetCls" [rowData]="tSheetRowData"
+                [columnDefs]="tSheetColumnDefs" (gridReady)="onGridReady($event)" domLayout='autoHeight'
+                [suppressRowTransform]="'true'" [defaultColDef]="tSheetDefaultColDef">
+            </ag-grid-angular>
+            <div class="col-12 px-3">
+                <label for="commentTxa" class="label col-form-label">Comment</label>
+                <!-- text area -->
+                <textarea rows="5" maxlength="255" nbInput [(ngModel)]="workcomment" fullWidth id="commentTxa"
+                    name="comment" [fieldSize]="fieldSize" class="form-control" [readonly]="!testStarted"
+                    style="resize: none; line-height: 1.25em;"></textarea>
+            </div>
+        </div>
+    </nb-card-body>
+    <nb-card-footer class="row mt-2">
+        <div class="col-2 mr-auto mx-0 ml-1 ">
+            <span class="label" *ngIf="testStatus">Result :</span><span *ngIf="testStatus"
+                class="label {{testStatus=='PASS'?'text-success':'text-danger'}}">&nbsp;{{testStatus}}</span>
+        </div>
+
+        <div class="col-9 d-flex justify-content-end">
+            <button type="button" nbButton *ngIf="eqScreen!=true&&tsScreen!=true"
+                class="btn btn-primary px-sm-2 px-lg-4 py-2 p-lg-2" (click)="eqScreen=true;tsScreen=false">
+                <nb-icon icon="settings-2-outline"></nb-icon>
+                Equipment
+            </button>
+            <button type="button" *ngIf="eqScreen==true||tsScreen==true" nbButton
+                class="btn btn-primary px-2 px-lg-4 p-lg-2 py-2" [disabled]="exJrfDtl.equipmentStatus==null"
+                (click)="eqScreen=false;tsScreen=false">Go To Test Info
+            </button>
+            <button type="button" *ngIf="tsScreen!=true&&eqScreen!=true" nbButton
+                class="btn btn-primary px-2 py-2 px-lg-4 p-lg-2" [disabled]="exJrfDtl.worksheetInfoStatus==null"
+                (click)="tsScreen=true;eqScreen=false">
+                <nb-icon icon="file-text-outline"></nb-icon>
+                Detail
+            </button>
+            <!-- *ngIf="tsScreen == true" exJrfDtl.worksheetInfoStatus==null ||-->
+            <button type="button" *ngIf="exJrfDtl.isButtonRequired == 'true' && exJrfDtl.timeTrackerStatus!='Completed'" nbButton
+                class="btn btn-primary px-2 px-lg-4 py-2 p-lg-2" [status]="(testStarted)?'danger':'success'"
+                [disabled]="timeTrackerButtonDisabled"  (click)="saveTimeTracker()">
+                <nb-icon [icon]="(testStarted)?'pause-circle-outline':'play-circle-outline'"></nb-icon>
+                {{timeTrackerButtonName}}
+            </button>
+            <button type="button" *ngIf="(testStarted && exJrfDtl.isButtonRequired == 'true')" (click)="onSave($event)"
+                nbButton class="btn btn-primary px-2 px-lg-4 py-2 p-lg-2">
+                <nb-icon icon="save-outline"></nb-icon>
+                Save
+            </button>
+            <button type="button" *ngIf="exJrfDtl.isButtonRequired == 'true' && exJrfDtl.timeTrackerStatus!='Completed'" (click)="completeTimeTracker()" nbButton
+                class="btn btn-primary px-2 px-lg-4 py-2 p-lg-2 mr-1"
+                [disabled]="(exJrfDtl.worksheetInfoStatus==null || exJrfDtl.timeTrackerStatus == null || timeTrackerButtonDisabled)">
+                <nb-icon icon="checkmark-circle-outline"></nb-icon>
+                Complete
+            </button>
+        </div>
+    </nb-card-footer>
+</nb-card>

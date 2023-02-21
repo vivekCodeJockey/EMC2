@@ -1,0 +1,36 @@
+<!-- Customer Approval container starts -->
+<nb-card class="col-md-12 px-0" nbSpinnerStatus="success" nbSpinnerSize="giant" nbSpinnerMessage="Loading...">
+    <!-- header section starts-->
+    <nb-card-header class="d-flex justify-content-between align-items center mx-3">
+        <span class="col-lg-2 px-0">Customer Approval</span>
+    </nb-card-header>
+    <!-- header section ends -->
+    <!-- body section starts -->
+    <nb-card-body>
+        <div class="col-12 d-flex justify-content-end align-items-center px-0">
+            <label class="search-label label mr-2 mb-0" for="search">Search:</label>
+            <nb-form-field>
+              <input nbInput id="search" [(ngModel)]="searchText" [fieldSize]="fieldSize" class="search-input" (keyup.enter)="searchUser()" (ngModelChange)="updateSearchText()">
+              <button nbSuffix type="button" nbButton size="tiny" class="searchBtn border-0"  (click)="searchUser()" [status]="'default'" title="search">
+                <nb-icon icon="search"></nb-icon>
+              </button>
+            </nb-form-field>
+          </div>
+        <!-- customer table section starts -->
+        <ag-grid-angular #userGrid style="width: 100%;" id="catmyGrid"
+            class="{{customerDefaultColDef.theme}} mt-2" [columnDefs]="customerColumnDefs"
+            [defaultColDef]="customerDefaultColDef" [gridOptions]="customerGridOptions"
+            (gridReady)="onCustomerGridReady($event)">
+        </ag-grid-angular>
+        <!-- customer table section ends -->
+    </nb-card-body>
+    <!-- body ends -->
+    <!-- footer starts
+    <nb-card-footer>
+        <button type="button" nbButton class="btn btn-primary" (click)="saveUser()" *ngIf="btnPermission?.isCreate || btnPermission?.ediisEdit"
+            [disabled]="userButtonDisabled"><nb-icon icon="save"></nb-icon>{{userButtonName}}</button> 
+        <button type="button" nbButton class="btn btn-primary" (click)="cancelUser()" *ngIf="btnPermission?.isCreate || btnPermission?.ediisEdit"
+            [disabled]="userButtonDisabled"><nb-icon icon="backspace"></nb-icon>Cancel</button>
+    </nb-card-footer> -->
+    <!-- footer ends -->
+</nb-card>

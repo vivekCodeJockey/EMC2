@@ -1,0 +1,131 @@
+// .bg {
+//   background: rgb(2, 0, 36);
+//   background: linear-gradient(
+//     90deg,
+//     rgba(2, 0, 36, 1) 0%,
+//     rgba(73, 131, 228, 1) 50%,
+//     rgba(8, 7, 104, 1) 100%
+//   );
+// }
+
+.reg-form {
+  background-color: rgba(128, 128, 128, 0.987);
+  background-color: #9bc2e654;
+  background: linear-gradient(#005194, #9bc2e6d9);
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
+.span_bold {
+  font-weight: 500;
+  cursor: pointer;
+}
+
+a:link {
+  text-decoration: none;
+  font-weight: 600;
+  color: #0f5c9c !important;
+  cursor: pointer;
+  &:hover {
+    color: white !important;
+  }
+}
+
+.t_c {
+  text-decoration: none;
+  font-weight: 600;
+  color: #0f5c9c !important;
+  cursor: pointer;
+  &:hover {
+    color: white !important;
+  }
+}
+
+a:visited {
+  text-decoration: none;
+  font-weight: 600;
+  color: #0f5c9c !important;
+  cursor: pointer;
+  &:hover {
+    color: white !important;
+  }
+}
+
+.auth-btn:not([disabled]){
+  border: 1px solid #ffffff;
+  // background-color: transparent;
+  background-color: #3e7fb6;
+  color: #ffffff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: large;
+  cursor: pointer;
+  box-shadow:rgb(153 183 212 / 49%) -8px 0px 5px 5px, rgb(63 79 96 / 38%) 17px 17px 15px 0px
+}
+
+.auth-btn:hover {
+  border: 1px solid #015ebc;
+  background-color: #fff;
+  color: #015ebc;
+  padding: 5px 10px;
+}
+
+.auth-btn:disabled,
+.auth-btn[disabled] {
+  // border: 1px solid #999999 !important;
+  border: 1px solid #7a92a5 !important;
+  background-color: transparent !important;
+  // color: #adadad !important;
+  color: #7a92a5 !important;
+}
+
+.reg_copyRight {
+  position: fixed;
+  bottom: 0;
+  background-color: #526599 !important;
+}
+
+.height {
+  min-height: 100vh !important;
+}
+
+@media (max-width: 576px) {
+  .copyRight {
+    position: inherit;
+  }
+}
+
+.error-message > div {
+  color: #e91e63;
+  font-size: x-small;
+}
+
+.error:focus,
+.input-error {
+  border-color: #e91e63;
+  border-style: solid;
+}
+
+.kl {
+  position: absolute;
+  bottom: -19px;
+  left: 15px;
+}
+
+// input[type="email"] {
+//   font-family: inherit;
+//   letter-spacing: inherit;
+//   font-size: 0.9rem;
+//   text-indent: 8px;
+// }
+
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="text"] {
+  font-family: inherit;
+  letter-spacing: inherit;
+  font-size: 0.9rem;
+  text-indent: 8px;
+}

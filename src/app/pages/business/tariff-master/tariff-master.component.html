@@ -1,0 +1,163 @@
+<!-- container starts -->
+<nb-card class="row col-12 mx-0 px-0 mb-0">
+    <!-- tabset starts -->
+    <nb-tabset (changeTab)="getActiveTab($event)">
+        <!-- tariff tab starts -->
+        <nb-tab tabTitle="Tariff" active="{{tabActive}}">
+            <!-- grid -->
+            <div class="col-12 d-flex justify-content-end align-items-center px-0">
+                <label class="search-label label mr-2 mb-0" for="search">Search:</label>
+                <nb-form-field>
+                    <input nbInput id="search" [(ngModel)]="searchText" [fieldSize]="fieldSize" class="search-input"
+                    (keyup.enter)="searchtariff()" (ngModelChange)="updateSearchText()">
+                    <button nbSuffix type="button" nbButton size="tiny" class="searchBtn border-0"
+                        (click)="searchtariff()" [status]="'default'" title="search">
+                        <nb-icon icon="search"></nb-icon>
+                    </button>
+                </nb-form-field>
+            </div>
+            <ag-grid-angular #agGrid style="width: 100%;" id="myGrid" class="{{tariffDefaultColDef.theme}} mt-2"
+                [columnDefs]="tariffColumnDefs" [defaultColDef]="tariffDefaultColDef" [gridOptions]="gridOptions"
+                (gridReady)="onTariffGridReady($event)">
+            </ag-grid-angular>
+            <!-- </div> -->
+        </nb-tab>
+        <!-- tariff tab ends -->
+        <!-- New tariff tab starts -->
+        <nb-tab tabTitle="New Tariff" active="{{!tabActive}}">
+            <!-- tariff form -->
+            <form [formGroup]="tariffForm" class="col-12 mt-1 mx-0 px-0" (ngSubmit)="saveTariff()">
+                <div class="row col pr-0 mr-0 d-flex justify-content-between align-items-start">
+                    <div class="row px-0 " [ngClass]="fieldStrengthDivHideShow?'col col-lg-5':'col'">
+                        <!-- category -->
+                        <div class="col-md-6 mb-3" [ngClass]="fieldStrengthDivHideShow?'col-lg-6':'col-lg-3'">
+                            <label for="" class="label col-form-label">Category</label>
+                            <nb-select class="d-block" size="{{fieldSize}}" fullWidth
+                                (selectedChange)="getSpecificationMaster($event)" formControlName="categoryId"
+                                [selected]="tariffForm.controls['categoryId'].value" autofocus>
+                                <nb-option [value]="category.id" *ngFor="let category of categoryMasterList">
+                                    {{category.name}}</nb-option>
+                            </nb-select>
+                        </div>
+                        <!-- specification -->
+                        <div class="col-md-6 mb-3 z-1"
+                            [ngClass]="fieldStrengthDivHideShow?'col-md-6 col-lg-6 ':'col-md-6 col-lg-3 '">
+                            <label for="" class="label col-form-label">Specification</label>
+                            <nb-select class="d-block" size="{{fieldSize}}" fullWidth
+                                [selected]="tariffForm.controls['specificationId'].value"
+                                (selectedChange)="getTestMaster($event)" formControlName="specificationId">
+                                <nb-option [value]="specification.id"
+                                    *ngFor="let specification of specificationMasterList">
+                                    {{specification.name}}
+                                </nb-option>
+                            </nb-select>
+                        </div>
+                        <!-- test name -->
+                        <div class="col-md-6  mb-3 z-1"
+                            [ngClass]="fieldStrengthDivHideShow?'col-lg-6 col-md-6':'col-lg-3 col-md-6'">
+                            <label for="bPriceTxt" class="label col-form-label">Test Name</label>
+                            <nb-select class="d-block" size="{{fieldSize}}" formControlName="testId" fullWidth
+                                [selected]="tariffForm.controls['testId'].value"
+                                (selectedChange)="doHideAndShow($event)">
+                                <nb-option [value]="test.id" *ngFor="let test of testMasterList">{{test.testName}}
+                                </nb-option>
+                            </nb-select>
+                        </div>
+                        <!-- base price -->
+                        <div class="col-md-6 mb-3"
+                            [ngClass]="fieldStrengthDivHideShow?'col-lg-6 col-md-6':'col-lg-3 col-md-6'">
+                            <label for="bPriceTxt" class="label col-form-label">Base Price</label>
+                            <span class='label fas fa-rupee-sign'></span>
+                            <input type="text" class="form-control" maxlength="15" nbInput fullWidth id="basePrice"
+                                formControlName="basePrice" [fieldSize]="fieldSize" nvValidate="amount"
+                                placeholder="Base Price">
+                        </div>
+                        <!-- additional test charge -->
+                        <div class="col-md-6 mb-3"
+                            [ngClass]="fieldStrengthDivHideShow?'col-lg-6 col-md-6':'col-lg-3 col-md-6'">
+                            <label for="pCableTxt" class="label col-form-label">Additional Charge</label>
+                            <span class='label fas fa-rupee-sign'></span>
+                            <input type="text" class="form-control" maxlength="15" nvValidate="amount" nbInput fullWidth
+                                id="additionalTestCharge" formControlName="additionalTestCharge" [fieldSize]="fieldSize"
+                                placeholder="1">
+                        </div>
+                        <!-- Single Phase -->
+                        <div *ngIf="emptyDivHideShow" class="col-md-6 col-lg-3 mb-3">
+                            <label for="sPhaseTxt" class="label col-form-label">Single Phase</label>
+                            <span class='label fas fa-rupee-sign'></span>
+                            <input type="text" class="form-control" maxlength="15" nvValidate="amount" nbInput fullWidth
+                                id="singlePhase" formControlName="singlePhase" [fieldSize]="fieldSize"
+                                placeholder="Single Phase">
+                        </div>
+                        <!-- three phase -->
+                        <div *ngIf="emptyDivHideShow" class="col-md-6 col-lg-3 mb-3">
+                            <label for="tPhaseTxt" class="label col-form-label">Three Phase</label>
+                            <span class='label fas fa-rupee-sign'></span>
+                            <input type="text" class="form-control" maxlength="15" nvValidate="amount" nbInput fullWidth
+                                id="threePhase" formControlName="threePhase" [fieldSize]="fieldSize"
+                                placeholder="Three Phase">
+                        </div>
+                        <!-- DC -->
+                        <div *ngIf="emptyDivHideShow" class="col-md-6 col-lg-3 mb-3">
+                            <label for="dcTxt" class="label col-form-label">DC</label>
+                            <span class='label fas fa-rupee-sign'></span>
+                            <input type="text" class="form-control" maxlength="15" nvValidate="amount" nbInput fullWidth
+                                id="dc" formControlName="dc" [fieldSize]="fieldSize" placeholder="DC">
+                        </div>
+                        <!-- cable -->
+                        <div *ngIf="cableDivHideShow" class="col-md-6 col-lg-3 mb-3">
+                            <label for="pCableTxt" class="label col-form-label">Cable Count</label>
+                            <input type="text" class="form-control" maxlength="15" nvValidate="amount" nbInput fullWidth
+                                id="cableCount" formControlName="cableCount" [fieldSize]="fieldSize" placeholder="1">
+                        </div>
+                        <!-- amount -->
+                        <div *ngIf="cableDivHideShow" class="col-md-6 col-lg-3 mb-3">
+                            <label for="pCableTxt" class="label col-form-label">Cable Amount</label>
+                            <span class='label fas fa-rupee-sign'></span>
+                            <input type="text" class="form-control" maxlength="15" nvValidate="amount" nbInput fullWidth
+                                id="amount" formControlName="cableAmount" [fieldSize]="fieldSize"
+                                placeholder="Per Cable">
+                        </div>
+                        <!-- per cabel -->
+                        <div *ngIf="cableDivHideShow" class="col-md-6 col-lg-3 mb-3">
+                            <label for="pCableTxt" class="label col-form-label">Per Cable</label>
+                            <span class='label fas fa-rupee-sign'></span>
+                            <input type="text" class="form-control" maxlength="15" nvValidate="amount" nbInput fullWidth
+                                id="perCable" formControlName="perCable" [fieldSize]="fieldSize"
+                                placeholder="Per Cable">
+                        </div>
+                    </div>
+                    <div *ngIf="fieldStrengthDivHideShow" class="col-md-12 col-lg-7 mb-3 px-0 freqCls">
+                        <div class="col-12 d-flex justify-content-end align-items-center px-0"
+                            *ngIf="btnPermission?.isCreate || btnPermission?.isEdit">
+                            <button type="button" (click)="gridFunctionality('addRow')" nbButton
+                                class="btn btn-primary px-2 py-1"><i
+                                    class="ion-android-add ion-android-add-type-bold mr-2" outline></i>Add</button>
+                        </div>
+                        <ag-grid-angular #agGrid style="width: 100%;max-height: 370px;" id="myGrid"
+                            class="{{fStrengthDefaultColDef.theme}} mt-3" [columnDefs]="fStrengthColumnDefs"
+                            [defaultColDef]="fStrengthDefaultColDef" [gridOptions]="fGridOptions"
+                            [rowData]="fieldFrequencyList" (gridReady)="onfStrengthGridReady($event)">
+                        </ag-grid-angular>
+                    </div>
+                </div>
+                <!-- footer -->
+
+                <nb-card-footer class="px-0 pb-0 col-12" *ngIf="btnPermission?.isCreate || btnPermission?.isEdit">
+                    <button type="submit" nbButton class="btn btn-primary px-4 py-2 p-2"
+                        [disabled]="tariffButtonDisabled">
+                        <nb-icon icon="save"></nb-icon>{{tariffButtonName}}
+                    </button>
+                    <button type="button" nbButton class="btn btn-primary px-4 py-2 p-2" (click)="cancelTariff()"
+                        [disabled]="tariffButtonDisabled">
+                        <nb-icon icon="backspace"></nb-icon>Cancel
+                    </button>
+                </nb-card-footer>
+
+            </form>
+        </nb-tab>
+        <!-- New tariff tab ends -->
+    </nb-tabset>
+    <!-- tabset ends -->
+</nb-card>
+<!-- container ends -->

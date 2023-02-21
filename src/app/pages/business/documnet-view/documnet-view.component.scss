@@ -1,0 +1,26 @@
+::-webkit-file-upload-button {
+    background: transparent;
+    border: none;
+    border-right: 1px solid blue;
+    outline: none;
+    margin-right: 10px;
+    padding-left: 0;
+}
+
+.nb-tree-grid-header-cell button {
+    // .hdrCellCls button{
+    text-transform: capitalize;
+}
+
+.hdrCellCls {
+    background-color: var(--ag-header-background-color);
+    color: var(--ag-header-foreground-color);
+    padding: 0px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table-bordered td {
+    padding: 1px 10px;
+    vertical-align: middle;
+}

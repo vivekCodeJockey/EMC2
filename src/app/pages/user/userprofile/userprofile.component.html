@@ -1,0 +1,143 @@
+<nb-card>
+    <div class="col-md-12 row">
+        <!-- user profile section 1 starts-->
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <!-- profile photo -->
+                <img class="rounded-circle mt-5" width="150px"
+                    src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                <!-- name -->
+                <span class="font-weight-bold">{{userDtl.firstName+" "+userDtl.lastName}}</span>
+                <!-- email -->
+                <span class="text-black-50">{{email}}</span><span> </span>
+            </div>
+        </div>
+        <!-- user profile section 1 ends -->
+
+        <!-- user profile section 2 starts -->
+        <div class="col-md-9 border-right">
+            <div class="p-3 py-5">
+
+                <!-- header -->
+                <nb-card-header>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <!-- title -->
+                        <h4 class="text-right">Profile Settings</h4>
+                    </div>
+                </nb-card-header>
+
+                <!-- body -->
+                <nb-card-body class="mt-3">
+                    <!-- form -->
+                    <form class="text-white" [formGroup]="userForm">
+                        <div class="row mt-2">
+                            <!-- first name -->
+                            <div class="col-md-6 col-lg-6"><label for="firstNameTxt" class="label">First
+                                    Name</label><input type="text" nbInput class="form-control" placeholder="first name"
+                                    formControlName="firstName" fullWidth id="firstNameTxt" name="firstName"
+                                    [fieldSize]="fieldSize"></div>
+
+                            <!-- last name -->
+                            <div class="col-md-6 col-lg-6"><label for="lastNameTxt" class="label">Last
+                                    Name</label><input type="text" nbInput class="form-control"
+                                    formControlName="lastName" fullWidth id="lastNameTxt" name="lastName"
+                                    placeholder="lastName" [fieldSize]="fieldSize"></div>
+
+
+
+                            <!-- designation -->
+                            <div class="col-md-12 col-lg-6"><label for="designationTxt"
+                                    class="label">Designation</label><input type="text" nbInput class="form-control"
+                                    placeholder="designation" formControlName="designation" fullWidth
+                                    [fieldSize]="fieldSize" id="designationTxt" name="designation"></div>
+
+                            <!-- mobile number -->
+                            <div class="col-md-12 col-lg-6"><label for="mobileNoTxt" class="label">Mobile
+                                    Number</label><input type="text" nbInput class="form-control"
+                                    placeholder="enter phone number" formControlName="mobileNo" fullWidth
+                                    [fieldSize]="fieldSize" id="mobileNoTxt" name="mobileNo"></div>
+
+                            <!-- company name -->
+                            <div class="col-md-12 col-lg-6"><label for="companyNameTxt" class="label">Company
+                                    Name</label><input type="text" nbInput class="form-control"
+                                    placeholder="enter company name" formControlName="companyName" fullWidth
+                                    [fieldSize]="fieldSize" id="companyNameTxt" name="companyName"></div>
+
+                            <!-- GST  -->
+                            <div class="col-md-12 col-lg-6"><label for="gstNoTxt" class="label">GST No</label><input
+                                    type="text" nbInput class="form-control" placeholder="enter GST number"
+                                    formControlName="gstNo" fullWidth [fieldSize]="fieldSize" id="gstNoTxt"
+                                    name="gstNo"></div>
+
+                            <!-- Address line 1 -->
+                            <div class="col-md-12 col-lg-12"><label for="address1Txt" class="label">Address Line
+                                    1</label><input type="text" nbInput class="form-control"
+                                    placeholder="enter address line 1" formControlName="address1" fullWidth
+                                    [fieldSize]="fieldSize" id="address1Txt" name="address1"></div>
+
+                            <!-- Address line 2 -->
+                            <div class="col-md-12 col-lg-12"><label for="address2Txt" class="label">Address Line
+                                    2</label><input type="text" nbInput class="form-control"
+                                    placeholder="enter address line 2" formControlName="address2" fullWidth
+                                    [fieldSize]="fieldSize" id="address2Txt" name="address2"></div>
+                            <!-- City -->
+                            <div class="col-md-6 col-lg-6"><label for="companyCityTxt" class="label">City</label><input
+                                    type="text" nbInput class="form-control" placeholder="enter city"
+                                    formControlName="companyCity" fullWidth [fieldSize]="fieldSize" id="companyCityTxt"
+                                    name="companyCity"></div>
+                            <!-- State -->
+                            <div class="col-md-6 col-lg-6"><label for="companyStateTxt"
+                                    class="label">State</label><input type="text" nbInput class="form-control"
+                                    placeholder="enter State" formControlName="companyState" fullWidth
+                                    [fieldSize]="fieldSize" id="companyStateTxt" name="companyState"></div>
+
+                            <!-- country -->
+                            <div class="col-md-6 col-lg-6"><label for="companyCountryTxt"
+                                    class="label">Country</label><input type="text" nbInput class="form-control"
+                                    placeholder="country" formControlName="companyCountry" fullWidth
+                                    [fieldSize]="fieldSize" id="companyCountryTxt" name="companyCountry"></div>
+
+                            <!-- Post code -->
+                            <div class="col-md-6 col-lg-6"><label for="companyPinCodeeTxt"
+                                    class="label">Postcode</label><input type="text" nbInput class="form-control"
+                                    placeholder="enter Postcode" formControlName="companyPinCode" fullWidth
+                                    [fieldSize]="fieldSize" id="companyPinCodeeTxt" name="companyPinCode"></div>
+
+                            <!-- telephone number -->
+                            <div class="col-md-8 col-lg-4"><label for="companyTelephoneTxt" class="label">Telphone
+                                    No</label><input type="text" nbInput class="form-control" placeholder="Telphone No"
+                                    formControlName="companyTelephone" fullWidth [fieldSize]="fieldSize"
+                                    id="companyTelephoneTxt" name="companyTelephone"></div>
+
+                            <div class="col-md-4 col-lg-2"><label for="companyTeleExtensionTxt"
+                                    class="label">Ext</label><input type="text" nbInput class="form-control"
+                                    placeholder="Ext" formControlName="companyTeleExtension" fullWidth
+                                    [fieldSize]="fieldSize" id="companyTeleExtensionTxt" name="companyTeleExtension"></div>
+
+                            <!-- Fax -->
+                            <div class="col-md-8 col-lg-4"><label for="companyFaxTxt" class="label">Fax</label><input
+                                    type="text" nbInput [fieldSize]="fieldSize" class="form-control"
+                                    formControlName="companyFax" fullWidth id="companyFaxTxt" name="companyFax"
+                                    placeholder="Fax"></div>
+
+                            <!-- Ext -->
+                            <div class="col-md-4 col-lg-2"><label for="companyFaxExtensionTxt" class="label">Fax</label><input
+                                    type="text" nbInput [fieldSize]="fieldSize" class="form-control"
+                                    formControlName="companyFaxExtension" fullWidth id="companyFaxExtensionTxt" name="companyFaxExtension"
+                                    placeholder="Ext"></div>
+                        </div>
+                    </form>
+                </nb-card-body>
+                <nb-card-footer>
+                    <!-- <div class="mt-5 text-center"> -->
+                    <button class="btn btn-primary profile-button" *ngIf="showBtn" nbButton type="button" [disabled]="(!userForm.valid)||submitted" (click)="onSubmit()">Save Profile<div [ngClass]="{'loading':loader}"></div></button>
+                    <!-- </div> -->
+                </nb-card-footer>
+
+            </div>
+        </div>
+        <!-- user profile section 2 ends -->
+
+    </div>
+
+</nb-card>

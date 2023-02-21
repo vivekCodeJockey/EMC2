@@ -1,0 +1,65 @@
+<nb-card [nbSpinner]="loading" nbSpinnerStatus="success" nbSpinnerSize="giant" nbSpinnerMessage="Loading...">
+  <!-- header section starts  -->
+  <nb-card-header *ngIf="testGridShow||jobGridShow">Tracker
+    <!-- reload btn -->
+    <button type="button" nbButton size="tiny" class="mr-1 float-right cursor-pointer" (click)="reloadTracker()"
+      [status]="default" title="Reload">
+      <nb-icon icon="sync-outline"></nb-icon> Reload
+    </button>
+  </nb-card-header>
+  <!-- header section ends -->
+  <nb-card-body class="py-2">
+    <!-- job grid section starts-->
+    <div *ngIf="jobGridShow" class="col-12 d-flex justify-content-end align-items-center px-0">
+      <!-- search section starts -->
+      <!-- label -->
+      <label class="search-label label mr-2" for="search">Search:</label>
+      <!-- input field -->
+      <nb-form-field>
+        <input nbInput id="search" [(ngModel)]="jobsearchText" [fieldSize]="fieldSize" class="search-input mb-2"
+        (keyup.enter)="searchJob()" (ngModelChange)="updateSearchJobText()">
+        <button nbSuffix type="button" nbButton size="tiny" class="searchBtn border-0 mb-2"
+          (click)="searchJob()" [status]="'default'" title="search">
+          <nb-icon icon="search"></nb-icon>
+        </button>
+      </nb-form-field>
+    </div>
+    <!-- ag grid -->
+    <ag-grid-angular *ngIf="jobGridShow" #agGrid style="width: 100%;" id="myGrid" class="{{defaultColDef.theme}} mb-3"
+      [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" [gridOptions]="gridOptions"
+      (gridReady)="onGridReady($event)" (rowClicked)="onGridRowClicked($event)">
+    </ag-grid-angular>
+    <!-- job grid section ends -->
+    <!-- horizontal line -->
+    <hr *ngIf="testGridShow&&jobGridShow">
+    <nb-tabset *ngIf="testGridShow" (changeTab)="getActiveTab($event)">
+      <nb-tab tabTitle="In-Progress" class="p-2">
+      </nb-tab>
+      <nb-tab tabTitle="Completed" class="p-2">
+      </nb-tab>
+    </nb-tabset>
+    <!-- test grid section starts -->
+    <div *ngIf="testGridShow" class="col-12 d-flex justify-content-end align-items-center px-0">
+      <!-- search section starts -->
+      <!-- label -->
+      <label class="search-label label mr-2" for="search">Search:</label>
+      <!-- input field -->
+      <nb-form-field>
+        <input nbInput id="search" [(ngModel)]="testsearchText" [fieldSize]="fieldSize" class="search-input mb-2"
+        (keyup.enter)="searchtest()" (ngModelChange)="updateSearchTestText()">
+        <button nbSuffix type="button" nbButton size="tiny" class="searchBtn border-0 mb-2"
+          (click)="searchtest()" [status]="default" title="search">
+          <nb-icon icon="search"></nb-icon>
+        </button>
+      </nb-form-field>
+    </div>
+    <!-- ag grid -->
+    <ag-grid-angular *ngIf="testGridShow" #agTestGrid style="width: 100%;" id="myTestGrid"
+      class="{{testDefaultColDef.theme}}" [columnDefs]="testColumnDefs" [defaultColDef]="testDefaultColDef"
+      [gridOptions]="testGridOptions" (gridReady)="onTestGridReady($event)" (rowClicked)="onGridRowClicked($event)">
+    </ag-grid-angular>
+    <h1 class="label" style="font-size: 20px;" *ngIf="(!jobGridShow)&&(!testGridShow)">You dont have permission to view
+      any screen</h1>
+    <!-- test grid section starts -->
+  </nb-card-body>
+</nb-card>

@@ -1,0 +1,23 @@
+::-webkit-file-upload-button {
+  background: transparent;
+  border: none;
+  border-right: 1px solid blue;
+  outline: none;
+  margin-right: 10px;
+  padding-left: 0;
+}
+
+input {
+  background: transparent;
+}
+
+// nb-card-body{
+//   --ag-background-color: red;
+// }
+.eqOverLay {
+  background-color: transparent;
+  height: 93%;
+  width: 97%;
+  position: absolute;
+  z-index: 1;
+}
