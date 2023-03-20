@@ -1,41 +1,31 @@
-<!-- bg container -->
 <nb-layout>
-  <nb-layout-column>
+  <nb-layout-column class="p-0">
+    <!-- register component -->
+    <ngx-register-component *ngIf="signup"></ngx-register-component>
+    <!-- login component -->
+    <div *ngIf="(!signup)" class="login">
+      <div class="container">
+       <div class="login_container">
+        <div class="content_left">
 
-    <div class="w-100% vh-100 bg position-relative">
-      <div class="background-img">
-        <img src="assets/images/Background.jpg" alt="">
-      </div>
-      <!-- register component -->
-      <ngx-register-component *ngIf="signup"></ngx-register-component>
-      <!-- login section starts -->
-      <nb-card-body *ngIf="(!signup)" class="w-100% vh-100 text-white d-flex justify-content-center align-items-center">
-        <!-- login content container starts -->
-
-        <div class="row d-lg-flex justify-content-center align-items-center">
-          <!-- login content  starts -->
-          <div class="col-sm-11 col-md-7 col-lg-5 col-xl-4 row d-flex flex-column login-form-bg">
-            <!-- tata logo -->
-            <div class="d-flex pt-5  justify-content-center">
-              <img class="col-7 bg-black" src="assets/logo/Tata Advanced Systems White Logo.png" alt="">
-            </div>
-            <!-- tata logo ends -->
+        </div>
+        <div class="content_right">
+            <h2 class="login_title">Welcome Back!</h2>
             <!-- login form starts -->
-            <form [formGroup]="loginForm" class="mt-5">
-              <h5 class="text-center mb-2 text-white">EMC Portal</h5>
-
+            <form [formGroup]="loginForm" class="">
+              
               <!-- warnings sections starts -->
               <!-- <p class="text-danger col-sm-10 col-md-7 col-lg-7" *ngIf="invalid">Invalid Credentials</p>-->
               <ngx-forgotpasword *ngIf="fpwd" customTitle="{{showPage}}" (login)="showLogin()"></ngx-forgotpasword>
               <!-- warning section ends -->
 
               <div *ngIf="!fpwd" class="d-flex flex-column align-items-center">
-
                 <!-- user Id field -->
                 <div class="mb-2 col-sm-10 col-md-10 col-lg-10">
                   <div class="col-12 d-flex justify-content-between form-row px-0">
-                    <label for="userId" class="fw-700 col-5 pb-0"><span
-                        class="icon mr-1" [ngClass]="exApp?'ion-android-mail':'ion-ios-contact'"></span>{{exApp?'Email ID':'Login ID'}}
+                    <label for="userId" class="fw-700 col-5 pb-0"><span class="icon mr-1"
+                        [ngClass]="exApp?'ion-android-mail':'ion-ios-contact'"></span>{{exApp?'Email ID':'Login
+                      ID'}}
                     </label>
                     <span style="text-align: right;" class="text-danger col-7 text-end" *ngIf="invalid">Invalid
                       Credentials</span>
@@ -59,7 +49,8 @@
                 </div>
                 <!-- forgot password -->
                 <div class="d-flex justify-content-end col-sm-10 col-md-10 col-lg-10 mb-2">
-                  <a *ngIf="exApp" (click)="fpwd = true" class="span_bold">Forgot password?</a>
+                  <a  (click)="fpwd = true" class="span_bold">Forgot password?</a>
+                  <!-- <a *ngIf="exApp" (click)="fpwd = true" class="span_bold">Forgot password?</a> -->
                 </div>
                 <!-- sign in button -->
                 <button type="button" class="auth-btn px-4 py-2 mb-2" (click)="signin()"
@@ -67,26 +58,19 @@
                   <div [ngClass]="{'loading':loader}"></div>
                 </button>
                 <!-- sign up link -->
-                <p *ngIf="exApp" class="mt-2 text-end text-white font-weight-lighter pt-1 mb-0">Don't have an account?
+                <p *ngIf="exApp" class="mt-2 text-end text-white font-weight-lighter pt-1 mb-0">Don't have an
+                  account?
                   <span class="span_bold" (click)="signup=true">Sign Up</span>
                 </p>
               </div>
             </form>
             <!-- login form ends -->
-          </div>
-          <!-- content right ends -->
-
+          
         </div>
+       </div>
 
-      </nb-card-body>
-      <!-- login content container ends -->
-      <!-- copyright footer banner starts -->
-      <!-- <div class="vw-100 text-white text-center pb-1 copyRight
-  ">Copyright © 2020. All rights reserved.</div> -->
-      <!-- copyright footer banner starts -->
-
-      <!-- login section ends -->
-
+      </div>
     </div>
+
   </nb-layout-column>
 </nb-layout>
