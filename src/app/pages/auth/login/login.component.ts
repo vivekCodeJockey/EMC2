@@ -26,6 +26,10 @@ export class LoginComponent implements OnInit {
   signBtnDisable = false;
   exApp = true;
 
+  // changes made by naveen
+    // exApp = false;
+
+
   constructor(private loginService: CommonService, private fb: UntypedFormBuilder, private router: Router, private toastrService: nvtoastrService) {
     localStorage.clear();
     if (environment.INTERNAL_APP) {

@@ -4,76 +4,73 @@
     <ngx-register-component *ngIf="signup"></ngx-register-component>
     <!-- login component -->
     <div *ngIf="(!signup)" class="login">
-      <div class="container login_container">
+      <div class="container">
+       <div class="login_container">
+        <div class="content_left">
 
-            
-            <div class="content_right">
-              <div class="content_right-wrapper">
-                <!-- tata logo -->
-                <div class="d-flex pt-5  justify-content-center">
-                  <img class="col-7 bg-black" src="assets/logo/Tata Advanced Systems White Logo.png" alt="">
-                </div>
-                <!-- tata logo ends -->
-                <!-- login form starts -->
-                <form [formGroup]="loginForm" class="mt-5">
-                  <h5 class="text-center mb-2 text-white">EMC Portal</h5>
+        </div>
+        <div class="content_right">
+            <h2 class="login_title">Welcome Back!</h2>
+            <!-- login form starts -->
+            <form [formGroup]="loginForm" class="">
+              
+              <!-- warnings sections starts -->
+              <!-- <p class="text-danger col-sm-10 col-md-7 col-lg-7" *ngIf="invalid">Invalid Credentials</p>-->
+              <ngx-forgotpasword *ngIf="fpwd" customTitle="{{showPage}}" (login)="showLogin()"></ngx-forgotpasword>
+              <!-- warning section ends -->
 
-                  <!-- warnings sections starts -->
-                  <!-- <p class="text-danger col-sm-10 col-md-7 col-lg-7" *ngIf="invalid">Invalid Credentials</p>-->
-                  <ngx-forgotpasword *ngIf="fpwd" customTitle="{{showPage}}" (login)="showLogin()"></ngx-forgotpasword>
-                  <!-- warning section ends -->
-
-                  <div *ngIf="!fpwd" class="d-flex flex-column align-items-center">
-
-                    <!-- user Id field -->
-                    <div class="mb-2 col-sm-10 col-md-10 col-lg-10">
-                      <div class="col-12 d-flex justify-content-between form-row px-0">
-                        <label for="userId" class="fw-700 col-5 pb-0"><span class="icon mr-1"
-                            [ngClass]="exApp?'ion-android-mail':'ion-ios-contact'"></span>{{exApp?'Email ID':'Login
-                          ID'}}
-                        </label>
-                        <span style="text-align: right;" class="text-danger col-7 text-end" *ngIf="invalid">Invalid
-                          Credentials</span>
-                      </div>
-                      <input class="form-control p-1" [placeholder]="exApp?'Email ID':'Login ID'"
-                        [type]="exApp?'email':'text'" autofocus maxlength="100"
-                        [nbTooltip]="(exApp?'Email ID':'Login ID')+' should be a valid '+ (exApp?'email address':'AD username')"
-                        nbTooltipStatus="warning" aria-describedby="emailHelp" formControlName="username">
-                    </div>
-                    <!-- password field -->
-                    <div class="mb-2 col-sm-10 col-md-10 col-lg-10">
-                      <div class="col-12 d-flex justify-content-between form-row px-0">
-                        <label for="password" class="fw-700 col-5 pb-0"><span
-                            class="icon ion-ios-locked mr-1"></span>Password</label>
-                        <span style="text-align: right;" class="text-danger col-7 text-end" *ngIf="invalid">Invalid
-                          Credentials</span>
-                      </div>
-                      <input id="password" type="password" maxlength="25" (keyup.enter)="signin()"
-                        nbTooltip="Password should be minimum 8 characters" nbTooltipStatus="warning"
-                        class="form-control p-1" placeholder="Password" formControlName="password">
-                    </div>
-                    <!-- forgot password -->
-                    <div class="d-flex justify-content-end col-sm-10 col-md-10 col-lg-10 mb-2">
-                      <a *ngIf="exApp" (click)="fpwd = true" class="span_bold">Forgot password?</a>
-                    </div>
-                    <!-- sign in button -->
-                    <button type="button" class="auth-btn px-4 py-2 mb-2" (click)="signin()"
-                      [disabled]="(!loginForm.valid)||signBtnDisable">Sign In
-                      <div [ngClass]="{'loading':loader}"></div>
-                    </button>
-                    <!-- sign up link -->
-                    <p *ngIf="exApp" class="mt-2 text-end text-white font-weight-lighter pt-1 mb-0">Don't have an
-                      account?
-                      <span class="span_bold" (click)="signup=true">Sign Up</span>
-                    </p>
+              <div *ngIf="!fpwd" class="d-flex flex-column align-items-center">
+                <!-- user Id field -->
+                <div class="mb-2 col-sm-10 col-md-10 col-lg-10">
+                  <div class="col-12 d-flex justify-content-between form-row px-0">
+                    <label for="userId" class="fw-700 col-5 pb-0"><span class="icon mr-1"
+                        [ngClass]="exApp?'ion-android-mail':'ion-ios-contact'"></span>{{exApp?'Email ID':'Login
+                      ID'}}
+                    </label>
+                    <span style="text-align: right;" class="text-danger col-7 text-end" *ngIf="invalid">Invalid
+                      Credentials</span>
                   </div>
-                </form>
-                <!-- login form ends -->
+                  <input class="form-control p-1" [placeholder]="exApp?'Email ID':'Login ID'"
+                    [type]="exApp?'email':'text'" autofocus maxlength="100"
+                    [nbTooltip]="(exApp?'Email ID':'Login ID')+' should be a valid '+ (exApp?'email address':'AD username')"
+                    nbTooltipStatus="warning" aria-describedby="emailHelp" formControlName="username">
+                </div>
+                <!-- password field -->
+                <div class="mb-2 col-sm-10 col-md-10 col-lg-10">
+                  <div class="col-12 d-flex justify-content-between form-row px-0">
+                    <label for="password" class="fw-700 col-5 pb-0"><span
+                        class="icon ion-ios-locked mr-1"></span>Password</label>
+                    <span style="text-align: right;" class="text-danger col-7 text-end" *ngIf="invalid">Invalid
+                      Credentials</span>
+                  </div>
+                  <input id="password" type="password" maxlength="25" (keyup.enter)="signin()"
+                    nbTooltip="Password should be minimum 8 characters" nbTooltipStatus="warning"
+                    class="form-control p-1" placeholder="Password" formControlName="password">
+                </div>
+                <!-- forgot password -->
+                <div class="d-flex justify-content-end col-sm-10 col-md-10 col-lg-10 mb-2">
+                  <a  (click)="fpwd = true" class="span_bold">Forgot password?</a>
+                  <!-- <a *ngIf="exApp" (click)="fpwd = true" class="span_bold">Forgot password?</a> -->
+                </div>
+                <!-- sign in button -->
+                <button type="button" class="auth-btn px-4 py-2 mb-2" (click)="signin()"
+                  [disabled]="(!loginForm.valid)||signBtnDisable">Sign In
+                  <div [ngClass]="{'loading':loader}"></div>
+                </button>
+                <!-- sign up link -->
+                <p *ngIf="exApp" class="mt-2 text-end text-white font-weight-lighter pt-1 mb-0">Don't have an
+                  account?
+                  <span class="span_bold" (click)="signup=true">Sign Up</span>
+                </p>
               </div>
-            </div>
+            </form>
+            <!-- login form ends -->
           
         </div>
+       </div>
+
       </div>
-    
+    </div>
+
   </nb-layout-column>
 </nb-layout>

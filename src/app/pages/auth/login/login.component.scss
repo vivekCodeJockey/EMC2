@@ -182,21 +182,51 @@
   justify-content: center;
   align-items: center;
 
-  .login_container {
+  .container {
     height: 85%;
-    background-color: antiquewhite;
-
-    .row {
-      .content_left {}
-      .content_right {
-background: #F7A01D;
-        .content_right-wrapper {
+    .login_container {
+      height: 100%;
+      // background-color: antiquewhite;
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      border: 3px solid #384072;
+  
+      .content_left {
+        flex: 3;
+        
+        
+        img {
+          width: 100%;
           height: 100%;
-          
-          border-radius: 30px 0px 0px 30px;
+          object-fit: cover;
+          opacity: 0.8;
         }
       }
+  
+      .content_right {
+        flex: 2;
+        background: #F7A01D;
+        border-radius: 20px 0 0 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .login_title {
+          font-size: 30px;
+          color: #ffffff;
+          text-align: center;
+          margin: 0;
+        }
+
+        form {
+          margin-top: 15px;
+          
+        }
+      }
+  
     }
   }
+  
 
 }
