@@ -221,7 +221,58 @@
 
         form {
           margin-top: 15px;
+
+          ::placeholder {
+            color: #384072;
+            opacity: 1; /* Firefox */
+            padding-left: 10px;
+          }
           
+          :-ms-input-placeholder { /* Internet Explorer 10-11 */
+           color: #384072;
+          }
+          
+          ::-ms-input-placeholder { /* Microsoft Edge */
+           color: #384072;
+          }
+
+          input {
+            margin-top: 30px;
+          }
+
+          .nav_lk-fpwd {
+            font-size: 14px !important;
+            color: #ffffff !important;
+            font-weight: 500 !important;
+            cursor: pointer;
+          }
+
+          .nav_link {
+            color: #384072;
+            font-weight: 600 !important;
+            cursor: pointer;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+
+          button {
+            border: 1 px solid #ffffff;
+            outline: none;
+            background: transparent;
+            border-radius: 5px;
+            color: #ffffff;
+            cursor: pointer;
+            
+
+            &:hover {
+              background-color: #ffffff;
+              color: #384072;
+              font-weight: 500;
+            }
+          }
+
         }
       }
   

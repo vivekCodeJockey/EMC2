@@ -23,10 +23,10 @@
                 <!-- user Id field -->
                 <div class="mb-2 col-sm-10 col-md-10 col-lg-10">
                   <div class="col-12 d-flex justify-content-between form-row px-0">
-                    <label for="userId" class="fw-700 col-5 pb-0"><span class="icon mr-1"
+                    <!-- <label for="userId" class="fw-700 col-5 pb-0"><span class="icon mr-1"
                         [ngClass]="exApp?'ion-android-mail':'ion-ios-contact'"></span>{{exApp?'Email ID':'Login
                       ID'}}
-                    </label>
+                    </label> -->
                     <span style="text-align: right;" class="text-danger col-7 text-end" *ngIf="invalid">Invalid
                       Credentials</span>
                   </div>
@@ -38,8 +38,8 @@
                 <!-- password field -->
                 <div class="mb-2 col-sm-10 col-md-10 col-lg-10">
                   <div class="col-12 d-flex justify-content-between form-row px-0">
-                    <label for="password" class="fw-700 col-5 pb-0"><span
-                        class="icon ion-ios-locked mr-1"></span>Password</label>
+                    <!-- <label for="password" class="fw-700 col-5 pb-0"><span
+                        class="icon ion-ios-locked mr-1"></span>Password</label> -->
                     <span style="text-align: right;" class="text-danger col-7 text-end" *ngIf="invalid">Invalid
                       Credentials</span>
                   </div>
@@ -48,19 +48,23 @@
                     class="form-control p-1" placeholder="Password" formControlName="password">
                 </div>
                 <!-- forgot password -->
-                <div class="d-flex justify-content-end col-sm-10 col-md-10 col-lg-10 mb-2">
-                  <a  (click)="fpwd = true" class="span_bold">Forgot password?</a>
+                <div class="d-flex justify-content-end col-sm-10 col-md-10 col-lg-10 mb-4">
+                  <a  (click)="fpwd = true" class="nav_lk-fpwd">Forgot password?</a>
                   <!-- <a *ngIf="exApp" (click)="fpwd = true" class="span_bold">Forgot password?</a> -->
                 </div>
                 <!-- sign in button -->
-                <button type="button" class="auth-btn px-4 py-2 mb-2" (click)="signin()"
+                <button type="button" class="auth-btn px-4 py-2 mb-2 " (click)="signin()"
                   [disabled]="(!loginForm.valid)||signBtnDisable">Sign In
                   <div [ngClass]="{'loading':loader}"></div>
                 </button>
                 <!-- sign up link -->
-                <p *ngIf="exApp" class="mt-2 text-end text-white font-weight-lighter pt-1 mb-0">Don't have an
+                <!-- <p *ngIf="exApp" class="mt-2 text-end text-white font-weight-lighter pt-1 mb-0">Don't have an
                   account?
                   <span class="span_bold" (click)="signup=true">Sign Up</span>
+                </p> -->
+                <p  class="mt-2 text-end text-white font-weight-lighter pt-1 mb-0">Don't have an
+                  account?
+                  <span class="nav_link" (click)="signup=true">Sign Up</span>
                 </p>
               </div>
             </form>
