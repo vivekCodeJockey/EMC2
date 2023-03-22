@@ -177,10 +177,12 @@
 
 .login {
   height: 100vh;
-  background-color: #ffffff;
+  // background-color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: rgb(34,193,195);
+background: linear-gradient(330deg, rgba(34,193,195,1) 0%, rgba(255,176,6,0.5495448179271709) 42%);
 
   .container {
     height: 85%;
@@ -206,7 +208,7 @@
   
       .content_right {
         flex: 2;
-        background: #F7A01D;
+        background: #030E4E;
         border-radius: 20px 0 0 20px;
         display: flex;
         flex-direction: column;
@@ -221,6 +223,7 @@
 
         form {
           margin-top: 15px;
+          
 
           ::placeholder {
             color: #384072;
@@ -248,7 +251,7 @@
           }
 
           .nav_link {
-            color: #384072;
+            color: #ffffff;
             font-weight: 600 !important;
             cursor: pointer;
 
@@ -273,7 +276,34 @@
             }
           }
 
+          hr {
+            border-bottom: 1px solid #A0A5BC;
+            width: 70%;
+          }
+
+          .google_login {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+           
+            align-items: center;
+            
+
+            .g_container {
+              padding: 6px 15px;
+              display: flex;
+              justify-content: center;
+              gap: 10px;
+              align-items: center;
+              background-color: white;
+              border-radius: 6px;
+              cursor: pointer;
+            }
+          }
+
         }
+
+        
       }
   
     }
