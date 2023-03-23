@@ -177,15 +177,15 @@
 
 .login {
   height: 100vh;
-  // background-color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
   background: rgb(34,193,195);
-background: linear-gradient(330deg, rgba(34,193,195,1) 0%, rgba(255,176,6,0.5495448179271709) 42%);
+  background: linear-gradient(330deg, rgba(34, 193, 195, 1) 0%, rgba(255, 176, 6, 0.5495448179271709) 42%);
 
   .container {
     height: 85%;
+
     .login_container {
       height: 100%;
       // background-color: antiquewhite;
@@ -193,11 +193,11 @@ background: linear-gradient(330deg, rgba(34,193,195,1) 0%, rgba(255,176,6,0.5495
       overflow: hidden;
       display: flex;
       border: 3px solid #384072;
-  
+
       .content_left {
         flex: 3;
-        
-        
+
+
         img {
           width: 100%;
           height: 100%;
@@ -205,7 +205,7 @@ background: linear-gradient(330deg, rgba(34,193,195,1) 0%, rgba(255,176,6,0.5495
           opacity: 0.8;
         }
       }
-  
+
       .content_right {
         flex: 2;
         background: #030E4E;
@@ -223,20 +223,23 @@ background: linear-gradient(330deg, rgba(34,193,195,1) 0%, rgba(255,176,6,0.5495
 
         form {
           margin-top: 15px;
-          
+
 
           ::placeholder {
             color: #384072;
-            opacity: 1; /* Firefox */
+            opacity: 1;
+            /* Firefox */
             padding-left: 10px;
           }
-          
-          :-ms-input-placeholder { /* Internet Explorer 10-11 */
-           color: #384072;
+
+          :-ms-input-placeholder {
+            /* Internet Explorer 10-11 */
+            color: #384072;
           }
-          
-          ::-ms-input-placeholder { /* Microsoft Edge */
-           color: #384072;
+
+          ::-ms-input-placeholder {
+            /* Microsoft Edge */
+            color: #384072;
           }
 
           input {
@@ -248,12 +251,15 @@ background: linear-gradient(330deg, rgba(34,193,195,1) 0%, rgba(255,176,6,0.5495
             color: #ffffff !important;
             font-weight: 500 !important;
             cursor: pointer;
+            opacity: 0.6;
           }
 
           .nav_link {
             color: #ffffff;
             font-weight: 600 !important;
             cursor: pointer;
+            font-size: medium;
+            opacity: 0.5;
 
             &:hover {
               text-decoration: underline;
@@ -261,13 +267,14 @@ background: linear-gradient(330deg, rgba(34,193,195,1) 0%, rgba(255,176,6,0.5495
           }
 
           button {
-            border: 1 px solid #ffffff;
+            border: none;
             outline: none;
             background: transparent;
             border-radius: 5px;
             color: #ffffff;
             cursor: pointer;
-            
+            border: 2px solid #ffffff;
+
 
             &:hover {
               background-color: #ffffff;
@@ -285,9 +292,9 @@ background: linear-gradient(330deg, rgba(34,193,195,1) 0%, rgba(255,176,6,0.5495
             width: 100%;
             display: flex;
             justify-content: center;
-           
+
             align-items: center;
-            
+
 
             .g_container {
               padding: 6px 15px;
@@ -303,11 +310,11 @@ background: linear-gradient(330deg, rgba(34,193,195,1) 0%, rgba(255,176,6,0.5495
 
         }
 
-        
+
       }
-  
+
     }
   }
-  
+
 
 }
