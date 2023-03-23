@@ -1,17 +1,10 @@
-// .bg {
-//   background: rgb(2, 0, 36);
-//   background: linear-gradient(
-//     90deg,
-//     rgba(2, 0, 36, 1) 0%,
-//     rgba(73, 131, 228, 1) 50%,
-//     rgba(8, 7, 104, 1) 100%
-//   );
-// }
+.bg {
+  background: #030E4E;
+}
 
 .reg-form {
-  background-color: rgba(128, 128, 128, 0.987);
-  background-color: #9bc2e654;
-  background: linear-gradient(#005194, #9bc2e6d9);
+  background: rgb(34,193,195);
+  background: linear-gradient(330deg, rgba(34, 193, 195, 1) 0%, rgba(255, 176, 6, 0.5495448179271709) 42%);
   border-radius: 15px;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
     rgba(0, 0, 0, 0.22) 0px 10px 10px;
@@ -113,12 +106,6 @@ a:visited {
   left: 15px;
 }
 
-// input[type="email"] {
-//   font-family: inherit;
-//   letter-spacing: inherit;
-//   font-size: 0.9rem;
-//   text-indent: 8px;
-// }
 
 input[type="password"],
 input[type="email"],

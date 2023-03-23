@@ -1,19 +1,9 @@
 <div *ngIf="!signVerify"
     class="container-fluid px-0 height d-flex bg flex-column justify-content-center align-items-center">
-
-    <!-- register container starts -->
     <div class="col-lg-9 row d-flex flex-column mt-3 justify-content-md-center align-items-center reg-form">
-
-        <!-- header section start-->
-        <!-- title -->
         <h4 class="text-white mt-2">Create Your Account</h4>
-        <!-- content right starts -->
-        <!-- header section ends -->
-
-        <!-- register form starts -->
         <form class="text-white mt-3" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
             <div class="d-flex flex-column flex-lg-row">
-
                 <!-- general info section starts -->
                 <div id="g-info" class="col-md-12 col-lg-4 col-12 mb-4 mb-lg-0 m-0 form-row">
                     <!-- email id -->
@@ -107,7 +97,6 @@
                     </div>
                 </div>
                 <!-- general info section ends -->
-
                 <!-- company info section starts -->
                 <div id="company-info" class="col-md-12 col-lg-8 col-12 form-row m-0">
 
@@ -272,7 +261,6 @@
                 </div>
                 <!-- company info section ends -->
             </div>
-
             <!-- bottom section -->
             <div
                 class="col-12 row m-0 mt-3 d-flex justify-content-lg-between align-items-lg-center flex-lg-row flex-column align-items-start">
@@ -298,21 +286,7 @@
                 <p class="text-center text-white">Back to <span (click)="reloadPage()"><a href="">Sign In</a></span></p>
             </div>
         </form>
-        <!-- register form ends -->
-
     </div>
-    <!-- register container ends -->
-    <div class="container-fluid px-0 mx-0 text-white text-center reg_copyRight pb-1 bg-secondary
-    ">Copyright © 2020. All rights reserved.</div>
 </div>
 
 <ngx-forgotpasword *ngIf="signVerify" customTitle="v_password" [email]="f.email.value"></ngx-forgotpasword>
-
-
-
-
-
-
-
-<!-- <div class="vw-100 text-white text-center copyRight pb-2 bg-secondary
-">Copyright © 2020. All rights reserved.</div> -->
