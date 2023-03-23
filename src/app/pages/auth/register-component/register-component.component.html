@@ -1,318 +1,293 @@
 <div *ngIf="!signVerify"
-    class="container-fluid px-0 height d-flex bg flex-column justify-content-center align-items-center">
-
-    <!-- register container starts -->
-    <div class="col-lg-9 row d-flex flex-column mt-3 justify-content-md-center align-items-center reg-form">
-
-        <!-- header section start-->
-        <!-- title -->
-        <h4 class="text-white mt-2">Create Your Account</h4>
-        <!-- content right starts -->
-        <!-- header section ends -->
-
-        <!-- register form starts -->
-        <form class="text-white mt-3" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-            <div class="d-flex flex-column flex-lg-row">
-
-                <!-- general info section starts -->
-                <div id="g-info" class="col-md-12 col-lg-4 col-12 mb-4 mb-lg-0 m-0 form-row">
-                    <!-- email id -->
-                    <div class="mb-3 col-md-6 col-lg-12 position-relative">
-                        <label>Email ID</label>
-                        <input type="email" class="form-control p-2" placeholder="Email ID" autofocus
-                            formControlName="email" nbTooltip="User ID should be valid email Id" maxlength="100"
-                            nbTooltipStatus="warning"
-                            [ngClass]="{'input-error': signupForm.controls.email.touched && signupForm.controls.email.errors}">
-                        <div *ngIf="signupForm.controls.email.touched
-                         && f.email.errors" class="error-message kl">
-                            <div *ngIf="f.email.errors.required">Email is required</div>
-                            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
-                        </div>
-                    </div>
-
-                    <!-- first name -->
-                    <div class="mb-3 col-md-6 col-lg-12 position-relative">
-                        <label>First Name</label>
-                        <input type="text" class="form-control p-2" placeholder="First Name" maxlength="90"
-                            formControlName="firstName" nvValidate="character"
-                            [ngClass]="{ 'input-error': signupForm.controls.firstName.touched && f.firstName.errors }">
-                        <div *ngIf="signupForm.controls.firstName.touched && f.firstName.errors"
-                            class="error-message kl">
-                            <div *ngIf="f.firstName.errors.required">First Name is required</div>
-                        </div>
-                    </div>
-
-                    <!-- last name -->
-                    <div class="mb-3 col-md-6 col-lg-12 position-relative">
-                        <label>Last Name</label>
-                        <input type="text" class="form-control p-2" placeholder="Last Name" maxlength="90"
-                            formControlName="lastName" nvValidate="character"
-                            [ngClass]="{ 'input-error': signupForm.controls.lastName.touched && f.lastName.errors }">
-                        <div *ngIf="signupForm.controls.lastName.touched && f.lastName.errors" class="error-message kl">
-                            <div *ngIf="f.lastName.errors.required">Last Name is required</div>
-                        </div>
-                    </div>
-
-                    <!-- password -->
-                    <div class="mb-3 col-md-6 col-lg-12 position-relative">
-                        <label>Password</label>
-                        <input type="password" class="form-control p-2" maxlength="25"
-                            nbTooltip="Password should be minimum 8 characters" nbTooltipStatus="warning"
-                            placeholder="password" formControlName="password"
-                            [ngClass]="{ 'input-error': signupForm.controls.password.touched && f.password.errors }">
-                        <div *ngIf="signupForm.controls.password.touched && f.password.errors" class="error-message kl">
-                            <div *ngIf="f.password.errors.required">Password is required</div>
-                        </div>
-                    </div>
-
-                    <!-- confirm password -->
-                    <div class="mb-3 col-md-6 col-lg-12 position-relative">
-                        <label>Confirm Password</label>
-                        <input type="password" class="form-control p-2" placeholder="Confirm Password" maxlength="25"
-                            formControlName="confirmPassword"
-                            [ngClass]="{ 'input-error': signupForm.controls.confirmPassword.touched && f.confirmPassword.errors }">
-                        <div *ngIf="signupForm.controls.confirmPassword.touched && f.confirmPassword.errors"
-                            class="error-message kl">
-                            <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
-                            <div *ngIf="f.confirmPassword.errors.matching">
-                                Confirm Password does not match
+    class="container-fluid register">
+    <div class="container reg_section-wrapper">
+            <h4 class="reg_section-title">Register by Creating an Account</h4>
+            <hr>
+            <form class="text-white mt-3" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+                <div class="d-flex flex-column flex-lg-row">
+                    <!-- general info section starts -->
+                    <div id="g-info" class="col-md-12 col-lg-4 col-12 mb-4 mb-lg-0 m-0 form-row">
+                        <!-- email id -->
+                        <div class="mb-3 col-md-6 col-lg-12 position-relative">
+                            <label>Email ID</label>
+                            <input type="email" class="form-control p-2" placeholder="Email ID" autofocus
+                                formControlName="email" nbTooltip="User ID should be valid email Id" maxlength="100"
+                                nbTooltipStatus="warning"
+                                [ngClass]="{'input-error': signupForm.controls.email.touched && signupForm.controls.email.errors}">
+                            <div *ngIf="signupForm.controls.email.touched
+                             && f.email.errors" class="error-message kl">
+                                <div *ngIf="f.email.errors.required">Email is required</div>
+                                <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- contact number -->
-                    <div class="mb-3 col-md-6 col-lg-12 position-relative">
-                        <div class="form-row d-flex justify-content-between">
-                            <div class=" col-lg-4 col-4">
-                                <label for="" style="white-space:nowrap">Dial code</label>
-                                <input type="number" class="form-control p-2" placeholder="+91"
-                                    formControlName="countryCode"
-                                    [ngClass]="{ 'input-error': signupForm.controls.countryCode.touched && f.countryCode.errors }">
-                                <div *ngIf="signupForm.controls.countryCode.touched && f.countryCode.errors"
-                                    class="error-message kl">
-                                    <div *ngIf="f.countryCode.errors.required">Country Code is required</div>
+    
+                        <!-- first name -->
+                        <div class="mb-3 col-md-6 col-lg-12 position-relative">
+                            <label>First Name</label>
+                            <input type="text" class="form-control p-2" placeholder="First Name" maxlength="90"
+                                formControlName="firstName" nvValidate="character"
+                                [ngClass]="{ 'input-error': signupForm.controls.firstName.touched && f.firstName.errors }">
+                            <div *ngIf="signupForm.controls.firstName.touched && f.firstName.errors"
+                                class="error-message kl">
+                                <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                            </div>
+                        </div>
+    
+                        <!-- last name -->
+                        <div class="mb-3 col-md-6 col-lg-12 position-relative">
+                            <label>Last Name</label>
+                            <input type="text" class="form-control p-2" placeholder="Last Name" maxlength="90"
+                                formControlName="lastName" nvValidate="character"
+                                [ngClass]="{ 'input-error': signupForm.controls.lastName.touched && f.lastName.errors }">
+                            <div *ngIf="signupForm.controls.lastName.touched && f.lastName.errors" class="error-message kl">
+                                <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                            </div>
+                        </div>
+    
+                        <!-- password -->
+                        <div class="mb-3 col-md-6 col-lg-12 position-relative">
+                            <label>Password</label>
+                            <input type="password" class="form-control p-2" maxlength="25"
+                                nbTooltip="Password should be minimum 8 characters" nbTooltipStatus="warning"
+                                placeholder="password" formControlName="password"
+                                [ngClass]="{ 'input-error': signupForm.controls.password.touched && f.password.errors }">
+                            <div *ngIf="signupForm.controls.password.touched && f.password.errors" class="error-message kl">
+                                <div *ngIf="f.password.errors.required">Password is required</div>
+                            </div>
+                        </div>
+    
+                        <!-- confirm password -->
+                        <div class="mb-3 col-md-6 col-lg-12 position-relative">
+                            <label>Confirm Password</label>
+                            <input type="password" class="form-control p-2" placeholder="Confirm Password" maxlength="25"
+                                formControlName="confirmPassword"
+                                [ngClass]="{ 'input-error': signupForm.controls.confirmPassword.touched && f.confirmPassword.errors }">
+                            <div *ngIf="signupForm.controls.confirmPassword.touched && f.confirmPassword.errors"
+                                class="error-message kl">
+                                <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+                                <div *ngIf="f.confirmPassword.errors.matching">
+                                    Confirm Password does not match
                                 </div>
                             </div>
-                            <div class="col-lg-8 col-8">
-                                <label for="">Mobile Number</label>
-                                <input type="text" class="form-control p-2" nvValidate="number" maxlength="10"
-                                    placeholder="Mobile Number" formControlName="mobileNo"
-                                    [ngClass]="{ 'input-error': signupForm.controls.mobileNo.touched && f.mobileNo.errors }">
-                                <div *ngIf="signupForm.controls.mobileNo.touched && f.mobileNo.errors"
-                                    class="error-message kl">
-                                    <div *ngIf="f.mobileNo.errors.required">Mobile Number is required</div>
+                        </div>
+    
+                        <!-- contact number -->
+                        <div class="mb-3 col-md-6 col-lg-12 position-relative">
+                            <div class="form-row d-flex justify-content-between">
+                                <div class=" col-lg-4 col-4">
+                                    <label for="" style="white-space:nowrap">Dial code</label>
+                                    <input type="number" class="form-control p-2" placeholder="+91"
+                                        formControlName="countryCode"
+                                        [ngClass]="{ 'input-error': signupForm.controls.countryCode.touched && f.countryCode.errors }">
+                                    <div *ngIf="signupForm.controls.countryCode.touched && f.countryCode.errors"
+                                        class="error-message kl">
+                                        <div *ngIf="f.countryCode.errors.required">Country Code is required</div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-8">
+                                    <label for="">Mobile Number</label>
+                                    <input type="text" class="form-control p-2" nvValidate="number" maxlength="10"
+                                        placeholder="Mobile Number" formControlName="mobileNo"
+                                        [ngClass]="{ 'input-error': signupForm.controls.mobileNo.touched && f.mobileNo.errors }">
+                                    <div *ngIf="signupForm.controls.mobileNo.touched && f.mobileNo.errors"
+                                        class="error-message kl">
+                                        <div *ngIf="f.mobileNo.errors.required">Mobile Number is required</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- general info section ends -->
+                    <!-- company info section starts -->
+                    <div id="company-info" class="col-md-12 col-lg-8 col-12 form-row m-0">
+    
+                        <!-- company name -->
+                        <div class="mb-3 col-md-12 col-lg-12 col-12 position-relative">
+                            <label for="">Company Name</label>
+                            <input type="text" #autoInput class="form-control p-2" nbInput [nbSpinner]="true"
+                                maxlength="400" nbSpinnerSize="tiny" nbSpinnerStatus="primary"
+                                (input)="companyNameUpdate.next($event)" placeholder="Enter value" [nbAutocomplete]="auto"
+                                formControlName="companyName" />
+                            <nb-autocomplete #auto (selectedChange)="onSelectionChange($event)">
+                                <nb-option *ngFor="let option of filteredOptions$ | async" [value]="option.name">
+                                    {{ option.name }}
+                                </nb-option>
+                            </nb-autocomplete>
+                            <div *ngIf="signupForm.controls.companyName.touched && f.companyName.errors"
+                                class="error-message kl">
+                                <div *ngIf="f.companyName.errors.required">Name of the Company is required</div>
+                            </div>
+                        </div>
+    
+                        <!-- designation -->
+                        <div class="mb-3 col-md-6 col-lg-8 col-12 position-relative">
+                            <label for="">Designation</label>
+                            <input type="text" class="form-control p-2" placeholder="Designation" maxlength="90"
+                                formControlName="designation"
+                                [ngClass]="{ 'input-error': signupForm.controls.designation.touched && f.designation.errors }">
+                            <div *ngIf="signupForm.controls.designation.touched && f.designation.errors"
+                                class="error-message kl">
+                                <div *ngIf="f.designation.errors.required">Designation is required</div>
+                            </div>
+                        </div>
+    
+                        <!-- GST NO: -->
+                        <div class="mb-3 col-md-6 col-lg-4 col-12 position-relative">
+                            <label for="">GST NO:</label>
+                            <input type="text" class="form-control p-2" placeholder="GST NO:" maxlength="16"
+                                nvValidate="alphaNumeric" formControlName="gstNo"
+                                [ngClass]="{ 'input-error': signupForm.controls.gstNo.touched && f.gstNo.errors }">
+                            <div *ngIf="signupForm.controls.gstNo.touched && f.gstNo.errors" class="error-message kl">
+                                <div *ngIf="f.gstNo.errors.required">GST NO is required</div>
+                            </div>
+                        </div>
+    
+                        <!-- Address line 1 -->
+                        <div class="mb-3 col-lg-12 col-12 position-relative">
+                            <label for="">Address Line 1</label>
+                            <input type="text" class="form-control p-2" placeholder="Address Line 1" maxlength="290"
+                                formControlName="address1"
+                                [ngClass]="{ 'input-error': signupForm.controls.address1.touched && f.address1.errors }">
+                            <div *ngIf="signupForm.controls.address1.touched && f.address1.errors" class="error-message kl">
+                                <div *ngIf="f.address1.errors.required">Address Line 1 is required</div>
+                            </div>
+                        </div>
+    
+                        <!-- Address line 2 -->
+                        <div class="mb-3 col-lg-12 col-12 position-relative">
+                            <label for="">Address Line 2</label>
+                            <input type="text" class="form-control p-2" placeholder="Address Line 2" maxlength="490"
+                                formControlName="address2"
+                                [ngClass]="{ 'input-error': signupForm.controls.address2.touched && f.address2.errors }">
+                            <div *ngIf="signupForm.controls.address2.touched && f.address2.errors" class="error-message kl">
+                                <div *ngIf="f.address2.errors.required">Address Line 2 is required</div>
+                            </div>
+                        </div>
+    
+                        <!-- city -->
+                        <div class="mb-3 col-md-6 col-lg-3 col-12 position-relative">
+                            <label for="">City</label>
+                            <input type="text" class="form-control p-2" placeholder="City" maxlength="100"
+                                formControlName="companyCity"
+                                [ngClass]="{ 'input-error': signupForm.controls.companyCity.touched && f.companyCity.errors }">
+                            <div *ngIf="signupForm.controls.companyCity.touched && f.companyCity.errors"
+                                class="error-message kl">
+                                <div *ngIf="f.companyCity.errors.required">City is required</div>
+                            </div>
+                        </div>
+    
+                        <!-- State -->
+                        <div class="mb-3 col-md-6 col-lg-3 col-12 position-relative">
+                            <label for="">State</label>
+                            <input type="text" class="form-control p-2" maxlength="40" placeholder="State"
+                                formControlName="companyState"
+                                [ngClass]="{ 'input-error': signupForm.controls.companyState.touched && f.companyState.errors }">
+                            <div *ngIf="signupForm.controls.companyState.touched && f.companyState.errors"
+                                class="error-message kl">
+                                <div *ngIf="f.companyState.errors.required">State is required</div>
+                            </div>
+                        </div>
+    
+                        <!-- Country -->
+                        <div class="mb-3 col-md-6 col-lg-3 col-12 position-relative">
+                            <label for="">Country</label>
+                            <input type="text" class="form-control p-2" maxlength="30" placeholder="Country"
+                                formControlName="companyCountry"
+                                [ngClass]="{ 'input-error': signupForm.controls.companyCountry.touched && f.companyCountry.errors }">
+                            <div *ngIf="signupForm.controls.companyCountry.touched && f.companyCountry.errors"
+                                class="error-message kl">
+                                <div *ngIf="f.companyCountry.errors.required">Country is required</div>
+                            </div>
+                        </div>
+    
+                        <!-- Pin Code -->
+                        <div class="mb-3 col-md-6 col-lg-3 col-12 position-relative">
+                            <label for="">Pin Code</label>
+                            <input type="text" class="form-control p-2" nvValidate="number" maxlength="6"
+                                placeholder="Pin code" formControlName="companyPinCode"
+                                [ngClass]="{ 'input-error': signupForm.controls.companyPinCode.touched && f.companyPinCode.errors }">
+                            <div *ngIf="signupForm.controls.companyPinCode.touched && f.companyPinCode.errors"
+                                class="error-message kl">
+                                <div *ngIf="f.companyPinCode.errors.required">Pin Code is required</div>
+                            </div>
+                        </div>
+    
+                        <!-- telephone number -->
+                        <div class="mb-3 col-md-4 col-lg-4 col-8 position-relative">
+                            <label for="">Telephone Number</label>
+                            <input type="text" class="form-control p-2" nvValidate="number" maxlength="15"
+                                placeholder="Telephone Number" formControlName="companyTelephone"
+                                [ngClass]="{ 'input-error': signupForm.controls.companyTelephone.touched && f.companyTelephone.errors }">
+                            <div *ngIf="signupForm.controls.companyTelephone.touched && f.companyTelephone.errors"
+                                class="error-message kl">
+                                <div *ngIf="f.companyTelephone.errors.required">Telephone Number is required</div>
+                            </div>
+                        </div>
+    
+                        <!-- telephone extension -->
+                        <div class="mb-3 col-md-2 col-lg-2 col-4 position-relative">
+                            <label for="">Ext</label>
+                            <input type="text" class="form-control p-2" nvValidate="number" maxlength="10" placeholder="Ext"
+                                formControlName="companyTeleExtension"
+                                [ngClass]="{ 'input-error': signupForm.controls.companyTeleExtension.touched && f.companyTeleExtension.errors }">
+                            <div *ngIf="signupForm.controls.companyTeleExtension.touched && f.companyTelephone.errors"
+                                class="error-message kl">
+                                <div *ngIf="f.companyTelephone.errors.required">Tel. Ext is required</div>
+                            </div>
+                        </div>
+    
+                        <!-- fax -->
+                        <div class="mb-3 col-md-4 col-lg-4 col-8 position-relative">
+                            <label for="">Fax</label>
+                            <input type="text" class="form-control p-2" placeholder="Fax" maxlength="15" nvValidate="number"
+                                formControlName="companyFax"
+                                [ngClass]="{ 'input-error': signupForm.controls.companyFax.touched && f.companyFax.errors }">
+                            <div *ngIf="signupForm.controls.companyFax.touched && f.companyFax.errors"
+                                class="error-message kl">
+                                <div *ngIf="f.companyFax.errors.required">Fax is required</div>
+                            </div>
+                        </div>
+    
+                        <!-- fax extension -->
+                        <div class="mb-3 col-md-2 col-lg-2 col-4 position-relative">
+                            <label for="">Ext</label>
+                            <input type="text" class="form-control p-2" maxlength="10" nvValidate="number" placeholder="Ext"
+                                formControlName="companyFaxExtension"
+                                [ngClass]="{ 'input-error': signupForm.controls.companyFaxExtension.touched && f.companyFaxExtension.errors }">
+                            <div *ngIf="signupForm.controls.companyFaxExtension.touched && f.companyFax.errors"
+                                class="error-message kl">
+                                <div *ngIf="f.companyFax.errors.required">Fax Ext is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- company info section ends -->
                 </div>
-                <!-- general info section ends -->
-
-                <!-- company info section starts -->
-                <div id="company-info" class="col-md-12 col-lg-8 col-12 form-row m-0">
-
-                    <!-- company name -->
-                    <div class="mb-3 col-md-12 col-lg-12 col-12 position-relative">
-                        <label for="">Company Name</label>
-                        <input type="text" #autoInput class="form-control p-2" nbInput [nbSpinner]="true"
-                            maxlength="400" nbSpinnerSize="tiny" nbSpinnerStatus="primary"
-                            (input)="companyNameUpdate.next($event)" placeholder="Enter value" [nbAutocomplete]="auto"
-                            formControlName="companyName" />
-                        <nb-autocomplete #auto (selectedChange)="onSelectionChange($event)">
-                            <nb-option *ngFor="let option of filteredOptions$ | async" [value]="option.name">
-                                {{ option.name }}
-                            </nb-option>
-                        </nb-autocomplete>
-                        <div *ngIf="signupForm.controls.companyName.touched && f.companyName.errors"
-                            class="error-message kl">
-                            <div *ngIf="f.companyName.errors.required">Name of the Company is required</div>
-                        </div>
+                <!-- bottom section -->
+                <div
+                    class="col-12 row m-0 mt-3 d-flex justify-content-lg-between align-items-lg-center flex-lg-row flex-column align-items-start">
+                    <!-- terms and conditions -->
+                    <div class="row my-3 ml-2 ml-lg-3 form-check">
+                        <input type="checkbox" class="form-check-input mr-2" formControlName="terms" id="termsCheck">
+                        <label class="form-check-label t_c" for="termsCheck" (click)="openWindow()">Terms and
+                            Conditions</label>
                     </div>
-
-                    <!-- designation -->
-                    <div class="mb-3 col-md-6 col-lg-8 col-12 position-relative">
-                        <label for="">Designation</label>
-                        <input type="text" class="form-control p-2" placeholder="Designation" maxlength="90"
-                            formControlName="designation"
-                            [ngClass]="{ 'input-error': signupForm.controls.designation.touched && f.designation.errors }">
-                        <div *ngIf="signupForm.controls.designation.touched && f.designation.errors"
-                            class="error-message kl">
-                            <div *ngIf="f.designation.errors.required">Designation is required</div>
-                        </div>
+                    <!-- sign up button -->
+                    <div class="col-12 px-1 col-md-12 col-lg-6  d-flex justify-content-center justify-content-lg-end">
+                        <button type="submit" class="auth-btn p-2  col-12 col-md-5  col-lg-4 m-0"
+                            [disabled]="(!signupForm.valid)||submitted">Sign Up
+                            <div [ngClass]="{'loading':loader}"></div>
+                        </button>
+                        <!-- <button type="submit" class="btn p-2  col-12 col-md-5  col-lg-4 m-0 btn-primary"  [disabled]="(!signupForm.valid)||submitted">SIGN
+                            UP<div [ngClass]="{'loading':loader}"></div></button> -->
                     </div>
-
-                    <!-- GST NO: -->
-                    <div class="mb-3 col-md-6 col-lg-4 col-12 position-relative">
-                        <label for="">GST NO:</label>
-                        <input type="text" class="form-control p-2" placeholder="GST NO:" maxlength="16"
-                            nvValidate="alphaNumeric" formControlName="gstNo"
-                            [ngClass]="{ 'input-error': signupForm.controls.gstNo.touched && f.gstNo.errors }">
-                        <div *ngIf="signupForm.controls.gstNo.touched && f.gstNo.errors" class="error-message kl">
-                            <div *ngIf="f.gstNo.errors.required">GST NO is required</div>
-                        </div>
-                    </div>
-
-                    <!-- Address line 1 -->
-                    <div class="mb-3 col-lg-12 col-12 position-relative">
-                        <label for="">Address Line 1</label>
-                        <input type="text" class="form-control p-2" placeholder="Address Line 1" maxlength="290"
-                            formControlName="address1"
-                            [ngClass]="{ 'input-error': signupForm.controls.address1.touched && f.address1.errors }">
-                        <div *ngIf="signupForm.controls.address1.touched && f.address1.errors" class="error-message kl">
-                            <div *ngIf="f.address1.errors.required">Address Line 1 is required</div>
-                        </div>
-                    </div>
-
-                    <!-- Address line 2 -->
-                    <div class="mb-3 col-lg-12 col-12 position-relative">
-                        <label for="">Address Line 2</label>
-                        <input type="text" class="form-control p-2" placeholder="Address Line 2" maxlength="490"
-                            formControlName="address2"
-                            [ngClass]="{ 'input-error': signupForm.controls.address2.touched && f.address2.errors }">
-                        <div *ngIf="signupForm.controls.address2.touched && f.address2.errors" class="error-message kl">
-                            <div *ngIf="f.address2.errors.required">Address Line 2 is required</div>
-                        </div>
-                    </div>
-
-                    <!-- city -->
-                    <div class="mb-3 col-md-6 col-lg-3 col-12 position-relative">
-                        <label for="">City</label>
-                        <input type="text" class="form-control p-2" placeholder="City" maxlength="100"
-                            formControlName="companyCity"
-                            [ngClass]="{ 'input-error': signupForm.controls.companyCity.touched && f.companyCity.errors }">
-                        <div *ngIf="signupForm.controls.companyCity.touched && f.companyCity.errors"
-                            class="error-message kl">
-                            <div *ngIf="f.companyCity.errors.required">City is required</div>
-                        </div>
-                    </div>
-
-                    <!-- State -->
-                    <div class="mb-3 col-md-6 col-lg-3 col-12 position-relative">
-                        <label for="">State</label>
-                        <input type="text" class="form-control p-2" maxlength="40" placeholder="State"
-                            formControlName="companyState"
-                            [ngClass]="{ 'input-error': signupForm.controls.companyState.touched && f.companyState.errors }">
-                        <div *ngIf="signupForm.controls.companyState.touched && f.companyState.errors"
-                            class="error-message kl">
-                            <div *ngIf="f.companyState.errors.required">State is required</div>
-                        </div>
-                    </div>
-
-                    <!-- Country -->
-                    <div class="mb-3 col-md-6 col-lg-3 col-12 position-relative">
-                        <label for="">Country</label>
-                        <input type="text" class="form-control p-2" maxlength="30" placeholder="Country"
-                            formControlName="companyCountry"
-                            [ngClass]="{ 'input-error': signupForm.controls.companyCountry.touched && f.companyCountry.errors }">
-                        <div *ngIf="signupForm.controls.companyCountry.touched && f.companyCountry.errors"
-                            class="error-message kl">
-                            <div *ngIf="f.companyCountry.errors.required">Country is required</div>
-                        </div>
-                    </div>
-
-                    <!-- Pin Code -->
-                    <div class="mb-3 col-md-6 col-lg-3 col-12 position-relative">
-                        <label for="">Pin Code</label>
-                        <input type="text" class="form-control p-2" nvValidate="number" maxlength="6"
-                            placeholder="Pin code" formControlName="companyPinCode"
-                            [ngClass]="{ 'input-error': signupForm.controls.companyPinCode.touched && f.companyPinCode.errors }">
-                        <div *ngIf="signupForm.controls.companyPinCode.touched && f.companyPinCode.errors"
-                            class="error-message kl">
-                            <div *ngIf="f.companyPinCode.errors.required">Pin Code is required</div>
-                        </div>
-                    </div>
-
-                    <!-- telephone number -->
-                    <div class="mb-3 col-md-4 col-lg-4 col-8 position-relative">
-                        <label for="">Telephone Number</label>
-                        <input type="text" class="form-control p-2" nvValidate="number" maxlength="15"
-                            placeholder="Telephone Number" formControlName="companyTelephone"
-                            [ngClass]="{ 'input-error': signupForm.controls.companyTelephone.touched && f.companyTelephone.errors }">
-                        <div *ngIf="signupForm.controls.companyTelephone.touched && f.companyTelephone.errors"
-                            class="error-message kl">
-                            <div *ngIf="f.companyTelephone.errors.required">Telephone Number is required</div>
-                        </div>
-                    </div>
-
-                    <!-- telephone extension -->
-                    <div class="mb-3 col-md-2 col-lg-2 col-4 position-relative">
-                        <label for="">Ext</label>
-                        <input type="text" class="form-control p-2" nvValidate="number" maxlength="10" placeholder="Ext"
-                            formControlName="companyTeleExtension"
-                            [ngClass]="{ 'input-error': signupForm.controls.companyTeleExtension.touched && f.companyTeleExtension.errors }">
-                        <div *ngIf="signupForm.controls.companyTeleExtension.touched && f.companyTelephone.errors"
-                            class="error-message kl">
-                            <div *ngIf="f.companyTelephone.errors.required">Tel. Ext is required</div>
-                        </div>
-                    </div>
-
-                    <!-- fax -->
-                    <div class="mb-3 col-md-4 col-lg-4 col-8 position-relative">
-                        <label for="">Fax</label>
-                        <input type="text" class="form-control p-2" placeholder="Fax" maxlength="15" nvValidate="number"
-                            formControlName="companyFax"
-                            [ngClass]="{ 'input-error': signupForm.controls.companyFax.touched && f.companyFax.errors }">
-                        <div *ngIf="signupForm.controls.companyFax.touched && f.companyFax.errors"
-                            class="error-message kl">
-                            <div *ngIf="f.companyFax.errors.required">Fax is required</div>
-                        </div>
-                    </div>
-
-                    <!-- fax extension -->
-                    <div class="mb-3 col-md-2 col-lg-2 col-4 position-relative">
-                        <label for="">Ext</label>
-                        <input type="text" class="form-control p-2" maxlength="10" nvValidate="number" placeholder="Ext"
-                            formControlName="companyFaxExtension"
-                            [ngClass]="{ 'input-error': signupForm.controls.companyFaxExtension.touched && f.companyFaxExtension.errors }">
-                        <div *ngIf="signupForm.controls.companyFaxExtension.touched && f.companyFax.errors"
-                            class="error-message kl">
-                            <div *ngIf="f.companyFax.errors.required">Fax Ext is required</div>
-                        </div>
-                    </div>
+                    <!-- (click)="signVerify=true" -->
                 </div>
-                <!-- company info section ends -->
-            </div>
-
-            <!-- bottom section -->
-            <div
-                class="col-12 row m-0 mt-3 d-flex justify-content-lg-between align-items-lg-center flex-lg-row flex-column align-items-start">
-                <!-- terms and conditions -->
-                <div class="row my-3 ml-2 ml-lg-3 form-check">
-                    <input type="checkbox" class="form-check-input mr-2" formControlName="terms" id="termsCheck">
-                    <label class="form-check-label t_c" for="termsCheck" (click)="openWindow()">Terms and
-                        Conditions</label>
+                <!-- sign in link -->
+                <div class="d-flex justify-content-center justify-content-lg-start ml-lg-5 mb-1">
+                    <p class="text-center text-white">Back to <span (click)="reloadPage()"><a class="" href="">Sign In</a></span></p>
                 </div>
-                <!-- sign up button -->
-                <div class="col-12 px-1 col-md-12 col-lg-6  d-flex justify-content-center justify-content-lg-end">
-                    <button type="submit" class="auth-btn p-2  col-12 col-md-5  col-lg-4 m-0"
-                        [disabled]="(!signupForm.valid)||submitted">Sign Up
-                        <div [ngClass]="{'loading':loader}"></div>
-                    </button>
-                    <!-- <button type="submit" class="btn p-2  col-12 col-md-5  col-lg-4 m-0 btn-primary"  [disabled]="(!signupForm.valid)||submitted">SIGN
-                        UP<div [ngClass]="{'loading':loader}"></div></button> -->
-                </div>
-                <!-- (click)="signVerify=true" -->
-            </div>
-            <!-- sign in link -->
-            <div class="d-flex justify-content-center justify-content-lg-start ml-lg-5 mb-1">
-                <p class="text-center text-white">Back to <span (click)="reloadPage()"><a href="">Sign In</a></span></p>
-            </div>
-        </form>
-        <!-- register form ends -->
-
+            </form>
     </div>
-    <!-- register container ends -->
-    <div class="container-fluid px-0 mx-0 text-white text-center reg_copyRight pb-1 bg-secondary
-    ">Copyright © 2020. All rights reserved.</div>
 </div>
 
 <ngx-forgotpasword *ngIf="signVerify" customTitle="v_password" [email]="f.email.value"></ngx-forgotpasword>
-
-
-
-
-
-
-
-<!-- <div class="vw-100 text-white text-center copyRight pb-2 bg-secondary
-">Copyright © 2020. All rights reserved.</div> -->
