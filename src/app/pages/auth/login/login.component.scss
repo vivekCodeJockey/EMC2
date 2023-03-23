@@ -252,6 +252,10 @@
             font-weight: 500 !important;
             cursor: pointer;
             opacity: 0.6;
+
+            &:hover {
+              text-decoration: underline;
+            }
           }
 
           .nav_link {
@@ -283,8 +287,7 @@
             }
           }
 
-          .auth-btn:disabled,
-            .auth-btn[disabled] {
+          .auth-btn:disabled, .auth-btn[disabled] {
               border: 1px solid #7a92a5;
               background-color: transparent;
               color: #7a92a5;
@@ -316,7 +319,6 @@
           }
 
         }
-
 
       }
 
